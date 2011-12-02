@@ -1,0 +1,27 @@
+/***tooltip****/
+#tooltip{
+	position:absolute;
+	z-index:3000;
+	border:1px solid #aaaa66;
+  color:#444400;
+	background-color:#ffffdd;
+	padding:5px;
+  filter:Alpha(Opacity=85);/* for IE */
+  Opacity:0.85;/* for Firefox */
+  font-size:14px;
+        -moz-border-radius:12px;
+        -khtml-border-radius:12px;
+        -webkit-border-radius:12px;
+}
+#tooltip h3, #tooltip div{ margin:0; }
+#tooltip h3{
+  color:#665500;
+  border-bottom: 1px #000000 solid;
+}
+#tooltip .body{
+  color:#332200;
+}
+#tooltip .body img{
+  vertical-align:middle;
+}
+/** /tooltip*****/
