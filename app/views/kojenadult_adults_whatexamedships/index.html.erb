@@ -1,0 +1,21 @@
+<h1>Listing kojenadult_adults_whatexamedships</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kojenadult_adults_whatexamedships.each do |kojenadult_adults_whatexamedship| %>
+  <tr>
+    <td><%= link_to 'Show', kojenadult_adults_whatexamedship %></td>
+    <td><%= link_to 'Edit', edit_kojenadult_adults_whatexamedship_path(kojenadult_adults_whatexamedship) %></td>
+    <td><%= link_to 'Destroy', kojenadult_adults_whatexamedship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Kojenadult adults whatexamedship', new_kojenadult_adults_whatexamedship_path %>

@@ -1,0 +1,23 @@
+<h1>Listing adults_graduateds</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_graduateds.each do |adults_graduated| %>
+  <tr>
+    <td><%= adults_graduated.reason_desc %></td>
+    <td><%= link_to 'Show', adults_graduated %></td>
+    <td><%= link_to 'Edit', edit_adults_graduated_path(adults_graduated) %></td>
+    <td><%= link_to 'Destroy', adults_graduated, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults graduated', new_adults_graduated_path %>

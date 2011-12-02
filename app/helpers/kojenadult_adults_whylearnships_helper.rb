@@ -1,0 +1,2 @@
+module KojenadultAdultsWhylearnshipsHelper
+end

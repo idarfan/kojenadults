@@ -1,0 +1,17 @@
+<%= form_for(@kojenadult_adults_graduatedship) do |f| %>
+  <% if @kojenadult_adults_graduatedship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kojenadult_adults_graduatedship.errors.count, "error") %> prohibited this kojenadult_adults_graduatedship from being saved:</h2>
+
+      <ul>
+      <% @kojenadult_adults_graduatedship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

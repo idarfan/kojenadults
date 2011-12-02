@@ -1,0 +1,21 @@
+<%= form_for(@adults_whatexamed) do |f| %>
+  <% if @adults_whatexamed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adults_whatexamed.errors.count, "error") %> prohibited this adults_whatexamed from being saved:</h2>
+
+      <ul>
+      <% @adults_whatexamed.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :reason_desc %><br />
+    <%= f.text_field :reason_desc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

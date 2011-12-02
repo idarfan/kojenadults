@@ -1,0 +1,21 @@
+<h1>Listing kojenadult_adults_whylearnships</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kojenadult_adults_whylearnships.each do |kojenadult_adults_whylearnship| %>
+  <tr>
+    <td><%= link_to 'Show', kojenadult_adults_whylearnship %></td>
+    <td><%= link_to 'Edit', edit_kojenadult_adults_whylearnship_path(kojenadult_adults_whylearnship) %></td>
+    <td><%= link_to 'Destroy', kojenadult_adults_whylearnship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Kojenadult adults whylearnship', new_kojenadult_adults_whylearnship_path %>

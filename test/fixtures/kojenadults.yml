@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cname: MyString
+  ename: MyString
+  community_id: MyString
+  student_id: 
+
+two:
+  cname: MyString
+  ename: MyString
+  community_id: MyString
+  student_id: 

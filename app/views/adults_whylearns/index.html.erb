@@ -1,0 +1,23 @@
+<h1>Listing adults_whylearns</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_whylearns.each do |adults_whylearn| %>
+  <tr>
+    <td><%= adults_whylearn.reason_desc %></td>
+    <td><%= link_to 'Show', adults_whylearn %></td>
+    <td><%= link_to 'Edit', edit_adults_whylearn_path(adults_whylearn) %></td>
+    <td><%= link_to 'Destroy', adults_whylearn, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults whylearn', new_adults_whylearn_path %>

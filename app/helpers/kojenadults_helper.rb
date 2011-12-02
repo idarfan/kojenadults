@@ -1,0 +1,2 @@
+module KojenadultsHelper
+end

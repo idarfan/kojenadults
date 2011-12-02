@@ -1,0 +1,2 @@
+module AdultsHowyouknowusHelper
+end
