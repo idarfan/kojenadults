@@ -168,7 +168,7 @@
     }   
   </style>
 <% end %>
-<%= form_for(@kojenadult) do |f| %>
+<%= form_for(@kojenadult, :html => {:id => "kojenadult_form"}) do |f| %> 
   <% if @kojenadult.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@kojenadult.errors.count, "error") %> prohibited this kojenadult from being saved:</h2>
@@ -208,6 +208,10 @@
       <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_graduated_ids][]','' %>   
+  </div>
+  <div class="field slot">
+    <%= f.label :address, "7.請輸入您的住址" , :class => "tip" , :title => "請先選區別|再選路段" %><br />
+    <%=raw area_select(f) %><%= f.text_field(:road_name , :class => "road_name_setting hidden" , :ref => "#{f.object.class.to_s.downcase}[road_name]") %><select class="road_selector selector road_name_setting" ref="<%= "#{f.object.class.to_s.downcase}[road_name]" %>"><option class="title first_title" value="">★請先選擇地區</option><option class="title" value="%">★自訂輸入</option></select><%= f.text_field :address %>
   </div>
   <div class="actions">
     <%= f.submit %>
