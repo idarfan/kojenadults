@@ -40,7 +40,7 @@ class KojenadultClassesController < ApplicationController
   # POST /kojenadult_classes
   # POST /kojenadult_classes.xml
   def create
-    @kojenadult_class = KojenadultClasse.new(params[:kojenadult_class])
+    @kojenadult_class = KojenadultClasse.new(params[:kojenadult_classe])
 
     respond_to do |format|
       if @kojenadult_class.save
@@ -59,7 +59,7 @@ class KojenadultClassesController < ApplicationController
     @kojenadult_class = KojenadultClasse.find(params[:id])
 
     respond_to do |format|
-      if @kojenadult_class.update_attributes(params[:kojenadult_class])
+      if @kojenadult_class.update_attributes(params[:kojenadult_classe])
         format.html { redirect_to(@kojenadult_class, :notice => 'Kojenadult classe was successfully updated.') }
         format.xml  { head :ok }
       else
