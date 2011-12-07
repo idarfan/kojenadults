@@ -2,13 +2,18 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>level</th>
+    <th>start period</th>
+    <th>end period</th>
   </tr>
 
 <% @kojenadult_classes.each do |kojenadult_class| %>
   <tr>
+    <td><%= kojenadult_class.level %></td>
+    <td><%= kojenadult_class.start_period %></td>    
+    <td><%= kojenadult_class.end_period %></td>   
+    <td><%= kojenadult_class.community_id %></td>
+    <td><%= kojenadult_class.student_id %></td>
     <td><%= link_to 'Show', kojenadult_class %></td>
     <td><%= link_to 'Edit', edit_kojenadult_class_path(kojenadult_class) %></td>
     <td><%= link_to 'Destroy', kojenadult_class, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -18,4 +23,4 @@
 
 <br />
 
-<%= link_to 'New Kojenadult classe', new_kojenadult_class_path %>
+<%= link_to 'New Kojenadult class', new_kojenadult_class_path %>

@@ -1,5 +1,27 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <b>學生id :</b>
+  <%= @kojenadult_class.student_id %>
+</p>
+<p>
+  <b>學生身份證號碼 :</b>
+  <%= @kojenadult_class.community_id %>
+</p>
+<p>
+  <b>選課級別 LEVEL:</b>
+  <%= @kojenadult_class.level %>
+</p>
+
+<p>
+  <b>start_period:</b>
+  <%= @kojenadult_class.start_period %>
+</p>
+
+<p>
+  <b>end_period:</b>
+  <%= @kojenadult_class.end_period %>
+</p>
 
 <%= link_to 'Edit', edit_kojenadult_class_path(@kojenadult_class) %> |
 <%= link_to 'Back', kojenadult_classes_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130084447) do
+ActiveRecord::Schema.define(:version => 20111206094158) do
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -177,6 +177,9 @@ ActiveRecord::Schema.define(:version => 20111130084447) do
     t.text     "notice_other"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "main_area",          :limit => 1
+    t.integer  "sub_area",           :limit => 1
+    t.string   "road_name"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|
