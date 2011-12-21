@@ -1,5 +1,4 @@
 Kojenadults::Application.routes.draw do
-resources :events
   resources :kojenadults_classe_ships
 
   resources :kojenadult_classes

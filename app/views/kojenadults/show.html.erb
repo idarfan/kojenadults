@@ -19,7 +19,18 @@
   <b>Student:</b>
   <%= @kojenadult.student_id %>
 </p>
-
-
+<!-- <div>   
+  
+</div>
+-->
+<table>
+<!-- @kojenadult_classes.find_by_student_id(kojenadult.id) |kojenadult_class| -->
+<% @kojenadult_classes.each do |kojenadultclass| %>
+  <tr>   
+    <td><%= kojenadult_classes.community_id %></td>
+    <td><%= kojenadult_classes.student_id %></td>
+  </tr>
+  <% end %>
+</table>
 <%= link_to 'Edit', edit_kojenadult_path(@kojenadult) %> |
 <%= link_to 'Back', kojenadults_path %>

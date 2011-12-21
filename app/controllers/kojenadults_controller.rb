@@ -3,6 +3,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults.xml
   def index
     @kojenadults = Kojenadult.all
+    @kojenadult_classes = KojenadultClasse.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1.xml
   def show
     @kojenadult = Kojenadult.find(params[:id])
+    @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
     
 
@@ -37,7 +39,7 @@ class KojenadultsController < ApplicationController
 
   # GET /kojenadults/1/edit
   def edit
-    @kojenadult = Kojenadult.find(params[:id])
+    @kojenadult = Kojenadult.find(params[:id])  
     @adults_graduateds = AdultsGraduated.all   
   end
 
