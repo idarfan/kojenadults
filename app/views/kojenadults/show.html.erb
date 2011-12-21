@@ -24,12 +24,26 @@
 </div>
 -->
 <table>
-<!-- @kojenadult_classes.find_by_student_id(kojenadult.id) |kojenadult_class| -->
-<% @kojenadult_classes.each do |kojenadultclass| %>
-  <tr>   
-    <td><%= kojenadultclass.community_id %></td>
-    <td><%= kojenadultclass.student_id %></td>
+  <!-- @kojenadult_classes.find_by_student_id(kojenadult.id) |kojenadult_class| -->  
+  <tr>
+    <th>學生id</th>
+    <th>身分證號</th>
+    <th>中文姓名</th>
+    <th>英文姓名</th>
+    <th>課程級數</th>
+    <th>課程開始時間</th>
+    <th>課程結束時間</th>
   </tr>
+  <% @kojenadult_classes.each do |kojenadultclass| %>
+    <tr>
+      <td><%= kojenadultclass.student_id %></td>
+      <td><%= @kojenadult.community_id %></td>
+      <td><%= @kojenadult.cname %></td>
+      <td><%= @kojenadult.ename %></td>      
+      <td><%= kojenadultclass.level %> </td> 
+      <td><%= kojenadultclass.start_period %></td>
+      <td><%= kojenadultclass.end_period %></td>    
+    </tr>
   <% end %>
 </table>
 <%= link_to 'Edit', edit_kojenadult_path(@kojenadult) %> |
