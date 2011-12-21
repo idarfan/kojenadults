@@ -15,7 +15,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1.xml
   def show
     @kojenadult = Kojenadult.find(params[:id])
-    @kojenadult_classes = KojenadultClasse.all
+    @kojenadult_classes = KojenadultClasse.where("student_id = #{＠kojenadult.student_id}")
     @adults_graduateds = AdultsGraduated.all
     
 

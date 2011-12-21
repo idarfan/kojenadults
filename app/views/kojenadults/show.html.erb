@@ -27,8 +27,8 @@
 <!-- @kojenadult_classes.find_by_student_id(kojenadult.id) |kojenadult_class| -->
 <% @kojenadult_classes.each do |kojenadultclass| %>
   <tr>   
-    <td><%= kojenadult_classes.community_id %></td>
-    <td><%= kojenadult_classes.student_id %></td>
+    <td><%= kojenadultclass.community_id %></td>
+    <td><%= kojenadultclass.student_id %></td>
   </tr>
   <% end %>
 </table>
