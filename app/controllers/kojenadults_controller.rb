@@ -1,3 +1,4 @@
+# encoding: utf-8
 class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
@@ -14,11 +15,11 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1
   # GET /kojenadults/1.xml
   # 新增 @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
-  # 改為用身份證
+  # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄位
   
   def show
     @kojenadult = Kojenadult.find(params[:id])
-    @kojenadult_classes = KojenadultClasse.where("community_id = #{@kojenadult.community_id}")
+    @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @adults_graduateds = AdultsGraduated.all
     
 
