@@ -1,4 +1,6 @@
 class KojenadultClassesController < ApplicationController
+  before_filter :authorize
+  #skip_before_filter :authorize
   # GET /kojenadult_classes
   # GET /kojenadult_classes.xml
   def index

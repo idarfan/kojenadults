@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :authorize
   protect_from_forgery
    def js(*js_s)
     @js ||= []
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
   
   def current_user
     if session[:user_id]
-      @current_user ||= Stafflogin.first(:conditions => ["id = ?" , session[:user_id]])
+      @current_user ||= User.first(:conditions => ["id = ?" , session[:user_id]])
       if @current_user
         return @current_user
       else
@@ -40,4 +41,12 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  
+  protected
+  
+    def authorize
+      unless User.find_by_id(session[:user_id])
+        redirect_to login_url, :notiec => "Pleases log in "
+      end
+    end
 end

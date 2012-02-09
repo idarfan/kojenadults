@@ -1,5 +1,7 @@
 # encoding: utf-8
 class KojenadultsController < ApplicationController
+  before_filter :authorize
+  #skip_before_filter :authorize
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
@@ -15,8 +17,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1
   # GET /kojenadults/1.xml
   # 新增 @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
-  # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄位
-  
+  # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄  
   def show
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")

@@ -1,0 +1,11 @@
+<div class="depot_form">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+
+  <%= form_tag do %>
+          <div>
+        <%= submit_tag "logout" %>
+      </div>    
+  <% end %>
+</div>

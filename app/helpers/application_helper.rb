@@ -21,7 +21,7 @@ module ApplicationHelper
   
   def current_user
     if session[:user_id]
-      @current_user ||= Stafflogin.first(:conditions => ["id = ?" , session[:user_id]])
+      @current_user ||= User.first(:conditions => ["id = ?" , session[:user_id]])
       if @current_user
         return @current_user
       else

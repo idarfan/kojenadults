@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111206094158) do
+ActiveRecord::Schema.define(:version => 20120109110140) do
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -472,6 +472,14 @@ ActiveRecord::Schema.define(:version => 20111206094158) do
   end
 
   add_index "tb_user", ["user_id"], :name => "idx_user_id", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "weeklyusages", :force => true do |t|
     t.string   "reason_desc"
