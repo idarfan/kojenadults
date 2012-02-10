@@ -14,8 +14,8 @@ class Kojenadult < ActiveRecord::Base
   has_many :kojenadult_adults_howyouknowuship, :dependent => :destroy
   has_many :adults_howyouknowu, :through => :kojenadult_adults_howyouknowuship
   #您是如何知道我們的 
-  has_many :kojenadult_adults_whylernship, :dependent => :destroy
-  has_many :adults_whylearn, :through => :kojenadult_adults_whylernship  
+  has_many :kojenadult_adults_whylearnship, :dependent => :destroy
+  has_many :adults_whylearn, :through => :kojenadult_adults_whylearnship  
   #請問您是在何種動機，開始進修美
   has_many :kojenadult_adults_whatexamedship, :dependent => :destroy
   has_many :adults_whatexamed, :through => :kojenadult_adults_whatexamedship
@@ -23,7 +23,7 @@ class Kojenadult < ActiveRecord::Base
   has_many :kojenadult_adults_localexamedship, :dependent => :destroy
   has_many :adults_localexamed, :through => :kojenadult_adults_localexamedship
   #請問您參加過何種國家認證的英語能力認證
-  has_many :kojenadult_classe_ship, :dependent => :destroy
-  has_many :kojenadult_classe, :through => :kojenadult_classe_ship
+  has_many :kojenadults_classe_ship, :dependent => :destroy
+  has_many :kojenadult_classe, :through => :kojenadults_classe_ship
   #您選了那些課程
 end

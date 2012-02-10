@@ -22,6 +22,10 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @adults_graduateds = AdultsGraduated.all
+    @adults_howyouknowus = AdultsHowyouknowu.all
+    @adults_localexameds = AdultsLocalexamed.all
+    @adults_whatexameds = AdultsWhatexamed.all
+    @adults_whylearns = AdultsWhylearn.all
     
 
     respond_to do |format|
@@ -34,7 +38,13 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/new.xml
   def new
     @kojenadult = Kojenadult.new
+    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+    @kojenadult_classes = KojenadultClasse.all    
     @adults_graduateds = AdultsGraduated.all
+    @adults_howyouknowus = AdultsHowyouknowu.all
+    @adults_localexameds = AdultsLocalexamed.all
+    @adults_whatexameds = AdultsWhatexamed.all
+    @adults_whylearns = AdultsWhylearn.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,15 +54,27 @@ class KojenadultsController < ApplicationController
 
   # GET /kojenadults/1/edit
   def edit
-    @kojenadult = Kojenadult.find(params[:id])  
-    @adults_graduateds = AdultsGraduated.all   
+    @kojenadult = Kojenadult.find(params[:id]) 
+    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+    @kojenadult_classes = KojenadultClasse.all
+    @adults_graduateds = AdultsGraduated.all
+    @adults_howyouknowus = AdultsHowyouknowu.all
+    @adults_localexameds = AdultsLocalexamed.all
+    @adults_whatexameds = AdultsWhatexamed.all
+    @adults_whylearns = AdultsWhylearn.all
   end
 
   # POST /kojenadults
   # POST /kojenadults.xml
   def create
     @kojenadult = Kojenadult.new(params[:kojenadult])
+    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+    @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
+    @adults_howyouknowus = AdultsHowyouknowu.all
+    @adults_localexameds = AdultsLocalexamed.all
+    @adults_whatexameds = AdultsWhatexamed.all
+    @adults_whylearns = AdultsWhylearn.all
 
     respond_to do |format|
       if @kojenadult.save
@@ -69,7 +91,13 @@ class KojenadultsController < ApplicationController
   # PUT /kojenadults/1.xml
   def update
     @kojenadult = Kojenadult.find(params[:id])
+    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+    @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
+    @adults_howyouknowus = AdultsHowyouknowu.all
+    @adults_localexameds = AdultsLocalexamed.all
+    @adults_whatexameds = AdultsWhatexamed.all
+    @adults_whylearns = AdultsWhylearn.all
 
     respond_to do |format|
       if @kojenadult.update_attributes(params[:kojenadult])
