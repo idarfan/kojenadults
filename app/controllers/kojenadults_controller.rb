@@ -121,6 +121,14 @@ class KojenadultsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+ #底下的是參考性寫法
+   def myjobs
+    @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}
+    render :layout =>"test_layout"
+  end
+  def show_myjobs
+       ohmyjobs = params[:jobs].to_i   
+  end
   # 寫在controller 裏的方法叫actions
   def student_id_check
     if Student.count(:conditions => ["student_id = ?" , params[:student][:student_id]]) == 0

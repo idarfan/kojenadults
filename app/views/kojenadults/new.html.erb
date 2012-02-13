@@ -204,10 +204,14 @@
       <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_graduated_ids][]','' %>   
-  </div>
-  <div class="field1">
-    <%= f.label :jobs, "9.請輸入您的職業" %><br />
-    <%= f.text_field :jobs %>
+  </div>  
+  <div class="field2">
+    <%= f.label :jobs, "17.請您選擇您的工作?" %><br />
+    <select name="jobs">
+      <% @ohmyjobs.each do |myjob| %>
+        <option value="<%= myjob[1] %>"><%= myjob[0] %></option>
+      <% end %>
+    </select>   
   </div>
   <div class="field2">
     <%= f.label :address, "8.請輸入您的住址" , :class => "tip" , :title => "請先選區別|再選路段" %><br />

@@ -174,7 +174,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="field1">
+   <div class="field1">
     <%= f.label :student_id, "1.請輸入學籍號碼" %><br />
     <%= f.text_field :student_id %>
   </div>
@@ -186,31 +186,89 @@
     <%= f.label :ename, "3.請輸入英文名字" %><br />
     <%= f.text_field :ename %>
   </div>
-
   <div class="field2">
-    <%= f.label :birthday, "4.請選擇您的生日" %><br />
+    <%= f.label :gender, "4.性別" %><br />
+    <%=  f.select :gender, [ ["男", "M"], ["女", "F"] ] %>
+  </div>
+  <div class="field1">
+    <%= f.label :birthday, "5.請選擇您的生日" %><br />
     <%= f.text_field :birthday, :class => "date_picker" %>     
   </div>  
-  <div class="field">
-    <%= f.label :community_id %><br />
+  <div class="field2">
+    <%= f.label :community_id, "6.請輸入您的身份證號" %><br />
     <%= f.text_field :community_id %>
   </div>
- 
-  <div>
-    <%= f.label :graduated, "請您勾選您的學歷?" %><br />
+  <div class="field1">
+    <%= f.label :graduated, "7.請您勾選您的學歷?" %><br />
     <% @adults_graduateds.each do |gr| %>      
       <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_graduated_ids][]','' %>   
   </div>
-  <div class="field slot">
-    <%= f.label :address, "7.請輸入您的住址" , :class => "tip" , :title => "請先選區別|再選路段" %><br />
+  <div class="field1">
+    <%= f.label :jobs, "9.請輸入您的職業" %><br />
+    <%= f.text_field :jobs %>
+  </div>
+  <div class="field2">
+    <%= f.label :address, "8.請輸入您的住址" , :class => "tip" , :title => "請先選區別|再選路段" %><br />
     <%=raw area_select(f) %><%= f.text_field(:road_name , :class => "road_name_setting hidden" , :ref => "#{f.object.class.to_s.downcase}[road_name]") %><select class="road_selector selector road_name_setting" ref="<%= "#{f.object.class.to_s.downcase}[road_name]" %>"><option class="title first_title" value="">★請先選擇地區</option><option class="title" value="%">★自訂輸入</option></select><%= f.text_field :address %>
   </div>
+  <div class="field1">
+    <%= f.label :mobile_phone, "9.請輸入您的手機號碼" %><br />
+    <%= f.text_field :mobile_phone %>
+  </div>
+  <div class="field2">
+    <%= f.label :parents_phone, "9.請輸入您的家長電話號碼" %><br />
+    <%= f.text_field :parents_phone %>
+  </div>
+  <div class="field1">
+    <%= f.label :howyouknowus, "10.請您勾選您是透過什麼媒體知道我們的?" %><br />
+    <% @adults_howyouknowus.each do |how| %>      
+      <%= check_box_tag "kojenadult[adults_howyouknowu_ids][]", how.id, @kojenadult.adults_howyouknowu.map(&:id).include?(how.id) %> <%= how.reason_desc %>
+    <% end %>   
+    <%= hidden_field_tag 'kojenadult[adults_howyouknowu_ids][]','' %>   
+  </div>
+  <div class="field2">
+    <%= f.label :howyouknowus_other, "其他" %><br />
+    <%= f.text_field :howyouknowus_other %>
+  </div>    
+  <div class="field1">
+    <%= f.label :whylearn, "11.請您勾選您學習英文的動機為何?" %><br />
+    <% @adults_whylearns.each do |wh| %>      
+      <%= check_box_tag "kojenadult[adults_whylearn_ids][]", wh.id, @kojenadult.adults_whylearn.map(&:id).include?(wh.id) %> <%= wh.reason_desc %>
+    <% end %>   
+    <%= hidden_field_tag 'kojenadult[adults_whylearn_ids][]','' %>           
+  </div>
+  <div class="field2">
+    <%= f.label :whylearn_other,"其他"%><br />
+    <%= f.text_field :whylearn_other %>
+  </div>
+  <div class="field1">
+    <%= f.label :localexamed, "12.請問您有通過那些本國英語認證考試?" %><br />
+    <% @adults_localexameds.each do |lo| %>      
+      <%= check_box_tag "kojenadult[adults_localexamed_ids][]", lo.id, @kojenadult.adults_localexamed.map(&:id).include?(lo.id) %> <%= lo.reason_desc %>
+    <% end %>   
+    <%= hidden_field_tag 'kojenadult[adults_localexamed_ids][]','' %>   
+  </div>
+  <div class="field2">
+    <%= f.label :whatexamed, "13.請問您有通過那些國際英語認證考試?" %><br />
+    <% @adults_whatexameds.each do |we| %>      
+      <%= check_box_tag "kojenadult[adults_whatexamed_ids][]", we.id, @kojenadult.adults_whatexamed.map(&:id).include?(we.id) %> <%= we.reason_desc %>
+    <% end %>   
+    <%= hidden_field_tag 'kojenadult[adults_whatexamed_ids][]','' %>   
+  </div>
+  <div class="field1">
+    <%= f.label :whyexamed_other,"其他"%><br />
+    <%= f.text_field :whatexamed_other %>
+  </div>
+  <div class="field2">
+    <%= f.label :notice_other, "14.請輸入其他的附註事項" %><br />
+    <%= f.text_area :notice_other %>
+  </div>    
   <div class="actions">
     <%= f.submit %>
   </div>
-  <% end %>
+<% end %>
 
 <%= link_to 'Show', @kojenadult %> |
 <%= link_to 'Back', kojenadults_path %>
