@@ -207,11 +207,7 @@
   </div>  
   <div class="field2">
     <%= f.label :jobs, "17.請您選擇您的工作?" %><br />
-    <select name="jobs">
-      <% @ohmyjobs.each do |myjob| %>
-        <option value="<%= myjob[1] %>"><%= myjob[0] %></option>
-      <% end %>
-    </select>   
+    <%= f.select(:jobs, options_from_collection_for_select(@adults_graduateds, :reason_desc, 'reason_desc'),{ :include_blank => true }) %>    
   </div>
   <div class="field2">
     <%= f.label :address, "8.請輸入您的住址" , :class => "tip" , :title => "請先選區別|再選路段" %><br />
