@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'digest/sha2'
 class User < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
@@ -27,6 +28,14 @@ class User < ActiveRecord::Base
       self.hashed_password = self.class.encrypt_password(password, salt)
     end
   end
+  
+  after_destroy :ensure_an_admin_remains
+
+  def ensure_an_admin_remains
+    if User.count.zero?
+      raise "不能刪除 #{self.name} 因為他是最後一個管理者"
+    end
+  end    
     
   private
  
