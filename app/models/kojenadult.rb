@@ -16,7 +16,7 @@ class Kojenadult < ActiveRecord::Base
   #您是如何知道我們的 
   has_many :kojenadult_adults_whylearnship, :dependent => :destroy
   has_many :adults_whylearn, :through => :kojenadult_adults_whylearnship  
-  #請問您是在何種動機，開始進修美
+  #請問您是在何種動機，開始進修美語
   has_many :kojenadult_adults_whatexamedship, :dependent => :destroy
   has_many :adults_whatexamed, :through => :kojenadult_adults_whatexamedship
   #請問您參加過何種國際的英語能力認證
@@ -26,4 +26,76 @@ class Kojenadult < ActiveRecord::Base
   has_many :kojenadults_classe_ship, :dependent => :destroy
   has_many :kojenadult_classe, :through => :kojenadults_classe_ship
   #您選了那些課程
+  validate  :check_whylearn #檢查學習英文動機是否有勾選否則請填寫其它欄位  
+  validate :check_adults_howyouknowu # 檢查您看些什麼網站及雜誌 
+  validate :check_graduated # 請輸入您的學歷
+  def check_graduated
+    if self.adults_graduated_ids.empty? && self.graduated_other.blank?
+      errors[:請填寫您的學歷] << " : 請您必須勾選上述的選項或至少填寫其他學歷的欄位"
+    end
+  end 
+  #使用了第39行的寫法。便能達成即使勾選了其它(8)。但whylearn_other欄位空白仍會提示錯誤訊息
+  def check_whylearn
+    if self.adults_whylearn_ids.include?(8) && self.whylearn_other.blank?
+      errors[:其他學習動機] << " : 請您必須勾選上述的選項或至少填寫其他學習動機的欄位"
+    end
+  end   
+  #使用了第45行的寫法。便能達成即使勾選了其它(13)。但whylearn_other欄位空白仍會提示錯誤訊息
+  def check_adults_howyouknowu
+    if self.adults_howyouknowu_ids.empty? || self.adults_howyouknowu_ids.index(13) && self.howyouknowus_other.blank?
+      errors[:其他您經常閱讀的雜誌或網站] << " : 請您必須勾選上述的選項或至少填寫其他經常閱讀的雜誌或網站"
+    end
+  end 
+  
+  
+  #條件驗證式開始
+  validates :student_id,  :presence => true,
+    :uniqueness => true,
+    :length => {:minimum => 4, :maximum => 10}				  
+  # 輸入學生id ,範圍由 xxxx-xxxxx 不可不填. 不可以有重複 				  
+  validates :cname,  :presence => true, :on => :create
+  #確保必填
+  validates_length_of :cname, :in => 2..12, :allow_nil => false, :on => :update
+  #:length => {:minimum => 2, :maximum => 12}
+  # 中文姓名最少2個字,最多12個字	不可以不填
+  validates :email, :presence => true, 
+    :length => {:minimum => 3, :maximum => 254}  
+  # 電子郵件最少3個字最多 254個字,不可以不填,可以有重複
+  validates :ename,  :length => {:minimum => 2, :maximum => 254}
+  #英文姓名最少淤三個字,最多254字. 可以不填				  
+  validates :birthday,  :presence => true                  
+  #生日不能不填				  
+  validates :gender,  :presence => true
+  #性別不能不填			  
+  validates :address,  :presence => true, 
+    :length => {:minimum => 2, :maximum => 254}  
+				  
+  validates :telephone, :length => {:minimum => 3, :maximum => 254}
+  #電話欄位可以空白				  
+  validates :mobile_phone,  :presence => true, 
+    :length => {:minimum => 3, :maximum => 254}
+  #行動電話欄位不可以空白
+ 
+  ## 底下的是條件驗證式的錯誤訊息說明
+  validates :student_id,  :presence => { :message => "學生號碼欄位不能空白" }, 
+    :length => {:minimum => 4, :maximum => 10, :message => "學生號碼長度不正確" }
+  #驗證學號		
+  validates :cname,  :presence => { :message => "姓名欄位不能空白" }, 
+    :length => {:minimum => 2, :maximum => 12, :message => "姓名欄位長度不正確" }
+  #驗證姓名 		  
+  validates :email,  :presence => { :message => "電子郵件欄位不能空白" }, 
+    :length => {:minimum => 3, :maximum => 254, :message => "電子郵件欄位長度不正確" }
+  #驗證電子郵件
+  validates :birthday,  :presence => { :message => "生日欄位不能空白" }     
+  #驗證生日
+  validates :gender,  :presence => { :message => "姓別欄位不能空白" }
+  #驗證姓別
+  validates :address,  :presence => { :message => "住址欄位不能空白" }, 
+    :length => {:minimum => 2, :maximum => 254, :message => "住址欄位長度不正確" }
+  #驗證住址
+  validates :telephone, :length => {:minimum => 3, :maximum => 14, :message => "電話欄位長度不正確" }
+  #驗證電話
+  validates :mobile_phone,  :presence => { :message => "行動電話欄位不能空白" }, 
+    :length => {:minimum => 10, :maximum => 20, :message => "行動電話欄位長度不正確" }
+  #驗證行動電話  
 end

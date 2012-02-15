@@ -1,27 +1,225 @@
 /***tooltip****/
+body {
+    font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+    background: #4E5869;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+/* ~~ 元素/標籤選取器 ~~ */
+ul, ol, dl { /* 由於瀏覽器之間的差異，最佳作法是在清單中使用零寬度的欄位間隔及邊界。為了保持一致，您可以在這裡指定所要的量，或在清單包含的清單項目 (LI、DT、DD) 上指定所要的量。請記住，除非您寫入較為特定的選取器，否則在此執行的作業將重疊顯示到 .nav 清單。 */
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;	 /* 移除上方邊界可以解決邊界可能從其包含的 Div 逸出的問題。剩餘的下方邊界可以保持 Div 不與接在後面的元素接觸。 */
+    padding-right: 15px;
+    padding-left: 15px; /* 將欄位間隔加入至 Div 內元素的兩側 (而不是 Div 本身)，即可不需執行任何方塊模型的計算作業。具有側邊欄位間隔的巢狀 Div 也可當做替代方法。 */
+}
+a img { /* 這個選取器會移除某些瀏覽器在影像由連結所圍繞時，影像周圍所顯示的預設藍色邊框 */
+    border: none;
+}
+
+/* ~~ 網站連結的樣式設定必須保持此順序，包括建立滑過 (Hover) 效果的選取器群組在內。~~ */
+a:link {
+    color:#414958;
+    text-decoration: underline; /* 除非您要設定非常獨特的連結樣式，否則最好提供底線，以便快速看出 */
+}
+a:visited {
+    color: #4E5869;
+    text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* 這個選取器群組可以讓使用鍵盤導覽的使用者，也和使用滑鼠的使用者一樣擁有相同的滑過體驗。 */
+    text-decoration: none;
+}
+
+/* ~~ 這個容器環繞著所有其他的 Div，並依百分比設定其寬度 ~~ */
+.container {
+    width: 100%;
+    max-width: 98%;/* 建議您使用最大寬度，如此版面在大型螢幕上就不致於過寬，讓行保持比較方便閱讀的長度。IE6 並不適用這項宣告。 */
+    min-width: 96%;/* 建議您使用最小寬度，如此版面在大型螢幕上就不致於過窄，讓行在側欄中保持比較方便閱讀的長度。IE6 並不適用這項宣告。 */
+    background: #FFF;
+    margin: 0 auto; /* 兩側的自動值與寬度結合後，版面便會置中對齊。如果將 .container 的寬度設為 100%，就不需要這麼做。 */
+}
+
+/* ~~ 頁首沒有指定的寬度，而會橫跨版面的整個寬度。頁首包含影像預留位置，必須由您自己的連結商標加以取代 ~~ */
+.header {
+    background: #6F7D94;
+}
+
+/* ~~ 這是版面的欄位。~~ 
+
+1) 欄位間隔只會置於 Div 的頂端或底部。這些 Div 內的元素在兩側會有欄位間隔，可讓您不需進行「方塊模型計算」。請記住，如果對 Div 本身加入任何側邊的欄位間隔或邊框，在計算「總」寬度時，就會將這些加入您定義的寬度。您也可以選擇移除 Div 中元素的欄位間隔，然後在其中放置沒有寬度的第二個 Div，並依設計所需放置欄位間隔。
+
+2) 尚未為這些欄位提供邊界，因為它們全都是浮動的。如果必須加入邊界，請避免將其放在浮動方向的一側 (例如將右邊界放在設定為向右浮動的 Div 上)。在許多時候，您都可以改用欄位間隔。對於必須違反此規則的 Div，您應該在 Div 的規則中加入 "display:inline" 宣告，以防止某些版本的 Internet Explorer 將邊界加倍。
+
+3) 因為可在文件中多次使用類別 (也可對單一的元素套用多個類別)，所以已為欄位指定類別名稱，而非 ID。例如，您可在必要時將兩個側邊列 Div 堆疊起來。如有需要，也可以將這些名稱輕鬆地變更為 ID (只要您在每份文件中只使用一次)。
+
+4) 如果想要將導覽放在右方而非左方，只要將這些欄設定為往反方向浮動 (全部往右，而非全部往左)，它們就會以相反順序呈現。您不需要在 HTML 原始碼中移動 Div。
+
+*/
+.sidebar1 {
+    float: left;
+    width: 20%;
+    background: #93A5C4;
+    padding-bottom: 10px;
+}
+.content {
+    padding: 10px 0;
+    width: 80%;
+    float: left;
+}
+
+/* ~~ 這個群組選取器會在 .content 區域空間中提供清單 ~~ */
+.content ul, .content ol { 
+    padding: 0 15px 15px 40px; /* 這個欄位間隔反映出上方標題和段落規則中的右方間隔。當欄位間隔位於下方時，便可將清單中的其他元素間隔開來；當位於左方時，則可藉此建立縮排。這些動作均可依需要進行調整。 */
+}
+
+/* ~~ 導覽清單樣式 (如果選擇使用 Spry 之類的預製飛出選單，則可移除) ~~ */
+ul.nav {
+    list-style: none; /* 這會移除清單標記 */
+    border-top: 1px solid #666; /* 這會建立連結的上方邊框，其他則都會使用下方邊框放置在 LI 上 */
+    margin-bottom: 15px; /* 這會在下方的內容上建立導覽間的間距 */
+}
+ul.nav li {
+    border-bottom: 1px solid #666; /* 這會建立按鈕分隔 */
+}
+ul.nav a, ul.nav a:visited { /* 將這些選取器放入群組，即可確保您的連結即使在受到點擊後仍保有按鈕外觀 */
+    padding: 5px 5px 5px 15px;
+    display: block; /* 這會為連結提供區塊屬性，使連結能填滿包含它的整個 LI，讓整個區域都能回應滑鼠點按動作。 */
+    text-decoration: none;
+    background: #8090AB;
+    color: #000;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* 這會同時變更滑鼠及鍵盤導覽器的背景及文字顏色 */
+    background: #6F7D94;
+    color: #FFF;
+}
+
+/* ~~ 頁尾 ~~ */
+.footer {
+    padding: 10px 0;
+    background: #6F7D94;
+    position: relative;/* 這會為 IE6 提供 hasLayout 以進行適當的清除動作 */
+    clear: both; /* 這個 clear 屬性可以強制 .container 辨識欄結束於何處以及包含欄的位置 */
+}
+
+/* ~~ 其他 float/clear 類別 ~~ */
+.fltrt {  /* 這個類別可用來讓元素在頁面中浮動，浮動的元素必須位於頁面上相鄰的元素之前。 */
+    float: right;
+    margin-left: 8px;
+}
+.fltlft { /* 這個類別可用來讓元素在頁面左方浮動，浮動的元素必須位於頁面上相鄰的元素之前。 */
+    float: left;
+    margin-right: 8px;
+}
+.clearfloat { /* 這個類別可放置在 <br /> 或空白的 Div 上，當做接在 #container 內最後一個浮動 Div 後方的最後一個元素 (如果從 #container 移除或取出 #footer) */
+    clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+.wapper{
+    background:#93A5C4;
+    clear:both;
+    overflow: auto;
+}
+.wapper:after{
+    clear:both;
+    content:'.';
+    display:block;
+    hight:0;
+    overflow:hidden;
+}
+.content{
+    background:#FFFFFF;
+}     
+
 #tooltip{
-	position:absolute;
-	z-index:3000;
-	border:1px solid #aaaa66;
-  color:#444400;
-	background-color:#ffffdd;
-	padding:5px;
-  filter:Alpha(Opacity=85);/* for IE */
-  Opacity:0.85;/* for Firefox */
-  font-size:14px;
-        -moz-border-radius:12px;
-        -khtml-border-radius:12px;
-        -webkit-border-radius:12px;
+    position:absolute;
+    z-index:3000;
+    border:1px solid #aaaa66;
+    color:#444400;
+    background-color:#ffffdd;
+    padding:5px;
+    filter:Alpha(Opacity=85);/* for IE */
+    Opacity:0.85;/* for Firefox */
+    font-size:14px;
+    -moz-border-radius:12px;
+    -khtml-border-radius:12px;
+    -webkit-border-radius:12px;
 }
 #tooltip h3, #tooltip div{ margin:0; }
 #tooltip h3{
-  color:#665500;
-  border-bottom: 1px #000000 solid;
+    color:#665500;
+    border-bottom: 1px #000000 solid;
 }
 #tooltip .body{
-  color:#332200;
+    color:#332200;
 }
 #tooltip .body img{
-  vertical-align:middle;
+    vertical-align:middle;
 }
 /** /tooltip*****/
+    /* css no IE support */
+    .hidden{
+      display:none;
+    }
+
+    body {
+      font-size:20px;
+      line-height:20px;
+      background: #fcfff4; /* Old browsers */
+      background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C */
+    }
+    input:hover , input:focus{      
+      border:#ff9900 solid 3px;      
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+    }/*...okokok*/
+    input {     
+      border:solid 3px #e6cd8f;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px; 
+    }  
+    .field1 {
+      /* background-color: #A7C6E8; */
+      margin-bottom: 5px;
+      border:solid  #6f7D94;
+      /* -moz-border-radius: 0px 5px 0px 5px; */
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      background-color: #E2EAFF;
+
+    }
+    .field2 {
+      margin-top: 5px;
+      border:solid #6F7D94;
+      -moz-border-radius-bottomleft: 5px;
+      -moz-border-radius-bottomright: 5px;
+      -webkit-border-bottom-left-radius: 5px;
+      -webkit-border-bottom-right-radius: 5px;
+      background-color: #8090AB;
+    }
+    .centerline {
+      margin: 5px auto;
+      background: #e2eaff; /* Old browsers */
+      background: -moz-linear-gradient(top, #e2eaff 0%, #6f7d94 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2eaff), color-stop(100%,#6f7d94)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2eaff', endColorstr='#6f7d94',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* W3C */
+    } 

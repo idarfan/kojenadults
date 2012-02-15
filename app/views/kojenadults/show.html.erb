@@ -1,52 +1,47 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <b>學籍號:</b>
-  <%= @kojenadult.student_id %>
-</p>
-<p>
+<div class="field1">
+  <b>學籍號碼:</b>
+   <%= @kojenadult.student_id %>   
+  </div> 
+<div class="field2">
   <b>中文姓名:</b>
   <%= @kojenadult.cname %>
-</p>
-
-<p>
+</div>
+<div class="field1">
   <b>英文名字:</b>
   <%= @kojenadult.ename %>
-</p>
-<p>
+</div>
+<div class="field2">
   <b>性別:</b>
   <%= @kojenadult.gender %>
-</p>
-<p>
+</div>
+<div class="field1">
   <b>生日:</b>
   <%= @kojenadult.birthday %>
-</p>
-<p>
-  <b>身份證號:</b>
+</div>
+<div class="field1">
+  <b>身份證號碼:</b>
   <%= @kojenadult.community_id %>
-</p>
-<p>
+</div>
+<div class="field2">
+  <b>您的職業:</b>
+  <%= @kojenadult.jobs %>
+</div>
+<div class="field1">
   <b>您的學歷:</b>
   <% @adults_graduateds.each do |gr| %>      
     <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
   <% end %>  
-</p>
-<p>
+</div>
+<div class="field2">
   <b>請輸入您學習英文動機的其他理由:</b>
   <% @adults_whylearns.each do |w| %>      
     <%= check_box_tag "kojenadult[adults_whylearn_ids][]", w.id, @kojenadult.adults_whylearn.map(&:id).include?(w.id) %> <%= w.reason_desc %>
   <% end %>
   <br />
   <%= @kojenadult.whylearn_other %>
-</p>
-<p>  
-<%= select_tag '',options_from_collection_for_select(@adults_whylearns, 'id', 'reason_desc') %>
-</p>  
-<!-- <div>   
-  
 </div>
--->
-<table>
-  <!-- @kojenadult_classes.find_by_student_id(kojenadult.id) |kojenadult_class| -->  
+<table>  
   <tr>
     <th>學生id</th>
     <th>身分證號</th>
