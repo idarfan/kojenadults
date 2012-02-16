@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109110140) do
+ActiveRecord::Schema.define(:version => 20120216083958) do
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(:version => 20120109110140) do
     t.string   "company_phone"
     t.string   "graduated_other"
     t.string   "media_other"
-    t.string   "howyouknowus_ohter"
+    t.string   "howyouknowus_other"
     t.string   "whylearn_other"
     t.string   "whatexamed_other"
     t.string   "contact"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20120109110140) do
     t.integer  "main_area",          :limit => 1
     t.integer  "sub_area",           :limit => 1
     t.string   "road_name"
+    t.string   "keyin"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|

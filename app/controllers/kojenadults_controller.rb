@@ -75,6 +75,7 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
+    @kojenadult.keyin = current_user.name
 
     respond_to do |format|
       if @kojenadult.save
