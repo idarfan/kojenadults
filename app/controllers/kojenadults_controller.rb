@@ -1,6 +1,17 @@
 # encoding: utf-8
 class KojenadultsController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize, :except => [:data]
+  
+  def data
+    @kojenadults = Kojenadult.all
+    @kojenadult_classes = KojenadultClasse.all   
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @kojenadults }      
+      format.json { render :json => @kojenadults.to_json }
+    end
+  end
   #skip_before_filter :authorize
   # GET /kojenadults
   # GET /kojenadults.xml
@@ -11,6 +22,7 @@ class KojenadultsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @kojenadults }
+      format.json { render :json => @kojenadults.to_json }
     end
   end
 
@@ -30,7 +42,7 @@ class KojenadultsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @kojenadult }
+      format.xml  { render :xml => @kojenadult }    
     end
   end
 
@@ -47,8 +59,9 @@ class KojenadultsController < ApplicationController
     @adults_whylearns = AdultsWhylearn.all
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.erb      
       format.xml  { render :xml => @kojenadult }
+      #format.json { render :json => @kojenadult }    
     end
   end
 
@@ -122,13 +135,13 @@ class KojenadultsController < ApplicationController
       format.xml  { head :ok }
     end
   end
- #底下的是參考性寫法
-   def myjobs
+  #底下的是參考性寫法
+  def myjobs
     @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}
     render :layout =>"test_layout"
   end
   def show_myjobs
-       ohmyjobs = params[:jobs].to_i   
+    ohmyjobs = params[:jobs].to_i   
   end
   # 寫在controller 裏的方法叫actions
   def student_id_check

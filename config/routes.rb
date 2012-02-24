@@ -4,7 +4,7 @@ Kojenadults::Application.routes.draw do
   #get "sessions/create"
   #get "sessions/destroy"
   get 'admin' => 'admin#index'
-
+  
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -37,7 +37,11 @@ Kojenadults::Application.routes.draw do
 
   resources :adults_graduateds
 
-  resources :kojenadults
+  resources :kojenadults do
+    collection do
+      get :data
+    end
+  end
 
   root :to => 'main#index', :as => 'main'
 end
