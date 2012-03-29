@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216083958) do
+ActiveRecord::Schema.define(:version => 20120329115412) do
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -177,10 +177,14 @@ ActiveRecord::Schema.define(:version => 20120216083958) do
     t.text     "notice_other"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "main_area",          :limit => 1
-    t.integer  "sub_area",           :limit => 1
+    t.integer  "main_area",           :limit => 1
+    t.integer  "sub_area",            :limit => 1
     t.string   "road_name"
     t.string   "keyin"
+    t.string   "session"
+    t.date     "classtime"
+    t.string   "session_description"
+    t.string   "teacher"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|
@@ -480,6 +484,7 @@ ActiveRecord::Schema.define(:version => 20120216083958) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level"
   end
 
   create_table "weeklyusages", :force => true do |t|

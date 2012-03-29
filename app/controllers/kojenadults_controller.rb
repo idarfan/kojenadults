@@ -49,6 +49,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/new
   # GET /kojenadults/new.xml
   def new
+    #raise Exception.new(params.inspect)
     @kojenadult = Kojenadult.new
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all    
@@ -67,6 +68,7 @@ class KojenadultsController < ApplicationController
 
   # GET /kojenadults/1/edit
   def edit
+    return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id]) 
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
@@ -89,6 +91,8 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @kojenadult.keyin = current_user.name
+    #raise Exception.new(params.inspect)  
+    #檢視表單傳送些什麼參數，檢查完後再予以註銷
 
     respond_to do |format|
       if @kojenadult.save
@@ -104,6 +108,7 @@ class KojenadultsController < ApplicationController
   # PUT /kojenadults/1
   # PUT /kojenadults/1.xml
   def update
+    return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
@@ -127,6 +132,8 @@ class KojenadultsController < ApplicationController
   # DELETE /kojenadults/1
   # DELETE /kojenadults/1.xml
   def destroy
+    return unless user_level1 
+    #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult.destroy
 

@@ -26,6 +26,10 @@ class Kojenadult < ActiveRecord::Base
   has_many :kojenadults_classe_ship, :dependent => :destroy
   has_many :kojenadult_classe, :through => :kojenadults_classe_ship
   #您選了那些課程
+  #新增kojenadults_session_descriptionship 及 adults_session_description
+  has_many :kojenadults_session_descriptionship, :dependent => :destroy
+  has_many :adults_session_description, :through => :kojenadults_session_descriptionship
+  #底下為資料輸入項目檢查原則
   validate  :check_whylearn #檢查學習英文動機是否有勾選否則請填寫其它欄位  
   validate :check_adults_howyouknowu # 檢查您看些什麼網站及雜誌 
   validate :check_graduated # 請輸入您的學歷
@@ -45,9 +49,7 @@ class Kojenadult < ActiveRecord::Base
     if self.adults_howyouknowu_ids.empty? || self.adults_howyouknowu_ids.index(13) && self.howyouknowus_other.blank?
       errors[:其他您經常閱讀的雜誌或網站] << " : 請您必須勾選上述的選項或至少填寫其他經常閱讀的雜誌或網站"
     end
-  end 
-  
-  
+  end   
   #條件驗證式開始
   validates :student_id,  :presence => true,
     :uniqueness => true,

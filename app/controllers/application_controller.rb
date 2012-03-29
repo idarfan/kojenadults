@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   before_filter :authorize
   protect_from_forgery
@@ -27,17 +28,59 @@ class ApplicationController < ActionController::Base
       return nil
     end
   end
-  
-  def user_level(level = 3)
+#modify by idar 2012/3/29  
+  def user_level1(level = 1)
     if current_user
-      if current_user.level >= level
+      if current_user.level <= level
         return true
       else
-        redirect_to :controller => "students" , :action => "index"
+        redirect_to :controller => "kojenadults", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        return false
+      end
+    else       
+      redirect_to :controller => "kojenadults" , :action => "index"
+      return false
+    end
+  end
+  
+  def user_level2 (level = 2)
+    if current_user
+      if current_user.level <= level
+        return true
+      else
+        redirect_to :controller => "kojenadults" , :action => "index"
         return false
       end
     else
-      redirect_to :controller => "students" , :action => "index"
+      redirect_to :controller => "kojenadults" , :action => "index"
+      return false
+    end
+  end
+  # for users account maintain
+  def users_level1(level = 1)
+    if current_user
+      if current_user.level <= level
+        return true
+      else
+        redirect_to :controller => "users", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        return false
+      end
+    else       
+      redirect_to :controller => "users" , :action => "index"
+      return false
+    end
+  end
+  # for users account maintain
+  def users_level2(level = 2)
+    if current_user
+      if current_user.level <= level
+        return true
+      else
+        redirect_to :controller => "users", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        return false
+      end
+    else       
+      redirect_to :controller => "users" , :action => "index"
       return false
     end
   end

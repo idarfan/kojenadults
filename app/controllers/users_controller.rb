@@ -37,6 +37,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    return unless users_level2
+    #增加權限控管
     @user = User.find(params[:id])
   end
 
@@ -60,6 +62,8 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+     return unless users_level2
+     #增加權限控管
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -77,6 +81,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
+    return unless users_level1
+    #增加權限控管
     @user = User.find(params[:id])
     begin
       @user.destroy

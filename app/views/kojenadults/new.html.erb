@@ -110,7 +110,11 @@
         <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %>  
+  <div class="field2">
+    <%= f.label :jobs, "請輸入課程簡介" %><br />
+    <%= f.select(:jobs, options_from_collection_for_select(@adults_graduateds, :reason_desc, 'reason_desc', 1)) %>    
+  </div>
   <div class="field1">
     <%= f.label :student_id, "1.請輸入學籍號碼" %><br />
     <%= f.text_field :student_id %>
@@ -155,26 +159,23 @@
     <%= f.label :parents_phone, "11.請輸入您的家長電話號碼" %><br />
     <%= f.text_field :parents_phone %>
   </div>
+  
   <div class="field2">
-    <%= f.label :jobs, "12.請輸入您的職業" %><br />
-    <%= f.text_field :jobs %>
-  </div>
-  <div class="field1">
     <%= f.label :company, "13.請輸入您就職的公司" %><br />
     <%= f.text_field :company %>
   </div>  
-  <div class="field2">
+  <div class="field1">
     <%= f.label :graduated, "14.請您勾選您的學歷?" %><br />
     <% @adults_graduateds.each do |gr| %>      
       <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_graduated_ids][]','' %>    
   </div>
-  <div class="field1">
+  <div class="field2">
     <%= f.label :graduated_other, "其他" %><br />
     <%= f.text_field :graduated_other %>
   </div>
-  <div class="field2">
+  <div class="field1">
     <%= f.label :company_address, "15.請輸入您公司的地址" %><br />    
     <%= f.text_field :company_address %>
   </div>
