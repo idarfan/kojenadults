@@ -13,3 +13,4 @@ class AddSessionFourColumnToKojenadults < ActiveRecord::Migration
     remove_column :kojenadults, :teacher
   end
 end
+#20120329115412

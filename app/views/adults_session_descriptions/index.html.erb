@@ -1,0 +1,25 @@
+<h1>Listing adults_session_descriptions</h1>
+
+<table>
+  <tr>
+    <th>Classname</th>
+    <th>Class description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_session_descriptions.each do |adults_session_description| %>
+  <tr>
+    <td><%= adults_session_description.classname %></td>
+    <td><%= adults_session_description.class_description %></td>
+    <td><%= link_to 'Show', adults_session_description %></td>
+    <td><%= link_to 'Edit', edit_adults_session_description_path(adults_session_description) %></td>
+    <td><%= link_to 'Destroy', adults_session_description, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults session description', new_adults_session_description_path %>

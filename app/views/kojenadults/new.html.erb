@@ -112,8 +112,8 @@
     </div>
   <% end %>  
   <div class="field2">
-    <%= f.label :jobs, "請輸入課程簡介" %><br />
-    <%= f.select(:jobs, options_from_collection_for_select(@adults_graduateds, :reason_desc, 'reason_desc', 1)) %>    
+    <%= f.label :session_description, "請輸入課程簡介" %><br />
+    <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', '1')) %>    
   </div>
   <div class="field1">
     <%= f.label :student_id, "1.請輸入學籍號碼" %><br />

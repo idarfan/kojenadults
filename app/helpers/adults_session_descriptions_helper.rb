@@ -1,0 +1,2 @@
+module AdultsSessionDescriptionsHelper
+end

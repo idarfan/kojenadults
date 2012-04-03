@@ -1,0 +1,25 @@
+<%= form_for(@adults_session_description) do |f| %>
+  <% if @adults_session_description.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adults_session_description.errors.count, "error") %> prohibited this adults_session_description from being saved:</h2>
+
+      <ul>
+      <% @adults_session_description.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :classname %><br />
+    <%= f.text_field :classname %>
+  </div>
+  <div class="field">
+    <%= f.label :class_description %><br />
+    <%= f.text_field :class_description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

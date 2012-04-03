@@ -1,0 +1,17 @@
+<%= form_for(@kojenadult_session_descriptionship) do |f| %>
+  <% if @kojenadult_session_descriptionship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kojenadult_session_descriptionship.errors.count, "error") %> prohibited this kojenadult_session_descriptionship from being saved:</h2>
+
+      <ul>
+      <% @kojenadult_session_descriptionship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<h1>Listing kojenadult_session_descriptionships</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kojenadult_session_descriptionships.each do |kojenadult_session_descriptionship| %>
+  <tr>
+    <td><%= link_to 'Show', kojenadult_session_descriptionship %></td>
+    <td><%= link_to 'Edit', edit_kojenadult_session_descriptionship_path(kojenadult_session_descriptionship) %></td>
+    <td><%= link_to 'Destroy', kojenadult_session_descriptionship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Kojenadult session descriptionship', new_kojenadult_session_descriptionship_path %>
