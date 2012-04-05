@@ -161,7 +161,11 @@ ActiveRecord::Schema.define(:version => 20120402092347) do
   create_table "kojenadult_session_descriptionships", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "kojenadult_id"
+    t.integer  "adults_session_description_id"
   end
+
+  add_index "kojenadult_session_descriptionships", ["kojenadult_id", "adults_session_description_id"], :name => "kojenadult_id and adults_session_description_id", :unique => true
 
   create_table "kojenadults", :force => true do |t|
     t.string   "cname"

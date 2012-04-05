@@ -18,7 +18,8 @@ class KojenadultsController < ApplicationController
   def index
     @kojenadults = Kojenadult.all
     @kojenadult_classes = KojenadultClasse.all
-
+    @adults_session_descriptions = AdultsSessionDescription.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @kojenadults }
@@ -38,7 +39,7 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-     @adults_session_descriptions = AdultsSessionDescription.all
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -120,7 +121,7 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions = AdultsSessionDescription.all
+    @adults_session_descriptions 
 
     respond_to do |format|
       if @kojenadult.update_attributes(params[:kojenadult])
@@ -140,6 +141,7 @@ class KojenadultsController < ApplicationController
     #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult.destroy
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html { redirect_to(kojenadults_url) }
