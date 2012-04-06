@@ -16,7 +16,8 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    @kojenadults = Kojenadult.all
+    #@kojenadults = Kojenadult.all 加入分頁機制
+    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 15)
     @kojenadult_classes = KojenadultClasse.all
     @adults_session_descriptions = AdultsSessionDescription.all
     
