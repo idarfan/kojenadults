@@ -100,4 +100,7 @@ class Kojenadult < ActiveRecord::Base
   validates :mobile_phone,  :presence => { :message => "行動電話欄位不能空白" }, 
     :length => {:minimum => 10, :maximum => 20, :message => "行動電話欄位長度不正確" }
   #驗證行動電話  
+  searchable do
+    text :cname, :ename, :email, :telephone, :mobile_phone, :parents_phone, :company_phone
+  end
 end

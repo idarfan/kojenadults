@@ -44,8 +44,9 @@ Kojenadults::Application.routes.draw do
   resources :kojenadults do
     collection do
       get :data
+      get :search
     end
-  end
-
+  end  
+  
   root :to => 'main#index', :as => 'main'
 end

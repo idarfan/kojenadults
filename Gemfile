@@ -4,11 +4,12 @@ gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'sunspot_rails'
 gem 'mysql2', '~> 0.2.11'
 gem 'will_paginate'
 gem 'rake', '~> 0.9.2'
 gem 'devise'
+gem 'progress_bar'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -32,3 +33,6 @@ gem 'devise'
 # group :development, :test do
 #   gem 'webrat'
 # end
+group :development do
+    gem 'sunspot_solr'
+  end

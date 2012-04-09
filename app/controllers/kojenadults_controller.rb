@@ -16,7 +16,8 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)    
+    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10) 
+    @kojenadult = Kojenadult.all
     @kojenadult_classes = KojenadultClasse.all    
     
     respond_to do |format|
@@ -58,7 +59,7 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-     @adults_session_descriptions = AdultsSessionDescription.all
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # new.html.erb      
@@ -163,4 +164,19 @@ class KojenadultsController < ApplicationController
       render(:json => false.to_json)
     end
   end
+  
+  # GET /kojenadults/search
+  # GET /kojenadults/search.xml
+  # 全文檢索
+  def search
+    @kojenadults = Kojenadult.search do
+      keywords params[:query]
+    end.results
+
+    respond_to do |format|
+      format.html { render :action => "index" }
+      format.xml  { render :xml => @kojenadults }
+    end
+  end
+
 end

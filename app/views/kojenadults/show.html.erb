@@ -20,10 +20,15 @@
   <b>生日:</b>
   <%= @kojenadult.birthday %>
 </div>
-<div class="field1">
+<div class="field2">
   <b>身份證號碼:</b>
   <%= @kojenadult.community_id %>
 </div>
+<div class="field1">
+  <b>地址:</b>
+  <%= area_name(@kojenadult) %><%= @kojenadult.road_name %><%= @kojenadult.address %>  
+</div>
+
 <div class="field2">
   <b>您選讀的課程是:</b>
   <%= @kojenadult.session_description %>
