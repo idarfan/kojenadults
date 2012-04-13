@@ -16,8 +16,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10) 
-    @kojenadult = Kojenadult.all
+    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)    
     @kojenadult_classes = KojenadultClasse.all    
     
     respond_to do |format|

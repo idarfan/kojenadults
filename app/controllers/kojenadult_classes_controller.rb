@@ -5,6 +5,7 @@ class KojenadultClassesController < ApplicationController
   # GET /kojenadult_classes.xml
   def index
     @kojenadult_classes = KojenadultClasse.all
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +17,7 @@ class KojenadultClassesController < ApplicationController
   # GET /kojenadult_classes/1.xml
   def show
     @kojenadult_class = KojenadultClasse.find(params[:id])
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,6 +29,7 @@ class KojenadultClassesController < ApplicationController
   # GET /kojenadult_classes/new.xml
   def new
     @kojenadult_class = KojenadultClasse.new
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,6 +46,7 @@ class KojenadultClassesController < ApplicationController
   # POST /kojenadult_classes.xml
   def create
     @kojenadult_class = KojenadultClasse.new(params[:kojenadult_classe])
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       if @kojenadult_class.save
@@ -59,6 +63,7 @@ class KojenadultClassesController < ApplicationController
   # PUT /kojenadult_classes/1.xml
   def update
     @kojenadult_class = KojenadultClasse.find(params[:id])
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       if @kojenadult_class.update_attributes(params[:kojenadult_classe])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402092347) do
+ActiveRecord::Schema.define(:version => 20120411123915) do
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20120402092347) do
     t.date     "classtime"
     t.string   "session_description"
     t.string   "teacher"
+    t.string   "classnumber"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|
