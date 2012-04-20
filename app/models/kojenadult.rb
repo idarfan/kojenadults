@@ -53,11 +53,11 @@ class Kojenadult < ActiveRecord::Base
   #條件驗證式開始
   validates :student_id,  :presence => true,
     :uniqueness => true,
-    :length => {:minimum => 4, :maximum => 10}				  
+    :length => {:minimum => 4, :maximum => 12}				  
   # 輸入學生id ,範圍由 xxxx-xxxxx 不可不填. 不可以有重複 				  
   validates :cname,  :presence => true, :on => :create
   #確保必填
-  validates_length_of :cname, :in => 2..12, :allow_nil => false, :on => :update
+  validates_length_of :cname, :presence => true, :in => 2..12, :allow_nil => false, :on => :update
   #:length => {:minimum => 2, :maximum => 12}
   # 中文姓名最少2個字,最多12個字	不可以不填
   validates :email, :presence => true, 
@@ -101,6 +101,6 @@ class Kojenadult < ActiveRecord::Base
     :length => {:minimum => 10, :maximum => 20, :message => "行動電話欄位長度不正確" }
   #驗證行動電話  
   searchable do
-    text :cname, :ename, :email, :telephone, :mobile_phone, :parents_phone, :company_phone
+    text :cname, :ename, :email, :student_id,:telephone, :mobile_phone, :parents_phone, :company_phone, :jobs, :session_description
   end
 end
