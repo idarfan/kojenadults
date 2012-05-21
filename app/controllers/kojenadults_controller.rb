@@ -147,6 +147,31 @@ class KojenadultsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def search    
+    #@level = Incomelevel.all.map{|im|[im.reason_desc , im.id]}    #test ok by rails c
+    #@howuknowu = Howuknowu.all.map{|sh|[sh.reason_desc , sh.id]}  #test ok by rails c 
+    #@whylearn = Whylearn.all.map{|sw|[sw.reason_desc , sw.id]}    #test ok by rails c
+    render :layout =>"test_layout"
+  end
+
+  def search_report    
+    start_at = Time.parse(params[:start_at])
+    end_at = Time.parse(params[:end_at])   
+    @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+    @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+    @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+    @kojenadults = Kojenadult.from('kojenadults AS s').joins("
+    INNER JOIN kojenadult_adults_whylearnships AS ka ON ka.kojenadult_id = s.id AND ka.adults_whylearn_id IN (#{@whylearn_ids.join(',')})
+    INNER JOIN kojenadult_adults_howyouknowuships AS ah ON ah.kojenadult_id = s.id AND ah.adults_howyouknowu_id IN (#{@howuknowu_ids.join(',')})
+    INNER JOIN kojenadult_adults_graduatedships AS ag ON ag.kojenadult_id = s.id AND ag.adults_graduated_id IN (#{@graduated_ids.join(',')})  
+    INNER JOIN kojenadults ON (kojenadults.id = ka.kojenadult_id AND kojenadults.id = ah.kojenadult_id AND kojenadults.id = ag.kojenadult_id AND 
+        kojenadults.created_at BETWEEN 
+        DATE('#{start_at.strftime("%Y/%m/%d")}') AND
+        DATE('#{end_at.strftime("%Y/%m/%d")}'))
+      ")  
+  end  
+  
   #底下的是參考性寫法
   def myjobs
     @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}

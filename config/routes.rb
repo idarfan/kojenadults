@@ -45,8 +45,10 @@ Kojenadults::Application.routes.draw do
     collection do
       get :data
       get :search
+      get :search1
+      get :search_report
     end
-  end  
+  end   
   
   root :to => 'main#index', :as => 'main'
 end
