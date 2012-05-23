@@ -38,8 +38,14 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions = AdultsSessionDescription.all
-
+    @adults_session_descriptions = AdultsSessionDescription.all  
+  #if @kojenadult_classes == nil #new adding
+  #      format.html { redirect_to(@kojenadult, :notice => 'Kojenadult_classes is none.') }
+  #      format.xml  { render :xml => @kojenadult, :status => :created, :location => @kojenadult }
+  #    else #new adding
+  if @kojenadult_classes == nil #new adding
+    redirect_to(@kojenadult, :notice => 'Kojenadult_classes is none.')
+  end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @kojenadult }    
@@ -156,8 +162,10 @@ class KojenadultsController < ApplicationController
   end
 
   def search_report    
-    start_at = Time.parse(params[:start_at])
-    end_at = Time.parse(params[:end_at])   
+    #start_at = Time.parse(params[:start_at])
+    start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")
+    #end_at = Time.parse(params[:end_at])   
+    end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")
     @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
     @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
     @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
@@ -203,4 +211,4 @@ class KojenadultsController < ApplicationController
     end
   end
 
-end
+end  
