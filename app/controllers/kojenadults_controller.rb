@@ -32,23 +32,26 @@ class KojenadultsController < ApplicationController
   # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄  
   def show 
     @kojenadult = Kojenadult.find(params[:id])
-    @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
-    @adults_graduateds = AdultsGraduated.all
-    @adults_howyouknowus = AdultsHowyouknowu.all
-    @adults_localexameds = AdultsLocalexamed.all
-    @adults_whatexameds = AdultsWhatexamed.all
-    @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions = AdultsSessionDescription.all  
-  #if @kojenadult_classes == nil #new adding
-  #      format.html { redirect_to(@kojenadult, :notice => 'Kojenadult_classes is none.') }
-  #      format.xml  { render :xml => @kojenadult, :status => :created, :location => @kojenadult }
-  #    else #new adding
-  if @kojenadult_classes == nil #new adding
-    redirect_to(@kojenadult, :notice => 'Kojenadult_classes is none.')
-  end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @kojenadult }    
+    if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
+      @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+      @adults_graduateds = AdultsGraduated.all
+      @adults_howyouknowus = AdultsHowyouknowu.all
+      @adults_localexameds = AdultsLocalexamed.all
+      @adults_whatexameds = AdultsWhatexamed.all
+      @adults_whylearns = AdultsWhylearn.all
+      @adults_session_descriptions = AdultsSessionDescription.all
+    end 
+    if @kojenadult_classes == nil
+      #redirect_to(@kojenadult, :notice => 'Kojenadult_classes have no record.')
+      #redirect_to(:action => :index,:notice => 'Kojenadult_classes have no record')
+      #redirect_to(:action => :index, flash[:notice] => '查無該筆學生選課記錄')
+      redirect_to:action => :index
+      flash[:notice] = "查無該筆學生選課記錄！"          
+    else   
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @kojenadult }    
+      end       
     end
   end
 

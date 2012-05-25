@@ -4,8 +4,12 @@
     <%= text_field_tag :query, params[:query] %> <%= submit_tag "搜尋學生資料!" %>
   </p>
 <% end %>
-
-<table>
+<b>  
+  <%= flash[:notice] %>
+</b>
+<br />
+<br />
+<table> 
   <tr>
     <th>學生編號</th>
     <th>中文姓名</th>
@@ -17,7 +21,7 @@
     <th>公司電話</th>    
   </tr>
 
-  <% @kojenadults.each do |kojenadult| %>
+  <% @kojenadults.each do |kojenadult| %>  
     <tr>
       <td><%= kojenadult.student_id %></td>
       <td><%= kojenadult.cname %></td>

@@ -1,0 +1,26 @@
+<% content_for :header do %>
+  <script>
+    jQuery(function($){
+      //alert("ewe");
+      $(".date_pick").datepicker();
+    })
+  </script>
+<% end %>
+<%= form_tag({:controller => "students", :action => "show_money"}, :method => "get" ) do %>
+  <input type="text" name="start_at" value="<%= (Time.now - 1.year).strftime("%Y/%m/%d") %>" class="date_pick"/>
+  <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/> 
+  <br /> 
+  <% Incomelevel.all.each do |income| %>
+    <%= check_box_tag "income_ids[]", income.id %> <%= income.reason_desc %>        
+  <% end %>
+    <br /> 
+  <% Howuknowu.all.each do | howuknowu| %>
+    <%= check_box_tag "howuknowu_ids[]", howuknowu.id %> <%= howuknowu.reason_desc %>        
+  <% end %>
+    <br /> 
+  <% Whylearn.all.each do | whylearn| %>
+    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>
+  <% end %>
+    <br />     
+  <%= submit_tag value="send" %>
+<% end %>
