@@ -5,6 +5,8 @@
     })
   </script>
 <% end %>
+  <p id="notice"><%= notice %></p>
+
 <%= form_tag({:controller => "kojenadults", :action => "search_report"}, :method => "get" ) do %>
   <input type="text" name="start_at" value="<%= (Time.now - 1.year).strftime("%Y/%m/%d") %>" class="date_pick"/>
   <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/> 
