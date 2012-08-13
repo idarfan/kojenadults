@@ -34,7 +34,8 @@ class ApplicationController < ActionController::Base
       if current_user.level <= level
         return true
       else
-        redirect_to :controller => "kojenadults", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        flash[:notice] = "您的權限不足，請洽經理授權允許進行此操作"
+        redirect_to :controller => "kojenadults", :action => "index"
         return false
       end
     else       
@@ -48,6 +49,7 @@ class ApplicationController < ActionController::Base
       if current_user.level <= level
         return true
       else
+        flash[:notice] = "您的權限不足，請洽組長授權允許進行此操作"
         redirect_to :controller => "kojenadults" , :action => "index"
         return false
       end
@@ -61,8 +63,10 @@ class ApplicationController < ActionController::Base
     if current_user
       if current_user.level <= level
         return true
-      else
-        redirect_to :controller => "users", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+      else        
+        #redirect_to :controller => "users", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        flash[:notice] = "您的權限不足，未被授權允許進行此操作"
+        redirect_to :controller => "users", :action => "index" 
         return false
       end
     else       
@@ -76,7 +80,8 @@ class ApplicationController < ActionController::Base
       if current_user.level <= level
         return true
       else
-        redirect_to :controller => "users", :action => "index", :notice => "您的權限不足，未被授權允許進行此操作"
+        flash[:notice] = "您的權限不足，未被授權允許進行此操作"
+        redirect_to :controller => "users", :action => "index"
         return false
       end
     else       

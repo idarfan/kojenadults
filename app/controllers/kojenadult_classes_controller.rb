@@ -4,7 +4,8 @@ class KojenadultClassesController < ApplicationController
   # GET /kojenadult_classes
   # GET /kojenadult_classes.xml
   def index
-    @kojenadult_classes = KojenadultClasse.all
+    @kojenadult_classes = KojenadultClasse.paginate(:page => params[:page], :per_page => 10) 
+    #@kojenadult_classes = KojenadultClasse.all
     @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|

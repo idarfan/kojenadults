@@ -1,0 +1,16 @@
+{ 
+	"chart": { 
+		"caption" : "本週學生付費上課金額總計" ,
+		"xAxisName" : "週",
+		"yAxisName" : "銷售金額",
+		"numberPrefix" : "$"
+	},
+	
+	"data" : 
+		[
+ 		  { "label" : "第一週", "value" : "14400" },
+		  { "label" : "第二週", "value" : "19600" },
+		  { "label" : "第三週", "value" : "24000" },
+		  { "label" : "第四週", "value" : "15700" }
+		]
+}
