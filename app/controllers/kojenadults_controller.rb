@@ -170,7 +170,9 @@ class KojenadultsController < ApplicationController
     #redirect_to:action => :search1  
     #elsif  params[:end_at].nil? or params[:end_at].empty?
     #  flash[:notice] = "請輸入結束日期！"
-    #  redirect_to:action => :search1      
+    #  redirect_to:action => :search1
+    #if @kojenadults == nil 
+     
     if params[:whylearn_ids].nil? or params[:whylearn_ids].empty?
       flash[:notice] = "請勾選為何學習英文的選項！"
       redirect_to:action => :search1      
@@ -180,10 +182,10 @@ class KojenadultsController < ApplicationController
     elsif params[:graduated_ids].nil? or params[:graduated_ids].empty?
       flash[:notice] = "請勾選欲查詢的學歷選項!"
       redirect_to:action => :search1
-    else
-      if @kojenadults == nil             
+    else 
+      if @kojenadult == nil  
         start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")         
-        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")        
+        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")      
         @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
         @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
         @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
@@ -196,11 +198,10 @@ class KojenadultsController < ApplicationController
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}'))
           ")
-        flash[:notice] = "查詢不到符合條件的學生記錄！" 
-      end      
-    end     
-  end  
-  
+        flash[:notice] = "查詢不到符合條件的學生記錄！"        
+      end        
+    end        
+  end
   #底下的是參考性寫法
   def myjobs
     @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}
@@ -231,5 +232,4 @@ class KojenadultsController < ApplicationController
       format.xml  { render :xml => @kojenadults }
     end
   end
-
 end  
