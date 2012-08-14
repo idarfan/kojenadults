@@ -1,4 +1,4 @@
 <p id="notice"><%= notice %></p>
-<% @kojenadults.each do |s| %>
-學生id: <%= s.student_id %> 學生姓名:<%= "#{s.cname} #{s.ename}" %> 電子郵件:<%= "#{s.email}" %> 手機:<%= "#{s.mobile_phone}" %> 建檔日期:<%= "#{s.created_at}" %>  <br/>
+<% @kojenadults.each do |s| %>  
+  學生id: <%= s.student_id %> 學生姓名:<%= "#{s.cname} #{s.ename}" %> 電子郵件:<%= "#{s.email}" %> 手機:<%= "#{s.mobile_phone}" %> 建檔日期:<%= "#{s.created_at}" %>  <br/>
 <% end %>

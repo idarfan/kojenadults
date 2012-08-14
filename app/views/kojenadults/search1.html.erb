@@ -1,27 +1,33 @@
 <% content_for :header do %>
   <script>
-    jQuery(function($){      
-      $(".date_pick").datepicker();
-    })
+    jQuery(function($){
+      $(".date_pick").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showOn: "button",
+        buttonImage: "../images/calendar.png",
+        buttonImageOnly: true       
+      });
+    });
   </script>
 <% end %>
-  <p id="notice"><%= notice %></p>
-
+<p id="notice"><%= notice %></p>
 <%= form_tag({:controller => "kojenadults", :action => "search_report"}, :method => "get" ) do %>
   <input type="text" name="start_at" value="<%= (Time.now - 1.year).strftime("%Y/%m/%d") %>" class="date_pick"/>
-  <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/> 
-  <br /> 
+  <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/>
+  <br />
+  <br />
   <% AdultsWhylearn.all.each do |whylearn| %>
-    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>        
+    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>
   <% end %>
-  <br /> 
+  <br />
   <% AdultsHowyouknowu.all.each do | howuknowu| %>
-    <%= check_box_tag "howuknowu_ids[]", howuknowu.id %> <%= howuknowu.reason_desc %>        
+    <%= check_box_tag "howuknowu_ids[]", howuknowu.id %> <%= howuknowu.reason_desc %>
   <% end %>
-  <br /> 
+  <br />
   <% AdultsGraduated.all.each do | gr | %>
     <%= check_box_tag "graduated_ids[]", gr.id %> <%= gr.reason_desc %>
   <% end %>
-  <br />  
+  <br />
   <%= submit_tag value="send" %>
 <% end %>
