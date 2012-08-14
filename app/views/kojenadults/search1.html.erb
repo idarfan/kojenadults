@@ -22,6 +22,6 @@
   <% AdultsGraduated.all.each do | gr | %>
     <%= check_box_tag "graduated_ids[]", gr.id %> <%= gr.reason_desc %>
   <% end %>
-  <br />     
+  <br />  
   <%= submit_tag value="send" %>
 <% end %>

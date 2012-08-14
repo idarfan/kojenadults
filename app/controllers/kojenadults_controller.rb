@@ -157,22 +157,14 @@ class KojenadultsController < ApplicationController
     end
   end
   
-  def search    
-    #@level = Incomelevel.all.map{|im|[im.reason_desc , im.id]}    #test ok by rails c
-    #@howuknowu = Howuknowu.all.map{|sh|[sh.reason_desc , sh.id]}  #test ok by rails c 
-    #@whylearn = Whylearn.all.map{|sw|[sw.reason_desc , sw.id]}    #test ok by rails c
+  def search #註解掉會遭到不幸 by idarfan
+    #@level = Incomelevel.all.map{|im|[im.reason_desc , im.id]}    
+    #@howuknowu = Howuknowu.all.map{|sh|[sh.reason_desc , sh.id]}   
+    #@whylearn = Whylearn.all.map{|sw|[sw.reason_desc , sw.id]}    
     render :layout =>"test_layout"
   end
 
   def search_report
-    #if  params[:start_at].not math? or params[:start_at].empty?
-    #flash[:notice] = "請輸入起始日期！"
-    #redirect_to:action => :search1  
-    #elsif  params[:end_at].nil? or params[:end_at].empty?
-    #  flash[:notice] = "請輸入結束日期！"
-    #  redirect_to:action => :search1
-    #if @kojenadults == nil 
-     
     if params[:whylearn_ids].nil? or params[:whylearn_ids].empty?
       flash[:notice] = "請勾選為何學習英文的選項！"
       redirect_to:action => :search1      
@@ -207,6 +199,7 @@ class KojenadultsController < ApplicationController
     @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}
     render :layout =>"test_layout"
   end
+  
   def show_myjobs
     ohmyjobs = params[:jobs].to_i   
   end
@@ -223,9 +216,12 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/search.xml
   # 全文檢索
   def search
-    @kojenadults = Kojenadult.search do
+    
+    @kojenadults = Kojenadult.search do 
       keywords params[:query]
-    end.results
+      #order_by <= can't wokr right now
+      paginate :page => 1, :per_page => 10, :offset => 0
+    end.results    
 
     respond_to do |format|
       format.html { render :action => "index" }
