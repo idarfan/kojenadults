@@ -164,16 +164,16 @@ class KojenadultsController < ApplicationController
     render :layout =>"test_layout"
   end
 
-  def search_report
+  def search_report    
     if params[:whylearn_ids].nil? or params[:whylearn_ids].empty?
-      flash[:notice] = "請勾選為何學習英文的選項,並選取起始日期及結束日期!"       
-      redirect_to:action => :search1   
+      flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選為何學習英文的選項!"       
+      redirect_to:action => :search1
     elsif params[:howuknowu_ids].nil? or params[:howuknowu_ids].empty?
-      flash[:notice] = "請勾選如何知道我們的選項,並選取起始日期及結束日期!"
-      redirect_to:action => :search1
+      flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選如何知道我們的選項!"
+      redirect_to:action => :search1       
     elsif params[:graduated_ids].nil? or params[:graduated_ids].empty?
-      flash[:notice] = "請勾選欲查詢的學歷選項,並選取起始日期及結束日期!"
-      redirect_to:action => :search1
+      flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選要查詢學歷的選項!"
+      redirect_to:action => :search1       
     else      
       start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
       end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")         
@@ -188,15 +188,14 @@ class KojenadultsController < ApplicationController
         kojenadults.created_at BETWEEN 
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}'))
-        ")
-      @kojenadults.uniq
+        ")   
       if @kojenadults.nil? || @kojenadults.size.zero?
         flash[:notice] = "查詢不到符合條件的學生記錄！"                 
       else
         flash[:notice] = "總共查詢到#{@kojenadults.size}筆記錄"
-      end      
+      end   
+      @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
     end
-    @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
   end
   #底下的是參考性寫法
   def myjobs
