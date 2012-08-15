@@ -166,22 +166,21 @@ class KojenadultsController < ApplicationController
 
   def search_report
     if params[:whylearn_ids].nil? or params[:whylearn_ids].empty?
-      flash[:notice] = "請勾選為何學習英文的選項,並選取起始日期及結束日期!"
-      redirect_to:action => :search1      
+      flash[:notice] = "請勾選為何學習英文的選項,並選取起始日期及結束日期!"       
+      redirect_to:action => :search1   
     elsif params[:howuknowu_ids].nil? or params[:howuknowu_ids].empty?
       flash[:notice] = "請勾選如何知道我們的選項,並選取起始日期及結束日期!"
       redirect_to:action => :search1
     elsif params[:graduated_ids].nil? or params[:graduated_ids].empty?
       flash[:notice] = "請勾選欲查詢的學歷選項,並選取起始日期及結束日期!"
       redirect_to:action => :search1
-    else 
-      #if @kojenadult == nil  該檢查式有問題暫時移除
-        start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
-        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")         
-        @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-        @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-        @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-        @kojenadults = Kojenadult.from('kojenadults AS s').joins("
+    else      
+      start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
+      end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")         
+      @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+      @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+      @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+      @kojenadults = Kojenadult.from('kojenadults AS s').joins("
     INNER JOIN kojenadult_adults_whylearnships AS ka ON ka.kojenadult_id = s.id AND ka.adults_whylearn_id IN (#{@whylearn_ids.join(',')})
     INNER JOIN kojenadult_adults_howyouknowuships AS ah ON ah.kojenadult_id = s.id AND ah.adults_howyouknowu_id IN (#{@howuknowu_ids.join(',')})
     INNER JOIN kojenadult_adults_graduatedships AS ag ON ag.kojenadult_id = s.id AND ag.adults_graduated_id IN (#{@graduated_ids.join(',')})  
@@ -189,10 +188,15 @@ class KojenadultsController < ApplicationController
         kojenadults.created_at BETWEEN 
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}'))
-          ")
-        #flash[:notice] = "查詢不到符合條件的學生記錄！"
-        #redirect_to:action => :search1　<=　注意:　若加上這行會導致所有查詢都看不到
-      end                    
+        ")
+      @kojenadults.uniq
+      if @kojenadults.nil? || @kojenadults.size.zero?
+        flash[:notice] = "查詢不到符合條件的學生記錄！"                 
+      else
+        flash[:notice] = "總共查詢到#{@kojenadults.size}筆記錄"
+      end      
+    end
+    @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
   end
   #底下的是參考性寫法
   def myjobs

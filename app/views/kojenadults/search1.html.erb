@@ -18,15 +18,15 @@
   <br />
   <br />
   <% AdultsWhylearn.all.each do |whylearn| %>
-    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>
+    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %> 
   <% end %>
   <br />
   <% AdultsHowyouknowu.all.each do | howuknowu| %>
-    <%= check_box_tag "howuknowu_ids[]", howuknowu.id %> <%= howuknowu.reason_desc %>
+    <%= check_box_tag "howuknowu_ids[]", howuknowu.id %> <%= howuknowu.reason_desc %>  
   <% end %>
   <br />
   <% AdultsGraduated.all.each do | gr | %>
-    <%= check_box_tag "graduated_ids[]", gr.id %> <%= gr.reason_desc %>
+    <%= check_box_tag "graduated_ids[]", gr.id %> <%= gr.reason_desc %>  
   <% end %>
   <br />
   <%= submit_tag value="send" %>
