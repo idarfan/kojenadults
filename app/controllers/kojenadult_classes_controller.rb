@@ -7,6 +7,7 @@ class KojenadultClassesController < ApplicationController
     @kojenadult_classes = KojenadultClasse.paginate(:page => params[:page], :per_page => 10) 
     #@kojenadult_classes = KojenadultClasse.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    @kojenadults = Kojenadult.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,6 +20,9 @@ class KojenadultClassesController < ApplicationController
   def show
     @kojenadult_class = KojenadultClasse.find(params[:id])
     @adults_session_descriptions = AdultsSessionDescription.all
+    #@kojenadults = Kojenadult.where("student_id = #{@kojenadult_class.student_id}")
+    #@kojenadult = Kojenadult.find(params[:student_id])
+    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")    
 
     respond_to do |format|
       format.html # show.html.erb
