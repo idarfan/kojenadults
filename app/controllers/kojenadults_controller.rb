@@ -202,7 +202,7 @@ class KojenadultsController < ApplicationController
         end   
         @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
         #render :search_report :layout => "text_layout" # 這邊要明確的指示render
-        #render :layout => "test_layout"
+        #render :layout => "test_layout" <= 怪怪用了它會遭到不幸,會無法調出資料
       rescue Exception => e
         flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
         redirect_to :action => :search1       
