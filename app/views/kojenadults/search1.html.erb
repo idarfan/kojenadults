@@ -16,9 +16,11 @@
   <input type="text" name="start_at" value="<%= (Time.now - 1.year).strftime("%Y/%m/%d") %>" class="date_pick"/>
   <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/>
   <br />
+  <input type="text" size="3" name="start_age_at" value="" />
+  <input type="text" size="3" name="end_age_at" value="" />        
   <br />
   <% AdultsWhylearn.all.each do |whylearn| %>
-    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %> 
+    <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>  
   <% end %>
   <br />
   <% AdultsHowyouknowu.all.each do | howuknowu| %>

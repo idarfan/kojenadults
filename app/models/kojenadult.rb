@@ -1,12 +1,20 @@
 # encoding: utf-8
 class Kojenadult < ActiveRecord::Base
- #採用過濾器
+  #採用過濾器
   before_save :fix_cname
+  
+  #記算年齡的方法
+  def age
+    now = Time.now.utc.to_date
+    dob = self.birthday
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
   #使用私有方法 fix_cname
   private
   def fix_cname
     self.cname = self.cname.gsub(/[\w\s\b\$[:punct:]]/ , '')
   end
+  
   #
   has_many :kojenadult_adults_graduatedship, :dependent => :destroy
   has_many :adults_graduated, :through => :kojenadult_adults_graduatedship

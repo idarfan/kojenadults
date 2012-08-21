@@ -129,7 +129,7 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions 
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       if @kojenadult.update_attributes(params[:kojenadult])
@@ -175,34 +175,40 @@ class KojenadultsController < ApplicationController
       flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選要查詢學歷的選項!"
       redirect_to:action => :search1       
     else
-      begin
-      start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
-      end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")         
-    
-      @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-      @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-      @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
-      @kojenadults = Kojenadult.from('kojenadults AS s').joins("
+      #begin
+        start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
+        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")      
+        #start_age = Time.now - params[:end_age_at].to_i.years - 1.year - 1.day      
+        #end_age = Time.now - params[:start_age_at].to_i.years - 1.year - 1.day
+        start_age_at = Time.now - params[:end_age_at].to_i.years - 1.day 
+        end_age_at = Time.now - params[:start_age_at].to_i.years  
+        @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+        @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+        @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
+        @kojenadults = Kojenadult.from('kojenadults AS s').joins("
     INNER JOIN kojenadult_adults_whylearnships AS ka ON ka.kojenadult_id = s.id AND ka.adults_whylearn_id IN (#{@whylearn_ids.join(',')})
     INNER JOIN kojenadult_adults_howyouknowuships AS ah ON ah.kojenadult_id = s.id AND ah.adults_howyouknowu_id IN (#{@howuknowu_ids.join(',')})
     INNER JOIN kojenadult_adults_graduatedships AS ag ON ag.kojenadult_id = s.id AND ag.adults_graduated_id IN (#{@graduated_ids.join(',')})  
     INNER JOIN kojenadults ON (kojenadults.id = ka.kojenadult_id AND kojenadults.id = ah.kojenadult_id AND kojenadults.id = ag.kojenadult_id AND 
-        kojenadults.created_at BETWEEN 
+        kojenadults.updated_at BETWEEN
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
-        DATE('#{end_at.strftime("%Y/%m/%d")}'))
-        ")   
-      if @kojenadults.nil? || @kojenadults.size.zero?
-        flash[:notice] = "查詢不到符合條件的學生記錄！"                 
-      else
-        flash[:notice] = "總共查詢到#{@kojenadults.size}筆記錄"
-      end   
-      @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
-      #render :search_report :layout => "text_layout" # 這邊要明確的指示render
-      render :layout => "test_layout"
-      rescue Exception => e
-        flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
-        redirect_to :action => :search1       
-      end
+        DATE('#{end_at.strftime("%Y/%m/%d")}') AND
+        kojenadults.birthday BETWEEN
+        DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND
+        DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            
+          ")
+        if @kojenadults.nil? || @kojenadults.size.zero?
+          flash[:notice] = "查詢不到符合條件的學生記錄！"                 
+        else
+          flash[:notice] = "總共查詢到#{@kojenadults.size}筆記錄"
+        end   
+        @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
+        #render :search_report :layout => "text_layout" # 這邊要明確的指示render
+        #render :layout => "test_layout"
+      #rescue Exception => e
+      #  flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
+      #  redirect_to :action => :search1       
+      # end
     end
   end
   #底下的是參考性寫法
