@@ -175,12 +175,10 @@ class KojenadultsController < ApplicationController
       flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選要查詢學歷的選項!"
       redirect_to:action => :search1       
     else
-      #begin
+      begin
         start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
-        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")      
-        #start_age = Time.now - params[:end_age_at].to_i.years - 1.year - 1.day      
-        #end_age = Time.now - params[:start_age_at].to_i.years - 1.year - 1.day
-        start_age_at = Time.now - params[:end_age_at].to_i.years - 1.day 
+        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")        
+        start_age_at = Time.now - params[:end_age_at].to_i.years  
         end_age_at = Time.now - params[:start_age_at].to_i.years  
         @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
         @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
@@ -205,10 +203,10 @@ class KojenadultsController < ApplicationController
         @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
         #render :search_report :layout => "text_layout" # 這邊要明確的指示render
         #render :layout => "test_layout"
-      #rescue Exception => e
-      #  flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
-      #  redirect_to :action => :search1       
-      # end
+      rescue Exception => e
+        flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
+        redirect_to :action => :search1       
+       end
     end
   end
   #底下的是參考性寫法

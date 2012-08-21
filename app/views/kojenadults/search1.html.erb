@@ -16,9 +16,12 @@
   <input type="text" name="start_at" value="<%= (Time.now - 1.year).strftime("%Y/%m/%d") %>" class="date_pick"/>
   <input type="text" name="end_at" value="<%= Time.now.strftime("%Y/%m/%d") %>" class="date_pick"/>
   <br />
-  <input type="text" size="3" name="start_age_at" value="" />
-  <input type="text" size="3" name="end_age_at" value="" />        
-  <br />
+  <div class="field1">
+  <p>請輸入欲查詢的學生起始年齡:</p>
+  <input type="text" name="start_age_at" value="" />  
+  <p>請輸入欲查詢的學生結束年齡:</p>
+  <input type="text" name="end_age_at" value="" />        
+  </div>
   <% AdultsWhylearn.all.each do |whylearn| %>
     <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>  
   <% end %>
