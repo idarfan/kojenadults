@@ -178,8 +178,8 @@ class KojenadultsController < ApplicationController
       begin
         start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
         end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")        
-        start_age_at = Time.now - params[:end_age_at].to_i.years  
-        end_age_at = Time.now - params[:start_age_at].to_i.years  
+        start_age_at = Time.now - params[:end_age_at].to_i.years - 1.year
+        end_age_at = Time.now - params[:start_age_at].to_i.years 
         @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
         @howuknowu_ids = params['howuknowu_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
         @graduated_ids = params['graduated_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact
@@ -191,10 +191,8 @@ class KojenadultsController < ApplicationController
         kojenadults.updated_at BETWEEN
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}') AND
-        kojenadults.birthday BETWEEN
-        DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND
-        DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            
-          ")
+        kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            
+        ")
         if @kojenadults.nil? || @kojenadults.size.zero?
           flash[:notice] = "查詢不到符合條件的學生記錄！"                 
         else
