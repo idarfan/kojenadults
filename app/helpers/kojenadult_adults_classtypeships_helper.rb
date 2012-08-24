@@ -1,0 +1,2 @@
+module KojenadultAdultsClasstypeshipsHelper
+end

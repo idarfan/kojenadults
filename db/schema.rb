@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430044000) do
+ActiveRecord::Schema.define(:version => 20120824090233) do
+
+  create_table "adults_classtypes", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "adults_graduateds", :force => true do |t|
     t.string   "reason_desc"
@@ -95,6 +101,15 @@ ActiveRecord::Schema.define(:version => 20120430044000) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "kojenadult_adults_classtypeships", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "kojenadult_id"
+    t.integer  "adults_classtype_id"
+  end
+
+  add_index "kojenadult_adults_classtypeships", ["kojenadult_id", "adults_classtype_id"], :name => "kojenadult_id and adults_classtype_id", :unique => true
 
   create_table "kojenadult_adults_graduatedships", :force => true do |t|
     t.datetime "created_at"
@@ -203,6 +218,7 @@ ActiveRecord::Schema.define(:version => 20120430044000) do
     t.string   "session_description"
     t.string   "teacher"
     t.string   "classnumber"
+    t.string   "adults_classtype"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|

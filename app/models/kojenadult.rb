@@ -37,6 +37,9 @@ class Kojenadult < ActiveRecord::Base
   #新增kojenadult_session_descriptionship 及 adults_session_description
   has_many :kojenadult_session_descriptionship, :dependent => :destroy
   has_many :adults_session_description, :through => :kojenadult_session_descriptionship
+  #新增kojenadult_adults_classtypeship 及 adults_classtype 課程類
+  has_many :kojenadult_adults_classtypeship, :dependent => :destroy
+  has_many :adults_classtype, :through => :kojenadult_adults_classtypeship
   #底下為資料輸入項目檢查原則
   validate  :check_whylearn #檢查學習英文動機是否有勾選否則請填寫其它欄位  
   validate :check_adults_howyouknowu # 檢查您看些什麼網站及雜誌 

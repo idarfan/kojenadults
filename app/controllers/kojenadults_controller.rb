@@ -17,7 +17,10 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults.xml
   def index
     @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)    
-    @kojenadult_classes = KojenadultClasse.all    
+    @adults_classtypes = AdultsClasstype.all
+    @kojenadult_classes = KojenadultClasse.all
+    
+    
     
     respond_to do |format|
       format.html # index.html.erb
@@ -32,6 +35,7 @@ class KojenadultsController < ApplicationController
   # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄  
   def show 
     @kojenadult = Kojenadult.find(params[:id])
+    @adults_classtypes = AdultsClasstype.all
     if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
       @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
       @adults_graduateds = AdultsGraduated.all
@@ -39,7 +43,7 @@ class KojenadultsController < ApplicationController
       @adults_localexameds = AdultsLocalexamed.all
       @adults_whatexameds = AdultsWhatexamed.all
       @adults_whylearns = AdultsWhylearn.all
-      @adults_session_descriptions = AdultsSessionDescription.all
+      @adults_session_descriptions = AdultsSessionDescription.all      
     end 
     if @kojenadult_classes == nil
       #redirect_to(@kojenadult, :notice => 'Kojenadult_classes have no record.')
@@ -60,6 +64,7 @@ class KojenadultsController < ApplicationController
   def new 
     #raise Exception.new(params.inspect)
     @kojenadult = Kojenadult.new
+    @adults_classtypes = AdultsClasstype.all
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all    
     @adults_graduateds = AdultsGraduated.all
@@ -67,7 +72,8 @@ class KojenadultsController < ApplicationController
     @adults_localexameds = AdultsLocalexamed.all
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions = AdultsSessionDescription.all
+    @adults_session_descriptions = AdultsSessionDescription.all   
+    
 
     respond_to do |format|
       format.html # new.html.erb      
@@ -79,7 +85,8 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1/edit
   def edit
     return unless user_level2 #增加權限控管    
-    @kojenadult = Kojenadult.find(params[:id]) 
+    @kojenadult = Kojenadult.find(params[:id])
+    @adults_classtypes = AdultsClasstype.all
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
@@ -88,12 +95,14 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    
   end
 
   # POST /kojenadults
   # POST /kojenadults.xml
   def create
     @kojenadult = Kojenadult.new(params[:kojenadult])
+    @adults_classtypes = AdultsClasstype.all
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
@@ -103,6 +112,7 @@ class KojenadultsController < ApplicationController
     @adults_whylearns = AdultsWhylearn.all
     @kojenadult.keyin = current_user.name
     @adults_session_descriptions = AdultsSessionDescription.all
+    
     #raise Exception.new(params.inspect)  
     #檢視表單傳送些什麼參數，檢查完後再予以註銷
 
@@ -122,6 +132,7 @@ class KojenadultsController < ApplicationController
   def update
     return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
+    @adults_classtypes = AdultsClasstype.all
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
@@ -130,6 +141,7 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    
 
     respond_to do |format|
       if @kojenadult.update_attributes(params[:kojenadult])

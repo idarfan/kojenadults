@@ -1,0 +1,23 @@
+<h1>Listing adults_classtypes</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_classtypes.each do |adults_classtype| %>
+  <tr>
+    <td><%= adults_classtype.reason_desc %></td>
+    <td><%= link_to 'Show', adults_classtype %></td>
+    <td><%= link_to 'Edit', edit_adults_classtype_path(adults_classtype) %></td>
+    <td><%= link_to 'Destroy', adults_classtype, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults classtype', new_adults_classtype_path %>

@@ -1,0 +1,21 @@
+<h1>Listing kojenadult_adults_classtypeships</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kojenadult_adults_classtypeships.each do |kojenadult_adults_classtypeship| %>
+  <tr>
+    <td><%= link_to 'Show', kojenadult_adults_classtypeship %></td>
+    <td><%= link_to 'Edit', edit_kojenadult_adults_classtypeship_path(kojenadult_adults_classtypeship) %></td>
+    <td><%= link_to 'Destroy', kojenadult_adults_classtypeship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Kojenadult adults classtypeship', new_kojenadult_adults_classtypeship_path %>

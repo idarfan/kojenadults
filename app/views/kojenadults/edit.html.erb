@@ -111,6 +111,10 @@
       </ul>
     </div>
   <% end %>
+   <div class="field1">
+    <%= f.label :adults_classtype, "請輸入課程類別" %><br />
+    <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, :reason_desc, 'reason_desc', [@kojenadult.adults_classtype])) %>
+  </div>
   <div class="field2">
       <%= f.label :session_description, "１.請輸入選讀課程" %><br />                        
       <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', @kojenadult.session_description)) %>      

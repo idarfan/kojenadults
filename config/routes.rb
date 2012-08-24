@@ -1,4 +1,8 @@
 Kojenadults::Application.routes.draw do
+  resources :kojenadult_adults_classtypeships
+
+  resources :adults_classtypes
+
   resources :kojenadult_session_descriptionships
 
   resources :adults_session_descriptions
