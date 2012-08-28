@@ -16,8 +16,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)    
-    @adults_classtypes = AdultsClasstype.all
+    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)        
     @kojenadult_classes = KojenadultClasse.all
     
     
@@ -63,8 +62,10 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/new.xml
   def new 
     #raise Exception.new(params.inspect)
-    @kojenadult = Kojenadult.new
+    @kojenadult = Kojenadult.new   
+    #@kojenadult.adults_classtype = AdultsClasstype.all
     @adults_classtypes = AdultsClasstype.all
+    #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all    
     @adults_graduateds = AdultsGraduated.all
@@ -87,6 +88,7 @@ class KojenadultsController < ApplicationController
     return unless user_level2 #增加權限控管    
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
+    #@kojenadult.adults_classtype = [@adults_classtypes]
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
@@ -103,6 +105,9 @@ class KojenadultsController < ApplicationController
   def create
     @kojenadult = Kojenadult.new(params[:kojenadult])
     @adults_classtypes = AdultsClasstype.all
+    #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
+    #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
+    #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params[:kojenadult][:adults_classtype])
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
@@ -133,6 +138,8 @@ class KojenadultsController < ApplicationController
     return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
+    #@kojenadult.adults_classtype = [@adults_classtypes]
+    #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all

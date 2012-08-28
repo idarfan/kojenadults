@@ -4,7 +4,8 @@ gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'sunspot_rails'
+gem 'sunspot_rails', '~> 1.3.3'
+gem "simple_form"
 gem 'mysql2', '~> 0.2.11'
 gem 'will_paginate'
 gem 'rake', '~> 0.9.2'
@@ -34,5 +35,5 @@ gem 'progress_bar'
 #   gem 'webrat'
 # end
 group :development do
-    gem 'sunspot_solr'
+    gem 'sunspot_solr', '~> 1.3.3'    
   end
