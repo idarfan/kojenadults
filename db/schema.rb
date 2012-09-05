@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824090233) do
+ActiveRecord::Schema.define(:version => 20120828120817) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(:version => 20120824090233) do
   end
 
   create_table "adults_localexameds", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "adults_refinement_lessons", :force => true do |t|
     t.string   "reason_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -138,6 +144,15 @@ ActiveRecord::Schema.define(:version => 20120824090233) do
 
   add_index "kojenadult_adults_localexamedships", ["kojenadult_id", "adults_localexamed_id"], :name => "kojenadult_id and adults_localexamed_id", :unique => true
 
+  create_table "kojenadult_adults_refinement_lessonships", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "kojenadult_id"
+    t.integer  "adults_refinement_lesson_id"
+  end
+
+  add_index "kojenadult_adults_refinement_lessonships", ["kojenadult_id", "adults_refinement_lesson_id"], :name => "kojenadult_id and adults_refinement_lesson_id", :unique => true
+
   create_table "kojenadult_adults_whatexamedships", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -209,8 +224,8 @@ ActiveRecord::Schema.define(:version => 20120824090233) do
     t.text     "notice_other"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "main_area",           :limit => 1
-    t.integer  "sub_area",            :limit => 1
+    t.integer  "main_area",               :limit => 1
+    t.integer  "sub_area",                :limit => 1
     t.string   "road_name"
     t.string   "keyin"
     t.string   "session"
@@ -219,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20120824090233) do
     t.string   "teacher"
     t.string   "classnumber"
     t.string   "adults_classtype"
+    t.string   "adults_refinementlesson"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|

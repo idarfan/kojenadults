@@ -113,13 +113,17 @@
   <% end %>
  <div class="field1">
     <%= f.label :adults_classtype, "請輸入課程類別" %><br />
-    <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, :reason_desc, 'reason_desc', '1')) %>    
+    <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, :reason_desc, 'reason_desc', '1'), {:prompt => '請選擇課程類別'}) %>    
   </div>
   <div class="field2">
-    <%= f.label :session_description, "1.請輸入選讀課程" %><br />
-    <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', '1')) %>    
+    <%= f.label :session_description, "1.請輸入團體會話班課程類別" %><br />
+    <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', '1'), {:prompt => '請選擇課程類別'}) %>    
   </div>
   <div class="field1">
+    <%= f.label :adults_refinement_lesson, "請輸入精緻班課程類別" %><br />
+    <%= f.select(:adults_refinementlesson, options_from_collection_for_select(@adults_refinement_lessons, :reason_desc, 'reason_desc', '1'), {:prompt => '請選擇課程類別'}) %>    
+  </div>  
+  <div class="field2">
     <%= f.label :classnumber, "2.請輸入班級編號" %><br />
     <%= f.text_field :classnumber %>
   </div>  

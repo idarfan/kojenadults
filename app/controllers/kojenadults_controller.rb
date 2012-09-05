@@ -35,6 +35,7 @@ class KojenadultsController < ApplicationController
   def show 
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
+    @adults_refinement_lessons = AdultsRefinementLesson.all
     if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
       @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
       @adults_graduateds = AdultsGraduated.all
@@ -65,6 +66,7 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.new   
     #@kojenadult.adults_classtype = AdultsClasstype.all
     @adults_classtypes = AdultsClasstype.all
+    @adults_refinement_lessons = AdultsRefinementLesson.all
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all    
@@ -88,6 +90,7 @@ class KojenadultsController < ApplicationController
     return unless user_level2 #增加權限控管    
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
+    @adults_refinement_lessons = AdultsRefinementLesson.all
     #@kojenadult.adults_classtype = [@adults_classtypes]
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
@@ -105,6 +108,7 @@ class KojenadultsController < ApplicationController
   def create
     @kojenadult = Kojenadult.new(params[:kojenadult])
     @adults_classtypes = AdultsClasstype.all
+    @adults_refinement_lessons = AdultsRefinementLesson.all
     #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params[:kojenadult][:adults_classtype])
@@ -138,6 +142,7 @@ class KojenadultsController < ApplicationController
     return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
+    @adults_refinement_lessons = AdultsRefinementLesson.all
     #@kojenadult.adults_classtype = [@adults_classtypes]
     #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
@@ -168,7 +173,11 @@ class KojenadultsController < ApplicationController
     #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult.destroy
-    @adults_session_descriptions = AdultsSessionDescription.all
+    @adults_session_descriptions = AdultsSessionDescription.all    
+    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")    
+    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")
+    @kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")    
+    @kojenadult_class.destroy  
 
     respond_to do |format|
       format.html { redirect_to(kojenadults_url) }
@@ -211,7 +220,7 @@ class KojenadultsController < ApplicationController
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}') AND
         kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            
-        ")
+          ")
         if @kojenadults.nil? || @kojenadults.size.zero?
           flash[:notice] = "查詢不到符合條件的學生記錄！"                 
         else
@@ -223,7 +232,7 @@ class KojenadultsController < ApplicationController
       rescue Exception => e
         flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
         redirect_to :action => :search1       
-       end
+      end
     end
   end
   #底下的是參考性寫法

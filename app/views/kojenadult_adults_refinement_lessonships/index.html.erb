@@ -1,0 +1,21 @@
+<h1>Listing kojenadult_adults_refinement_lessonships</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kojenadult_adults_refinement_lessonships.each do |kojenadult_adults_refinement_lessonship| %>
+  <tr>
+    <td><%= link_to 'Show', kojenadult_adults_refinement_lessonship %></td>
+    <td><%= link_to 'Edit', edit_kojenadult_adults_refinement_lessonship_path(kojenadult_adults_refinement_lessonship) %></td>
+    <td><%= link_to 'Destroy', kojenadult_adults_refinement_lessonship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Kojenadult adults refinement lessonship', new_kojenadult_adults_refinement_lessonship_path %>

@@ -1,4 +1,8 @@
 Kojenadults::Application.routes.draw do
+  resources :kojenadult_adults_refinement_lessonships
+
+  resources :adults_refinement_lessons
+
   resources :kojenadult_adults_classtypeships
 
   resources :adults_classtypes

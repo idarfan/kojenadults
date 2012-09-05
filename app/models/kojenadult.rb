@@ -13,8 +13,7 @@ class Kojenadult < ActiveRecord::Base
   private
   def fix_cname
     self.cname = self.cname.gsub(/[\w\s\b\$[:punct:]]/ , '')
-  end
-  
+  end  
   #
   has_many :kojenadult_adults_graduatedship, :dependent => :destroy
   has_many :adults_graduated, :through => :kojenadult_adults_graduatedship
@@ -40,8 +39,11 @@ class Kojenadult < ActiveRecord::Base
   #新增kojenadult_adults_classtypeship 及 adults_classtype課程類
   #has_many :kojenadult_adults_classtypeship, :dependent => :destroy
   #has_many :adults_classtype, :through => :kojenadult_adults_classtypeship
+  #新增adults_refinement_lesson 及 kojenadult_adults_refinement_lessonship精緻班課程選項
+  #has_many :kojenadult_adults_refinement_lessonship, :dependent => :destroy
+  #has_many :adults_refinement_lesson, :through => :kojenadult_adults_refinement_lessonship
   #底下為資料輸入項目檢查原則
-  validate  :check_whylearn #檢查學習英文動機是否有勾選否則請填寫其它欄位  
+  validate :check_whylearn #檢查學習英文動機是否有勾選否則請填寫其它欄位  
   validate :check_adults_howyouknowu # 檢查您看些什麼網站及雜誌 
   validate :check_graduated # 請輸入您的學歷
   def check_graduated

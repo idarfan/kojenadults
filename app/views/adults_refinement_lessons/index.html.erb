@@ -1,0 +1,23 @@
+<h1>Listing adults_refinement_lessons</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_refinement_lessons.each do |adults_refinement_lesson| %>
+  <tr>
+    <td><%= adults_refinement_lesson.reason_desc %></td>
+    <td><%= link_to 'Show', adults_refinement_lesson %></td>
+    <td><%= link_to 'Edit', edit_adults_refinement_lesson_path(adults_refinement_lesson) %></td>
+    <td><%= link_to 'Destroy', adults_refinement_lesson, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults refinement lesson', new_adults_refinement_lesson_path %>
