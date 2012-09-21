@@ -1,0 +1,23 @@
+<h1>Listing adults_units</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_units.each do |adults_unit| %>
+  <tr>
+    <td><%= adults_unit.reason_desc %></td>
+    <td><%= link_to 'Show', adults_unit %></td>
+    <td><%= link_to 'Edit', edit_adults_unit_path(adults_unit) %></td>
+    <td><%= link_to 'Destroy', adults_unit, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults unit', new_adults_unit_path %>

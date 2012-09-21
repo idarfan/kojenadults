@@ -1,0 +1,23 @@
+<h1>Listing adults_licenses</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_licenses.each do |adults_license| %>
+  <tr>
+    <td><%= adults_license.reason_desc %></td>
+    <td><%= link_to 'Show', adults_license %></td>
+    <td><%= link_to 'Edit', edit_adults_license_path(adults_license) %></td>
+    <td><%= link_to 'Destroy', adults_license, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults license', new_adults_license_path %>

@@ -1,0 +1,2 @@
+module AdultsOnlinesHelper
+end

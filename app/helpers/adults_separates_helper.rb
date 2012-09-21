@@ -1,0 +1,2 @@
+module AdultsSeparatesHelper
+end

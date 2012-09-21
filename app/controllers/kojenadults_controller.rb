@@ -36,6 +36,11 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
+    @adults_units = AdultsUnit.all
+    @adults_licenses = AdultsLicense.all
+    @adults_separates = AdultsSeparate.all
+    @adults_japans = AdultsJapan.all
+    @adults_onlines = AdultsOnline.all
     if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
       @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
       @adults_graduateds = AdultsGraduated.all
@@ -67,6 +72,11 @@ class KojenadultsController < ApplicationController
     #@kojenadult.adults_classtype = AdultsClasstype.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
+    @adults_units = AdultsUnit.all
+    @adults_licenses = AdultsLicense.all
+    @adults_separates = AdultsSeparate.all
+    @adults_japans = AdultsJapan.all
+    @adults_onlines = AdultsOnline.all
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all    
@@ -91,6 +101,11 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
+    @adults_units = AdultsUnit.all
+    @adults_licenses = AdultsLicense.all
+    @adults_separates = AdultsSeparate.all
+    @adults_japans = AdultsJapan.all
+    @adults_onlines = AdultsOnline.all
     #@kojenadult.adults_classtype = [@adults_classtypes]
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
     @kojenadult_classes = KojenadultClasse.all
@@ -109,6 +124,11 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.new(params[:kojenadult])
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
+    @adults_units = AdultsUnit.all
+    @adults_licenses = AdultsLicense.all
+    @adults_separates = AdultsSeparate.all
+    @adults_japans = AdultsJapan.all
+    @adults_onlines = AdultsOnline.all
     #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params.delete(adults_classtype))
     #@adults_classtypes = AdultsClasstype.find_by_reason_desc(params[:kojenadult][:adults_classtype])
@@ -143,6 +163,11 @@ class KojenadultsController < ApplicationController
     @kojenadult = Kojenadult.find(params[:id])
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
+    @adults_units = AdultsUnit.all
+    @adults_licenses = AdultsLicense.all
+    @adults_separates = AdultsSeparate.all
+    @adults_japans = AdultsJapan.all
+    @adults_onlines = AdultsOnline.all
     #@kojenadult.adults_classtype = [@adults_classtypes]
     #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
     #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
@@ -216,7 +241,7 @@ class KojenadultsController < ApplicationController
     INNER JOIN kojenadult_adults_howyouknowuships AS ah ON ah.kojenadult_id = s.id AND ah.adults_howyouknowu_id IN (#{@howuknowu_ids.join(',')})
     INNER JOIN kojenadult_adults_graduatedships AS ag ON ag.kojenadult_id = s.id AND ag.adults_graduated_id IN (#{@graduated_ids.join(',')})  
     INNER JOIN kojenadults ON (kojenadults.id = ka.kojenadult_id AND kojenadults.id = ah.kojenadult_id AND kojenadults.id = ag.kojenadult_id AND 
-        kojenadults.updated_at BETWEEN
+        kojenadults.created_at BETWEEN
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}') AND
         kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            

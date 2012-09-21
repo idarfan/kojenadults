@@ -1,0 +1,23 @@
+<h1>Listing adults_japans</h1>
+
+<table>
+  <tr>
+    <th>Reason desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adults_japans.each do |adults_japan| %>
+  <tr>
+    <td><%= adults_japan.reason_desc %></td>
+    <td><%= link_to 'Show', adults_japan %></td>
+    <td><%= link_to 'Edit', edit_adults_japan_path(adults_japan) %></td>
+    <td><%= link_to 'Destroy', adults_japan, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adults japan', new_adults_japan_path %>

@@ -1,0 +1,2 @@
+module AdultsLicensesHelper
+end

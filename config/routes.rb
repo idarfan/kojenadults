@@ -1,4 +1,14 @@
 Kojenadults::Application.routes.draw do
+  resources :adults_onlines
+
+  resources :adults_japans
+
+  resources :adults_separates
+
+  resources :adults_licenses
+
+  resources :adults_units
+
   resources :kojenadult_adults_refinement_lessonships
 
   resources :adults_refinement_lessons

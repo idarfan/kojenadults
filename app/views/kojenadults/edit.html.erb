@@ -1,4 +1,4 @@
-<h1>Editing kojenadult</h1>
+<h1>編輯學生資料 kojenadult</h1>
 <% js("sub_area" , "jquery.validate") %>
 <% content_for :header do %>
   <script>
@@ -110,27 +110,41 @@
         <% end %>
       </ul>
     </div>
-  <% end %>
-  
-  <% if @adults_classtypes.present? %>
-  <% @adults_classtypes.each do |shit| %>
-  etc
-  <% end %>
-<% end %>
+  <% end %> 
 
    <div class="field1">
-    <%= f.label :adults_classtype, "請輸入課程類別" %><br />
+    <%= f.label :adults_classtype, "1.請輸入課程類別" %><br />
     <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, :reason_desc, 'reason_desc', @kojenadult.adults_classtype)) %>
   </div>
   <div class="field2">
-      <%= f.label :session_description, "１.請輸入選讀課程" %><br />                        
+      <%= f.label :session_description, "2.請輸入團體會話班課程類別" %><br />                        
       <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', @kojenadult.session_description)) %>      
   </div>
   <div class="field1">
-    <%= f.label :adults_refinement_lesson, "請輸入精緻班課程類別" %><br />
+    <%= f.label :adults_refinement_lesson, "3.請輸入精緻班課程類別" %><br />
     <%= f.select(:adults_refinementlesson, options_from_collection_for_select(@adults_refinement_lessons, :reason_desc, 'reason_desc', @kojenadult.adults_refinementlesson)) %>    
   </div>
   <div class="field2">
+    <%= f.label :adults_unit, "4.請輸入單元班課程類別" %><br />
+    <%= f.select(:adults_unit, options_from_collection_for_select(@adults_units, :reason_desc, 'reason_desc', @kojenadult.adults_unit)) %>    
+  </div>
+  <div class="field1">
+    <%= f.label :adults_license, "5.請輸入認證班課程類別" %><br />
+    <%= f.select(:adults_license, options_from_collection_for_select(@adults_licenses, :reason_desc, 'reason_desc', @kojenadult.adults_license)) %>    
+  </div>
+  <div class="field2">
+    <%= f.label :adults_separate, "6.請輸入個別班課程類別" %><br />
+    <%= f.select(:adults_separate, options_from_collection_for_select(@adults_separates, :reason_desc, 'reason_desc', @kojenadult.adults_separate)) %>    
+  </div>
+  <div class="field1">
+    <%= f.label :adults_japan, "7.請輸入日文班課程類別" %><br />
+    <%= f.select(:adults_japan, options_from_collection_for_select(@adults_japans, :reason_desc, 'reason_desc', @kojenadult.adults_japan)) %>    
+  </div>
+   <div class="field2">
+    <%= f.label :adults_online, "8.請輸入日文班課程類別" %><br />
+    <%= f.select(:adults_online, options_from_collection_for_select(@adults_onlines, :reason_desc, 'reason_desc', @kojenadult.adults_onlines)) %>    
+  </div>
+  <div class="field1">
     <%= f.label :classnumber, "2.請輸入班級編號" %><br />
     <%= f.text_field :classnumber %>
   </div>  

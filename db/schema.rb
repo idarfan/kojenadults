@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828120817) do
+ActiveRecord::Schema.define(:version => 20120921133600) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -31,7 +31,25 @@ ActiveRecord::Schema.define(:version => 20120828120817) do
     t.datetime "updated_at"
   end
 
+  create_table "adults_japans", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "adults_licenses", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "adults_localexameds", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "adults_onlines", :force => true do |t|
     t.string   "reason_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,9 +61,21 @@ ActiveRecord::Schema.define(:version => 20120828120817) do
     t.datetime "updated_at"
   end
 
+  create_table "adults_separates", :force => true do |t|
+    t.string   "reason_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "adults_session_descriptions", :force => true do |t|
     t.string   "classname"
     t.string   "class_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "adults_units", :force => true do |t|
+    t.string   "reason_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -235,6 +265,11 @@ ActiveRecord::Schema.define(:version => 20120828120817) do
     t.string   "classnumber"
     t.string   "adults_classtype"
     t.string   "adults_refinementlesson"
+    t.string   "adults_unit"
+    t.string   "adults_license"
+    t.string   "adults_separate"
+    t.string   "adults_japan"
+    t.string   "adults_online"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|
