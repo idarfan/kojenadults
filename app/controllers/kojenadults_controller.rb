@@ -198,11 +198,9 @@ class KojenadultsController < ApplicationController
     #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
     @kojenadult.destroy
-    @adults_session_descriptions = AdultsSessionDescription.all    
-    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")    
-    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")
-    @kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")    
-    @kojenadult_class.destroy  
+    #@adults_session_descriptions = AdultsSessionDescription.all    
+    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")           
+    #@kojenadult_class.destroy  
 
     respond_to do |format|
       format.html { redirect_to(kojenadults_url) }

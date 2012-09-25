@@ -111,6 +111,7 @@
       </ul>
     </div>
   <% end %>
+
  <div class="field1">
     <%= f.label :adults_classtype, "1.請輸入課程類別" %><br />
     <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, 'reason_desc', 'reason_desc', @adults_classtypes.last.reason_desc), {:prompt => '請選擇課程類別'}) %>    

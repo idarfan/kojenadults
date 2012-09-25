@@ -1,42 +1,78 @@
-<h1>列出學生清單</h1>
-<%= form_tag search_kojenadults_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %> <%= submit_tag "搜尋學生資料!" %>
-  </p>
-<% end %>
-  <b><p id="notice"><%= flash[:notice] %></p></b> 
-<br />
-<br />
-<table> 
-  <tr>
-    <th>學生編號</th>
-    <th>中文姓名</th>
-    <th>英文姓名</th>
-    <th>電子郵件</th>    
-    <th>市內電話</th>
-    <th>手機號</th>
-    <th>家長電話</th>
-    <th>公司電話</th>    
-  </tr>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      $(function () {
+        new Highcharts.Chart({
+          chart: { renderTo: 'kojenadults_chart' },
+          title: { text: 'Orders by Day' },
+          xAxis: { type: 'datetime' },
+          yAxis: {
+            title: { text: 'Dollars'}
+          },
+          
+          tooltip: {
+            formatter: function () {
+              return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' +
+                '$' + Highcharts.numberFormat(this.y, 2);
+            }
+          },
+          
+          series: [{
+              pointInterval: <%= 1.day * 1000 %>,
+              pointStart: <%= 3.weeks.ago.at_midnight.to_i * 1000 %>,
+              data: [1, 2, 5, 7, 3]
+            }]
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>列出學生清單</h1>
 
-  <% @kojenadults.each do |kojenadult| %>  
-    <tr>
-      <td><%= kojenadult.student_id %></td>
-      <td><%= kojenadult.cname %></td>
-      <td><%= kojenadult.ename %></td>
-      <td><%= kojenadult.email %></td>      
-      <td><%= kojenadult.telephone %></td>
-      <td><%= kojenadult.mobile_phone %></td>
-      <td><%= kojenadult.parents_phone %></td>
-      <td><%= kojenadult.company_phone %></td>        
-      <td><%= link_to 'Show', kojenadult %></td>
-      <td><%= link_to 'Edit', edit_kojenadult_path(kojenadult) %></td>
-      <td><%= link_to 'Destroy', kojenadult, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
+    <%= form_tag search_kojenadults_path, :method => :get do %>
+      <p>
+        <%= text_field_tag :query, params[:query] %> <%= submit_tag "搜尋學生資料!" %>
+      </p>
+    <% end %>
+    <b><p id="notice"><%= flash[:notice] %></p></b> 
+    <br />
+    <br />
+    <table> 
+      <tr>
+        <th>學生編號</th>
+        <th>中文姓名</th>
+        <th>英文姓名</th>
+        <th>電子郵件</th>    
+        <th>市內電話</th>
+        <th>手機號</th>
+        <th>家長電話</th>
+        <th>公司電話</th>    
+      </tr>
 
-<br />
-<%= will_paginate @kojenadults %>
+      <% @kojenadults.each do |kojenadult| %>  
+        <tr>
+          <td><%= kojenadult.student_id %></td>
+          <td><%= kojenadult.cname %></td>
+          <td><%= kojenadult.ename %></td>
+          <td><%= kojenadult.email %></td>      
+          <td><%= kojenadult.telephone %></td>
+          <td><%= kojenadult.mobile_phone %></td>
+          <td><%= kojenadult.parents_phone %></td>
+          <td><%= kojenadult.company_phone %></td>        
+          <td><%= link_to 'Show', kojenadult %></td>
+          <td><%= link_to 'Edit', edit_kojenadult_path(kojenadult) %></td>
+          <td><%= link_to 'Destroy', kojenadult, :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+      <% end %>
+    </table>
 
-<%= link_to '輸入新的學生記錄', new_kojenadult_path %>
+    <br />
+    <%= will_paginate @kojenadults %>
+    <div id="kojenadults_chart" style="width: 560px; height: 300px;"></div>
+    <table class="pretty">
+      <!-- Orders table code here -->
+    </table>
+    <%= link_to '輸入新的學生記錄', new_kojenadult_path %>
+  </body>
+</html>
