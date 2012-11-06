@@ -140,6 +140,7 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @kojenadult.keyin = current_user.name
+    @kojenadult.schoolname = current_user.schoolname
     @adults_session_descriptions = AdultsSessionDescription.all
     
     #raise Exception.new(params.inspect)  

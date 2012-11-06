@@ -34,7 +34,7 @@ Kojenadults::Application.routes.draw do
   end
   resources :users
 
-  get "main/index"
+  get "main/index"  
   resources :kojenadults_classe_ships
 
   resources :kojenadult_classes

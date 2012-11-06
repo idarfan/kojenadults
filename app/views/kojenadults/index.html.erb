@@ -40,6 +40,7 @@
     <br />
     <table> 
       <tr>
+        <th>所屬校別</th>          
         <th>學生編號</th>
         <th>中文姓名</th>
         <th>英文姓名</th>
@@ -52,6 +53,7 @@
 
       <% @kojenadults.each do |kojenadult| %>  
         <tr>
+          <td><%= kojenadult.schoolname %></td>
           <td><%= kojenadult.student_id %></td>
           <td><%= kojenadult.cname %></td>
           <td><%= kojenadult.ename %></td>
@@ -60,9 +62,9 @@
           <td><%= kojenadult.mobile_phone %></td>
           <td><%= kojenadult.parents_phone %></td>
           <td><%= kojenadult.company_phone %></td>        
-          <td><%= link_to 'Show', kojenadult %></td>
-          <td><%= link_to 'Edit', edit_kojenadult_path(kojenadult) %></td>
-          <td><%= link_to 'Destroy', kojenadult, :confirm => 'Are you sure?', :method => :delete %></td>
+          <td><%= link_to '瀏覽', kojenadult %></td>
+          <td><%= link_to '編輯', edit_kojenadult_path(kojenadult) %></td>
+          <td><%= link_to '刪除', kojenadult, :confirm => 'Are you sure?', :method => :delete %></td>
         </tr>
       <% end %>
     </table>
