@@ -105,7 +105,7 @@
       <h2><%= pluralize(@kojenadult_class.errors.count, "error") %> prohibited this kojenadult_class from being saved:</h2>
 
       <ul>
-        <% @kojenadult_class.errors.full_messages.each do |msg| %>
+        <% @kojenadult_class.errors.each do |attr,msg| %>  
           <li><%= msg %></li>
         <% end %>
       </ul>

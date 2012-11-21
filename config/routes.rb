@@ -26,14 +26,13 @@ Kojenadults::Application.routes.draw do
   #get "sessions/create"
   #get "sessions/destroy"
   get 'admin' => 'admin#index'
-  
+  get 'kojenadult_path' => 'kojenadult#new'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
   resources :users
-
   get "main/index"  
   resources :kojenadults_classe_ships
 

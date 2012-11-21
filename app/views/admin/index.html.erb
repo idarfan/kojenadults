@@ -3,6 +3,6 @@
 <p><%= current_user.name %> 您好</p>
 <p>我們共有<%= pluralize(@total_users, "位已登錄的員工帳號")%></p>
 <% if session[:user_id] %>
-<%= button_to '進入員工帳號登錄系統', users_path %>
+<%= button_to '輸入新的學生資料', new_kojenadult_path, :method => :get %>
 <% end %>
 <%= yield %>

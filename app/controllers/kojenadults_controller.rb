@@ -197,8 +197,11 @@ class KojenadultsController < ApplicationController
   def destroy
     return unless user_level1 
     #增加權限控管
+    #@kojenadult_classes = KojenadultClasse.all
     @kojenadult = Kojenadult.find(params[:id])
+    #@kojenadult = Kojenadult.find("student_id = #{@kojenadult_classe.student_id}")
     @kojenadult.destroy
+    
     #@adults_session_descriptions = AdultsSessionDescription.all    
     #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")           
     #@kojenadult_class.destroy  

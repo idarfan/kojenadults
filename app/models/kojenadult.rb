@@ -32,6 +32,9 @@ class Kojenadult < ActiveRecord::Base
   #請問您參加過何種國家認證的英語能力認證
   has_many :kojenadults_classe_ship, :dependent => :destroy
   has_many :kojenadult_classe, :through => :kojenadults_classe_ship
+  #上面是錯的...幹!
+  #validate :student_id, :presence => true
+  #has_many :kojenadult_classe, :dependent => :destroy
   #您選了那些課程
   #新增kojenadult_session_descriptionship 及 adults_session_description
   has_many :kojenadult_session_descriptionship, :dependent => :destroy
