@@ -246,19 +246,20 @@ class KojenadultsController < ApplicationController
         kojenadults.created_at BETWEEN
         DATE('#{start_at.strftime("%Y/%m/%d")}') AND
         DATE('#{end_at.strftime("%Y/%m/%d")}') AND
-        kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))            
-          ")
-        if @kojenadults.nil? || @kojenadults.size.zero?
+        kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))
+          ").group('kojenadults.id').select('kojenadults.*')
+        if @kojenadults.nil? || @kojenadults.length.zero?
           flash[:notice] = "查詢不到符合條件的學生記錄！"                 
         else
-          flash[:notice] = "總共查詢到#{@kojenadults.size}筆記錄"
+          flash[:notice] = "總共查詢到#{@kojenadults.length}筆記錄"
         end   
         @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
         #render :search_report :layout => "text_layout" # 這邊要明確的指示render
         #render :layout => "test_layout" <= 怪怪用了它會遭到不幸,會無法調出資料
       rescue Exception => e
-        flash[:notice] = "請選取欲查詢的起始日期及結束日期!"
-        redirect_to :action => :search1       
+          flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
+         #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
+       redirect_to :action => :search1       
       end
     end
   end

@@ -28,9 +28,9 @@ function site_dialog_close(){
 }
 
 jQuery(function($){
-  var super_temp;
-  super_temp = $('.tip')
-  if(super_temp[0]){
-    super_temp.tooltip({delay:0,track:true,showURL:false,showBody:"|",fade:250});
-  }
+//  var super_temp;
+//  super_temp = $('.tip')
+//  if(super_temp[0]){
+//    super_temp.tooltip({delay:0,track:true,showURL:false,showBody:"|",fade:250});
+//  }
 });

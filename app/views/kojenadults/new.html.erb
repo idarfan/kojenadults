@@ -50,7 +50,7 @@
         if($('.main_area').attr("value") != "%" && $('.sub_area').attr("value") != "%"){
           var temp = $('.main_area').attr("value");
           var temp2 = $('.sub_area').attr("value");
-          $.get("/maps/area_road_" + temp + "_" + temp2 , null, function(txt){
+          $.get("/maps/area_road_" + temp + "_" + temp2 + '.txt' , null, function(txt){
             $(".road_selector .first_title").html("★請下拉選擇").attr("selected" , "true");
             $(".road_selector").html($(".road_selector").html() + txt);
           });
