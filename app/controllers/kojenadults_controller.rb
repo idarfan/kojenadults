@@ -16,10 +16,13 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)        
+    if ["idarfan", "yitafan"].include? current_user.name
+      @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)      
+    else
+      @kojenadults = Kojenadult.where(:schoolname => current_user.schoolname).paginate(:page => params[:page], :per_page => 10)
+    end    
+    #@kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)        
     @kojenadult_classes = KojenadultClasse.all
-    
-    
     
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +30,6 @@ class KojenadultsController < ApplicationController
       format.json { render :json => @kojenadults.to_json }
     end
   end
-
   # GET /kojenadults/1
   # GET /kojenadults/1.xml
   # 新增 @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
