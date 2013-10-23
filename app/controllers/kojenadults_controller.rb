@@ -16,7 +16,7 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults
   # GET /kojenadults.xml
   def index
-    if ["idarfan", "yitafan"].include? current_user.name
+    if ["idarfan"].include? current_user.name
       @kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)      
     else
       @kojenadults = Kojenadult.where(:schoolname => current_user.schoolname).paginate(:page => params[:page], :per_page => 10)
