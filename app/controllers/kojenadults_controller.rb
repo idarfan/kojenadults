@@ -214,7 +214,7 @@ class KojenadultsController < ApplicationController
     end
   end
   
-  def search #註解掉會遭到不幸 by idarfan
+  def search #註解掉會遭到不幸. by idarfan
     #@level = Incomelevel.all.map{|im|[im.reason_desc , im.id]}    
     #@howuknowu = Howuknowu.all.map{|sh|[sh.reason_desc , sh.id]}   
     #@whylearn = Whylearn.all.map{|sw|[sw.reason_desc , sw.id]}    

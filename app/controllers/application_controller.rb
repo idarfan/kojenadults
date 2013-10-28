@@ -89,7 +89,37 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  ## adding by idarfan 2013/10/28 for kojenadult_classes ?
+  def classes_level1(level = 1)
+    if current_user
+      if current_user.level <= level
+        return true
+      else
+        flash[:notice] = "您的權限不足，請洽經理授權允許進行此操作"
+        redirect_to :controller => "kojenadult_classes", :action => "index", :message => flash[:notice] = "您的權限不足，請洽經理授權允許進行此操作"
+        return false
+      end
+    else       
+      redirect_to :controller => "kojenadult_classes" , :action => "index"
+      return false
+    end
+  end
   
+  def classes_level2 (level = 2)
+    if current_user
+      if current_user.level <= level
+        return true
+      else
+        flash[:notice] = "您的權限不足，請洽組長授權允許進行此操作"
+        redirect_to :controller => "kojenadult_classes" , :action => "index", :message => flash[:notice] = "您的權限不足，請洽經理授權允許進行此操作"
+        return false
+      end
+    else
+      redirect_to :controller => "kojenadult_classes" , :action => "index"
+      return false
+    end
+  end 
+  ###
   protected
   
     def authorize

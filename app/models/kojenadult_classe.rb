@@ -13,6 +13,6 @@ class KojenadultClasse < ActiveRecord::Base
   #  end
   #end
   validates :student_id,  :presence =>  {:message => "請您必須填寫學生id"}, 
-    :uniqueness => {:message => "學生id已經被使用"},
+   # :uniqueness => {:message => "學生id已經被使用"},,
     :length => {:message => "學生id最短4個數字,最長12個數字", :minimum => 4, :maximum => 12}    	
 end
