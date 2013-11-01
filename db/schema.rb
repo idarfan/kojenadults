@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106110339) do
+ActiveRecord::Schema.define(:version => 20131031082721) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -204,19 +204,18 @@ ActiveRecord::Schema.define(:version => 20121106110339) do
   create_table "kojenadult_classes", :force => true do |t|
     t.string   "level"
     t.date     "start_period"
-    t.decimal  "test_fee",     :precision => 10, :scale => 0
+    t.decimal  "test_fee",                   :precision => 10, :scale => 0
     t.date     "end_period"
-    t.decimal  "tuition",      :precision => 10, :scale => 0
-    t.string   "repeat"
-    t.decimal  "withdraw",     :precision => 10, :scale => 0
+    t.decimal  "tuition",                    :precision => 10, :scale => 0
+    t.decimal  "withdraw",                   :precision => 10, :scale => 0
     t.string   "postpone"
-    t.decimal  "scholarship",  :precision => 10, :scale => 0
     t.string   "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "community_id"
-    t.integer  "student_id"
+    t.integer  "student_id",    :limit => 8
     t.string   "classnumber"
+    t.integer  "kojenadult_id"
   end
 
   create_table "kojenadult_session_descriptionships", :force => true do |t|
@@ -232,7 +231,7 @@ ActiveRecord::Schema.define(:version => 20121106110339) do
     t.string   "cname"
     t.string   "ename"
     t.string   "community_id"
-    t.integer  "student_id"
+    t.integer  "student_id",              :limit => 8
     t.date     "birthday"
     t.string   "gender"
     t.string   "email"
@@ -294,6 +293,18 @@ ActiveRecord::Schema.define(:version => 20121106110339) do
     t.string   "learn_desc",    :limit => 64, :null => false
     t.boolean  "learn_states"
     t.text     "ohter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessonrecords", :force => true do |t|
+    t.integer  "kojenadult_id"
+    t.string   "cname"
+    t.string   "ename"
+    t.integer  "student_id",    :limit => 8
+    t.string   "lesson"
+    t.date     "start_period"
+    t.date     "end_period"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

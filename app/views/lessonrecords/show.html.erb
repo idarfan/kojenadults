@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cname:</b>
+  <%= @lessonrecord.cname %>
+</p>
+
+<p>
+  <b>Ename:</b>
+  <%= @lessonrecord.ename %>
+</p>
+
+<p>
+  <b>Student:</b>
+  <%= @lessonrecord.student_id %>
+</p>
+
+<p>
+  <b>Lesson:</b>
+  <%= @lessonrecord.lesson %>
+</p>
+
+<p>
+  <b>Start period:</b>
+  <%= @lessonrecord.start_period %>
+</p>
+
+<p>
+  <b>End period:</b>
+  <%= @lessonrecord.end_period %>
+</p>
+
+
+<%= link_to 'Edit', edit_lessonrecord_path(@lessonrecord) %> |
+<%= link_to 'Back', lessonrecords_path %>

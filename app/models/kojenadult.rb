@@ -29,13 +29,11 @@ class Kojenadult < ActiveRecord::Base
   #請問您參加過何種國際的英語能力認證
   has_many :kojenadult_adults_localexamedship, :dependent => :destroy
   has_many :adults_localexamed, :through => :kojenadult_adults_localexamedship
-  #請問您參加過何種國家認證的英語能力認證
-  has_many :kojenadults_classe_ship, :dependent => :destroy
-  has_many :kojenadult_classe, :through => :kojenadults_classe_ship
-  #上面是錯的...幹!
-  #validate :student_id, :presence => true
-  #has_many :kojenadult_classe, :dependent => :destroy
+  #請問您參加過何種國家認證的英語能力認證  
+  has_many :kojenadult_classe, :dependent => :destroy
+  #當刪除了kojenadult刪了該筆學生記錄後,會因依賴關係把kojenadult_classe 裏的選課資料一併刪除
   #您選了那些課程
+  has_many :lessonrecord, :dependent => :destroy
   #新增kojenadult_session_descriptionship 及 adults_session_description
   has_many :kojenadult_session_descriptionship, :dependent => :destroy
   has_many :adults_session_description, :through => :kojenadult_session_descriptionship
@@ -69,7 +67,7 @@ class Kojenadult < ActiveRecord::Base
   #條件驗證式開始
   validates :student_id,  :presence => true,
     :uniqueness => true,
-    :length => {:minimum => 4, :maximum => 12}				  
+    :length => {:minimum => 12, :maximum => 13}				  
   # 輸入學生id ,範圍由 xxxx-xxxxx 不可不填. 不可以有重複 				  
   validates :cname,  :presence => true, :on => :create
   #確保必填
@@ -96,7 +94,7 @@ class Kojenadult < ActiveRecord::Base
  
   ## 底下的是條件驗證式的錯誤訊息說明
   validates :student_id,  :presence => { :message => "學生號碼欄位不能空白" }, 
-    :length => {:minimum => 4, :maximum => 10, :message => "學生號碼長度不正確" }
+    :length => {:minimum => 12, :maximum => 13, :message => "學生號碼長度不正確" }
   #驗證學號		
   validates :cname,  :presence => { :message => "姓名欄位不能空白" }, 
     :length => {:minimum => 2, :maximum => 12, :message => "姓名欄位長度不正確" }

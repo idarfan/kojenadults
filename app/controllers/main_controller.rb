@@ -3,5 +3,6 @@ class MainController < ApplicationController
   def index
     @kojenadults = Kojenadult.all
     @kojenadult_classes = KojenadultClasse.all
+    @lessonrecords = Lessonrecord.all
   end
 end

@@ -23,6 +23,7 @@ class KojenadultsController < ApplicationController
     end    
     #@kojenadults = Kojenadult.paginate(:page => params[:page], :per_page => 10)        
     @kojenadult_classes = KojenadultClasse.all
+    @lessonrecords = Lessonrecord.all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -36,6 +37,7 @@ class KojenadultsController < ApplicationController
   # 只能使用學生id 不能用身份證號碼,因為身份證號碼不是整數欄  
   def show 
     @kojenadult = Kojenadult.find(params[:id])
+    @lessonrecords = Lessonrecord.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
     @adults_units = AdultsUnit.all
@@ -199,10 +201,10 @@ class KojenadultsController < ApplicationController
   def destroy
     return unless user_level1 
     #增加權限控管
-    #@kojenadult_classes = KojenadultClasse.all
     @kojenadult = Kojenadult.find(params[:id])
-    #@kojenadult = Kojenadult.find("student_id = #{@kojenadult_classe.student_id}")
     @kojenadult.destroy
+
+    #raise Exception.new @kojenadult.inspect
     
     #@adults_session_descriptions = AdultsSessionDescription.all    
     #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")           
@@ -258,7 +260,7 @@ class KojenadultsController < ApplicationController
         @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
         #render :search_report :layout => "text_layout" # 這邊要明確的指示render
         #render :layout => "test_layout" <= 怪怪用了它會遭到不幸,會無法調出資料
-      rescue Exception => e
+      rescue Exception => e #<= 這個不能取消
           flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
          #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
        redirect_to :action => :search1       

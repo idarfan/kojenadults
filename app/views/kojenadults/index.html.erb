@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>
-      $(function () {
-        new Highcharts.Chart({
-          chart: { renderTo: 'kojenadults_chart' },
-          title: { text: 'Orders by Day' },
-          xAxis: { type: 'datetime' },
-          yAxis: {
-            title: { text: 'Dollars'}
-          },
-          
-          tooltip: {
-            formatter: function () {
-              return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' +
-                '$' + Highcharts.numberFormat(this.y, 2);
-            }
-          },
-          
-          series: [{
-              pointInterval: <%= 1.day * 1000 %>,
-              pointStart: <%= 3.weeks.ago.at_midnight.to_i * 1000 %>,
-              data: [1, 2, 5, 7, 3]
-            }]
-        });
-      });
-    </script>
+  <head>    
   </head>
   <body>
     <h1>列出學生清單</h1>
@@ -68,13 +43,8 @@
         </tr>
       <% end %>
     </table>
-
     <br />
-    <%= will_paginate @kojenadults %>
-    <div id="kojenadults_chart" style="width: 560px; height: 300px;"></div>
-    <table class="pretty">
-      <!-- Orders table code here -->
-    </table>
+    <%= will_paginate @kojenadults %>    
     <%= link_to '輸入新的學生記錄', new_kojenadult_path %>
   </body>
 </html>

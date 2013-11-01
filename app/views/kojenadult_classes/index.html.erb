@@ -1,5 +1,8 @@
-<h1>Listing kojenadult_classes</h1>
-
+<!DOCTYPE html>
+<html>
+  <head>    
+  </head>
+  <body>
 <table>
   <tr>
     <th>學生選課級</th>
@@ -9,7 +12,7 @@
     <th>學生id</th>
   </tr>
 
-<% @kojenadult_classes.each do |kojenadult_class| %>
+<% @kojenadult_class.each do |kojenadult_class| %>
   <tr>
     <td><%= kojenadult_class.level %></td>
     <td><%= kojenadult_class.classnumber %></td>
@@ -24,6 +27,8 @@
 </table>
 
 <br />
-<%= will_paginate @kojenadult_classes %>
+<%= will_paginate @kojenadult_class %>
 
 <%= link_to '輸入新的學生選課資料', new_kojenadult_class_path %>
+</body>
+</html>

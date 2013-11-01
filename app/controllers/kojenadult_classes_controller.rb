@@ -5,7 +5,7 @@ class KojenadultClassesController < ApplicationController
   # GET /kojenadult_classes
   # GET /kojenadult_classes.xml
   def index
-    @kojenadult_classes = KojenadultClasse.paginate(:page => params[:page], :per_page => 10) 
+    @kojenadult_class = KojenadultClasse.paginate(:page => params[:page], :per_page => 10) 
     #@kojenadult_classes = KojenadultClasse.all
     @adults_session_descriptions = AdultsSessionDescription.all
     @kojenadults = Kojenadult.all
@@ -44,25 +44,21 @@ class KojenadultClassesController < ApplicationController
   end
 
   # GET /kojenadult_classes/1/edit
-  def edit
-    return unless user_level2 #增加權限控管   
+  def edit       
     @kojenadult_class = KojenadultClasse.find(params[:id])
   end
 
   # POST /kojenadult_classes
   # POST /kojenadult_classes.xml
-  def create
-    return unless classes_level2
+  def create    
     @kojenadult_class = KojenadultClasse.new(params[:kojenadult_classe])
     @adults_session_descriptions = AdultsSessionDescription.all
-    unless  
-      #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}") 
-      #Kojenadult.exists?(:student_id => params[:student_id]) 
-      #@kojenadult_class = @kojenadult_class.find(:student_id) == Kojenadult.find_by_student_id(:student_id)
-      @kojenadult_class.student_id == Kojenadult.find_by_student_id(params[:student_id])
-      #@kojenadult_classe.student_id = Kojenadult.find_by_student_id(params[:student_id]).id#這樣呢            
-      redirect_to:action => :index, flash[:notice] => "查無該筆學生id記錄！"          
-    else
+    @kojenadult = Kojenadult.where(:student_id => @kojenadult_class.student_id).first
+    #raise Exception.new [student_id, Kojenadult.where(:student_id => student_id)].inspect
+    #raise Exception.new [student_id, Kojenadult.where(:student_id => @kojenadult.student_id)].inspect
+    if @kojenadult
+     @kojenadult_class.kojenadult_id = @kojenadult.id
+     #如果kojenadult_class裏的kojenadult_id 等於 @kojenadult.id則執行下述動作
       respond_to do |format|
         if @kojenadult_class.save
           format.html { redirect_to(@kojenadult_class, :notice => 'Kojenadult classe was successfully created.') }
@@ -72,13 +68,15 @@ class KojenadultClassesController < ApplicationController
           format.xml  { render :xml => @kojenadult_class.errors, :status => :unprocessable_entity }
         end
       end
-    end  
+    else
+      flash[:notice] = "查無該筆學生id記錄！"
+      redirect_to :action => :index
+    end 
   end
 
   # PUT /kojenadult_classes/1
   # PUT /kojenadult_classes/1.xml
-  def update
-    return unless classes_level2 #增加權限控管,
+  def update    
     @kojenadult_class = KojenadultClasse.find(params[:id])
     @adults_session_descriptions = AdultsSessionDescription.all
 
@@ -104,5 +102,5 @@ class KojenadultClassesController < ApplicationController
       format.html { redirect_to(kojenadult_classes_url) }
       format.xml  { head :ok }
     end
-  end
+  end  
 end

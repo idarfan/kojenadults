@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cname: MyString
+  ename: MyString
+  student_id: 
+  lesson: MyString
+  start_period: 2013-10-31
+  end_period: 2013-10-31
+
+two:
+  cname: MyString
+  ename: MyString
+  student_id: 
+  lesson: MyString
+  start_period: 2013-10-31
+  end_period: 2013-10-31
