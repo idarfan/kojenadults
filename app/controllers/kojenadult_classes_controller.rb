@@ -50,12 +50,12 @@ class KojenadultClassesController < ApplicationController
 
   # POST /kojenadult_classes
   # POST /kojenadult_classes.xml
-  def create    
+  def create
+    #raise Exception.new [student_id, Kojenadult.where(:student_id => student_id)].inspect
+    #raise Exception.new [student_id, Kojenadult.where(:student_id => @kojenadult.student_id)].inspect
     @kojenadult_class = KojenadultClasse.new(params[:kojenadult_classe])
     @adults_session_descriptions = AdultsSessionDescription.all
     @kojenadult = Kojenadult.where(:student_id => @kojenadult_class.student_id).first
-    #raise Exception.new [student_id, Kojenadult.where(:student_id => student_id)].inspect
-    #raise Exception.new [student_id, Kojenadult.where(:student_id => @kojenadult.student_id)].inspect
     if @kojenadult
      @kojenadult_class.kojenadult_id = @kojenadult.id
      #如果kojenadult_class裏的kojenadult_id 等於 @kojenadult.id則執行下述動作

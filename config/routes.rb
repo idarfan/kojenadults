@@ -1,6 +1,13 @@
 Kojenadults::Application.routes.draw do
-  resources :lessonrecords
-get 'lessonrecord' => 'lessonrecord#index'
+  #resources :lessonrecords
+  #get 'lessonrecord' => 'lessonrecord#index'
+
+  resources :lessonrecords do
+    collection do
+      get :search
+    end
+  end
+  
   resources :adults_onlines
 
   resources :adults_japans

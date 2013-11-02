@@ -46,7 +46,7 @@ class KojenadultsController < ApplicationController
     @adults_japans = AdultsJapan.all
     @adults_onlines = AdultsOnline.all
     if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
-      @kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+      @lessonrecords = Lessonrecord.where("student_id = #{@kojenadult.student_id}")
       @adults_graduateds = AdultsGraduated.all
       @adults_howyouknowus = AdultsHowyouknowu.all
       @adults_localexameds = AdultsLocalexamed.all
@@ -54,7 +54,7 @@ class KojenadultsController < ApplicationController
       @adults_whylearns = AdultsWhylearn.all
       @adults_session_descriptions = AdultsSessionDescription.all      
     end 
-    if @kojenadult_classes == nil
+    if @lessonrecords == nil
       #redirect_to(@kojenadult, :notice => 'Kojenadult_classes have no record.')
       #redirect_to(:action => :index,:notice => 'Kojenadult_classes have no record')
       #redirect_to(:action => :index, flash[:notice] => '查無該筆學生選課記錄')
@@ -73,6 +73,7 @@ class KojenadultsController < ApplicationController
   def new 
     #raise Exception.new(params.inspect)
     @kojenadult = Kojenadult.new   
+    @lessonrecords = Lessonrecord.all
     #@kojenadult.adults_classtype = AdultsClasstype.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
@@ -103,6 +104,7 @@ class KojenadultsController < ApplicationController
   def edit
     return unless user_level2 #增加權限控管    
     @kojenadult = Kojenadult.find(params[:id])
+    @lessonrecords = Lessonrecord.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
     @adults_units = AdultsUnit.all
@@ -126,6 +128,7 @@ class KojenadultsController < ApplicationController
   # POST /kojenadults.xml
   def create
     @kojenadult = Kojenadult.new(params[:kojenadult])
+    @lessonrecords = Lessonrecord.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
     @adults_units = AdultsUnit.all
@@ -166,6 +169,7 @@ class KojenadultsController < ApplicationController
   def update
     return unless user_level2 #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
+    @lessonrecords = Lessonrecord.all
     @adults_classtypes = AdultsClasstype.all
     @adults_refinement_lessons = AdultsRefinementLesson.all
     @adults_units = AdultsUnit.all
@@ -202,6 +206,7 @@ class KojenadultsController < ApplicationController
     return unless user_level1 
     #增加權限控管
     @kojenadult = Kojenadult.find(params[:id])
+    @lessonrecords = Lessonrecord.all
     @kojenadult.destroy
 
     #raise Exception.new @kojenadult.inspect
