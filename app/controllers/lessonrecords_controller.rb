@@ -6,6 +6,7 @@ class LessonrecordsController < ApplicationController
   def index
     @lessonrecords = Lessonrecord.paginate(:page => params[:page], :per_page => 10) 
     @kojenadults = Kojenadult.all
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +18,8 @@ class LessonrecordsController < ApplicationController
   # GET /lessonrecords/1.xml
   def show
     @lessonrecords = Lessonrecord.find(params[:id])
-    #@kojenadults = Kojenadult.all
+    @adults_session_descriptions = AdultsSessionDescription.all
+    @kojenadults = Kojenadult.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,6 +32,7 @@ class LessonrecordsController < ApplicationController
   def new
     @lessonrecords = Lessonrecord.new
     @kojenadults = Kojenadult.all
+    @adults_session_descriptions = AdultsSessionDescription.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,17 +42,27 @@ class LessonrecordsController < ApplicationController
 
   # GET /lessonrecords/1/edit
   def edit
-    @lessonrecords = Lessonrecord.find(params[:id])
-    @kojenadults = Kojenadult.all
+    if ["idarfan"].include? current_user.name
+      @lessonrecords = Lessonrecord.find(params[:id])
+      @kojenadults = Kojenadult.all
+      @adults_session_descriptions = AdultsSessionDescription.all
+    else      
+      @lessonrecords = Lessonrecord.where(:schoolname => current_user.schoolname).find(params[:id])
+      flash[:notice] = "無權對他校資料進行修改！"
+      redirect_to :action => :index  
+    end
   end
 
   # POST /lessonrecords
   # POST /lessonrecords.xml
   def create    
-    @lessonrecords = Lessonrecord.new(params[:lessonrecord]) 
+    @lessonrecords = Lessonrecord.new(params[:lessonrecord])     
     @kojenadult = Kojenadult.where(:student_id => @lessonrecords.student_id).first
     if @kojenadult
-      @lessonrecords.kojenadult_id = @kojenadult.id     
+      @lessonrecords.kojenadult_id = @kojenadult.id
+      #adding following 2 lines
+      @lessonrecords.keyin = current_user.name
+      @lessonrecords.schoolname = current_user.schoolname
 
       respond_to do |format|
         if @lessonrecords.save
@@ -86,6 +99,7 @@ class LessonrecordsController < ApplicationController
   # DELETE /lessonrecords/1
   # DELETE /lessonrecords/1.xml
   def destroy
+    return unless lesson_level1 #增加權限控管 
     @lessonrecords = Lessonrecord.find(params[:id])
     @kojenadults = Kojenadult.all
     @lessonrecords.destroy

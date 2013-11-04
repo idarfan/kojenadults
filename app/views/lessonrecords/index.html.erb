@@ -3,7 +3,7 @@
   <head>    
   </head>
   <body>
-    <h1>Listing lessonrecords</h1>
+    <h1>列出學生選課紀錄</h1>
     <%= form_tag search_lessonrecords_path, :method => :get do %>
       <p>
         <%= text_field_tag :query, params[:query] %> <%= submit_tag "搜尋" %>
@@ -13,26 +13,23 @@
     <br />
     <br />
     <table>
-      <tr>
-        <th>Cname</th>
-        <th>Ename</th>
-        <th>Student</th>
-        <th>Lesson</th>
-        <th>Start period</th>
-        <th>End period</th>
-        <th></th>
-        <th></th>
-        <th></th>
+      <tr>        
+        <th>學生編號</th>
+        <th>課程名稱</th>
+        <th>開始日期</th>
+        <th>結束日期</th>
+        <th>建檔人員</th>
+        <th>所屬分校</th>        
       </tr>
 
       <% @lessonrecords.each do |lessonrecord| %>
-        <tr>
-          <td><%= lessonrecord.cname %></td>
-          <td><%= lessonrecord.ename %></td>
+        <tr>          
           <td><%= lessonrecord.student_id %></td>
           <td><%= lessonrecord.lesson %></td>
           <td><%= lessonrecord.start_period %></td>
           <td><%= lessonrecord.end_period %></td>
+          <td><%= lessonrecord.keyin %></td>
+          <td><%= lessonrecord.schoolname %></td>
           <td><%= link_to 'Show', lessonrecord %></td>
           <td><%= link_to 'Edit', edit_lessonrecord_path(lessonrecord) %></td>
           <td><%= link_to 'Destroy', lessonrecord, :confirm => 'Are you sure?', :method => :delete %></td>

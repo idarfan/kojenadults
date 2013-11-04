@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/idarfan/kojenadults/app/models/kojenadult.rb</file>
-            <file>file:/home/idarfan/kojenadults/db/seeds.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/views/kojenadults/new.html.erb</file>
             <file>file:/home/idarfan/kojenadults/app/models/kojenadult_classe.rb</file>
-            <file>file:/home/idarfan/kojenadults/app/controllers/kojenadults_controller.rb</file>
-            <file>file:/home/idarfan/kojenadults/db/schema.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/controllers/lessonrecords_controller.rb</file>
+            <file>file:/home/idarfan/kojenadults/config/application.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/views/layouts/application.html.erb</file>
             <file>file:/home/idarfan/kojenadults/app/controllers/kojenadult_classes_controller.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/models/kojenadult.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/views/lessonrecords/show.html.erb</file>
+            <file>file:/home/idarfan/kojenadults/app/views/lessonrecords/edit.html.erb</file>
+            <file>file:/home/idarfan/kojenadults/app/views/lessonrecords/index.html.erb</file>
+            <file>file:/home/idarfan/kojenadults/db/migrate/20120329115412_add_session_four_column_to_kojenadults.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/controllers/kojenadults_classe_ships_controller.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/controllers/kojenadults_controller.rb</file>
+            <file>file:/home/idarfan/kojenadults/app/controllers/application_controller.rb</file>
         </group>
     </open-files>
 </project-private>

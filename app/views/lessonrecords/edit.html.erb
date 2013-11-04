@@ -1,6 +1,137 @@
-<h1>Editing lessonrecord</h1>
+<h1>編輯學生選課資料</h1>
+<% js("sub_area" , "jquery.validate") %>
+<% content_for :header do %>
+  <script>
+    // 前台驗證的語法,需搭配在控制器裏的acton
+    /**/
+    $.validator.messages.required = "請填寫此欄位";
+    $.validator.messages.remote = "請修正此欄位";
 
-<%= render 'form' %>
+    jQuery(function($){
+      ///$(function() { alert('Ready to do your bidding!'); });      
+      //alert($('#student_form').length + ' elements!');            
+      /* $("#student_form").validate({
+        rules: {
+          "student[student_id]": {
+            required: true,
+            remote:"/students/student_id_check/"
+          }
+        },
+        messages: {
+          "student[student_id]": {
+            required:function(){alert("請填寫.....")},
+            remote:function(){alert("已有重複資料.....")}
+          }
+        }
+      });
+       */      
+      $(".date_picker").datepicker({              
+        showMonthAfterYear: true,
+        dateFormat : 'yy-mm-dd',
+        yearRange: '1928:2016',
+        changeMonth: true,
+        changeYear: true
+      });      
+    })
+  </script>
+  <style>
+    /* css no IE support */
+    .hidden{
+      display:none;
+    }
 
+    body {
+      font-size:20px;
+      line-height:20px;
+      background: #fcfff4; /* Old browsers */
+      background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C */
+    }
+    input:hover , input:focus{      
+      border:#ff9900 solid 3px;      
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+    }/*...okokok*/
+    input {     
+      border:solid 3px #e6cd8f;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px; 
+    }  
+    .field1 {
+      /* background-color: #A7C6E8; */
+      margin-bottom: 5px;
+      border:solid  #6f7D94;
+      /* -moz-border-radius: 0px 5px 0px 5px; */
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      background-color: #E2EAFF;
+
+    }
+    .field2 {
+      margin-top: 5px;
+      border:solid #6F7D94;
+      -moz-border-radius-bottomleft: 5px;
+      -moz-border-radius-bottomright: 5px;
+      -webkit-border-bottom-left-radius: 5px;
+      -webkit-border-bottom-right-radius: 5px;
+      background-color: #8090AB;
+    }
+    .centerline {
+      margin: 5px auto;
+      background: #e2eaff; /* Old browsers */
+      background: -moz-linear-gradient(top, #e2eaff 0%, #6f7d94 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2eaff), color-stop(100%,#6f7d94)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2eaff', endColorstr='#6f7d94',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, #e2eaff 0%,#6f7d94 100%); /* W3C */
+    }   
+  </style>
+<% end %>
+
+<%= form_for(@lessonrecords, :html => {:id => "kojenadult_class_form"}) do |f| %>
+  <% if @lessonrecords.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lessonrecords.errors.count, "error") %> prohibited this kojenadult_class from being saved:</h2>
+
+      <ul>
+        <% @lessonrecords.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>  
+  <div class="field2">
+    <%= f.label :student_id, "2.請輸入學籍號碼" %><br />
+    <%= f.text_field :student_id %>
+  </div>
+  <div class="field1">
+    <%= f.label :lesson, "3.請輸入課程名稱" %><br />
+    <%= f.text_field :lesson %>
+  </div>
+ 
+  <div class="field2">
+    <%= f.label :start_period, "4.請選擇上課開始日期" %><br />
+    <%= f.text_field :start_period, :class => "date_picker" %>     
+  </div>
+  <div class="field1">
+    <%= f.label :end_period, "5.請選擇上課結束日期" %><br />
+    <%= f.text_field :end_period, :class => "date_picker" %>     
+  </div>  
+ 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 <%= link_to 'Show', @lessonrecords %> |
 <%= link_to 'Back', lessonrecords_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031082721) do
+ActiveRecord::Schema.define(:version => 20131104055757) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -307,6 +307,8 @@ ActiveRecord::Schema.define(:version => 20131031082721) do
     t.date     "end_period"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "keyin"
+    t.string   "schoolname"
   end
 
   create_table "messages", :force => true do |t|
