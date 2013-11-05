@@ -42,14 +42,15 @@ class LessonrecordsController < ApplicationController
 
   # GET /lessonrecords/1/edit
   def edit
-    if ["idarfan"].include? current_user.name
-      @lessonrecords = Lessonrecord.find(params[:id])
-      @kojenadults = Kojenadult.all
-      @adults_session_descriptions = AdultsSessionDescription.all
+    #if ["idarfan"].include? current_user.name || @lessonrecords = Lessonrecord.where(:schoolname => current_user.schoolname).find(params[:id])
+    @lessonrecords = Lessonrecord.find(params[:id])
+    if @lessonrecords.schoolname == current_user.schoolname || ["idarfan"].include?(current_user.name)
+    @kojenadults = Kojenadult.all
+    @adults_session_descriptions = AdultsSessionDescription.all
     else      
-      @lessonrecords = Lessonrecord.where(:schoolname => current_user.schoolname).find(params[:id])
-      flash[:notice] = "無權對他校資料進行修改！"
-      redirect_to :action => :index  
+      #@lessonrecords = Lessonrecord.where(:schoolname => current_user.schoolname).find(params[:id])
+    flash[:notice] = "無權對他校資料進行修改！"
+    redirect_to :action => :index
     end
   end
 

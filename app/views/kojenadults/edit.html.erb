@@ -114,35 +114,35 @@
 
    <div class="field1">
     <%= f.label :adults_classtype, "1.請輸入課程類別" %><br />
-    <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, 'reason_desc', 'reason_desc', @kojenadult.adults_classtype)) %>
+    <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, 'reason_desc', 'reason_desc', @kojenadult.adults_classtype.presence || @adults_classtypes.last.reason_desc)) %>
   </div>
   <div class="field2">
       <%= f.label :session_description, "2.請輸入團體會話班課程類別" %><br />                        
-      <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, 'classname', 'classname', @kojenadult.session_description)) %>      
+      <%= f.select(:session_description, options_from_collection_for_select(@adults_session_descriptions, 'classname', 'classname', @kojenadult.session_description.presence || @adults_session_descriptions.last.classname)) %>      
   </div>
   <div class="field1">
     <%= f.label :adults_refinement_lesson, "3.請輸入精緻班課程類別" %><br />
-    <%= f.select(:adults_refinementlesson, options_from_collection_for_select(@adults_refinement_lessons, 'reason_desc', 'reason_desc', @kojenadult.adults_refinementlesson)) %>    
+    <%= f.select(:adults_refinementlesson, options_from_collection_for_select(@adults_refinement_lessons, 'reason_desc', 'reason_desc', @kojenadult.adults_refinementlesson.presence || @adults_refinement_lessons.last.reason_desc)) %>    
   </div>
   <div class="field2">
     <%= f.label :adults_unit, "4.請輸入單元班課程類別" %><br />
-    <%= f.select(:adults_unit, options_from_collection_for_select(@adults_units, 'reason_desc', 'reason_desc', @kojenadult.adults_unit)) %>    
+    <%= f.select(:adults_unit, options_from_collection_for_select(@adults_units, 'reason_desc', 'reason_desc', @kojenadult.adults_unit.presence || @adults_units.last.reason_desc)) %>    
   </div>
   <div class="field1">
     <%= f.label :adults_license, "5.請輸入認證班課程類別" %><br />
-    <%= f.select(:adults_license, options_from_collection_for_select(@adults_licenses, 'reason_desc', 'reason_desc', @kojenadult.adults_license)) %>    
+    <%= f.select(:adults_license, options_from_collection_for_select(@adults_licenses, 'reason_desc', 'reason_desc', @kojenadult.adults_license.presence || @adults_licenses.last.reason_desc)) %>    
   </div>
   <div class="field2">
     <%= f.label :adults_separate, "6.請輸入個別班課程類別" %><br />
-    <%= f.select(:adults_separate, options_from_collection_for_select(@adults_separates, 'reason_desc', 'reason_desc', @kojenadult.adults_separate)) %>    
+    <%= f.select(:adults_separate, options_from_collection_for_select(@adults_separates, 'reason_desc', 'reason_desc', @kojenadult.adults_separate.presence || @adults_separates.last.reason_desc)) %>    
   </div>
   <div class="field1">
     <%= f.label :adults_japan, "7.請輸入日文班課程類別" %><br />
-    <%= f.select(:adults_japan, options_from_collection_for_select(@adults_japans, 'reason_desc', 'reason_desc', @kojenadult.adults_japan)) %>    
+    <%= f.select(:adults_japan, options_from_collection_for_select(@adults_japans, 'reason_desc', 'reason_desc', @kojenadult.adults_japan.presence || @adults_japans.last.reason_desc)) %>    
   </div>
    <div class="field2">
     <%= f.label :adults_online, "8.請輸入Online課程類別" %><br />
-    <%= f.select(:adults_online, options_from_collection_for_select(@adults_onlines, 'reason_desc', 'reason_desc', @kojenadult.adults_online)) %>    
+    <%= f.select(:adults_online, options_from_collection_for_select(@adults_onlines, 'reason_desc', 'reason_desc', @kojenadult.adults_online.presence || @adults_onlines.last.reason_desc)) %>    
   </div>
   <div class="field1">
     <%= f.label :classnumber, "2.請輸入班級編號" %><br />

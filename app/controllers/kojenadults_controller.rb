@@ -103,25 +103,27 @@ class KojenadultsController < ApplicationController
   # GET /kojenadults/1/edit
   def edit
     return unless user_level2 #增加權限控管    
-    @kojenadult = Kojenadult.find(params[:id])
-    @lessonrecords = Lessonrecord.all
-    @adults_classtypes = AdultsClasstype.all
-    @adults_refinement_lessons = AdultsRefinementLesson.all
-    @adults_units = AdultsUnit.all
-    @adults_licenses = AdultsLicense.all
-    @adults_separates = AdultsSeparate.all
-    @adults_japans = AdultsJapan.all
-    @adults_onlines = AdultsOnline.all
-    #@kojenadult.adults_classtype = [@adults_classtypes]
-    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
-    @kojenadult_classes = KojenadultClasse.all
-    @adults_graduateds = AdultsGraduated.all
-    @adults_howyouknowus = AdultsHowyouknowu.all
-    @adults_localexameds = AdultsLocalexamed.all
-    @adults_whatexameds = AdultsWhatexamed.all
-    @adults_whylearns = AdultsWhylearn.all
-    @adults_session_descriptions = AdultsSessionDescription.all
-    
+    @kojenadult = Kojenadult.find(params[:id])    
+    if @kojenadult.schoolname == current_user.schoolname || ["idarfan"].include?(current_user.name)
+      @lessonrecords = Lessonrecord.all      
+      @adults_classtypes = AdultsClasstype.all
+      @adults_refinement_lessons = AdultsRefinementLesson.all
+      @adults_units = AdultsUnit.all
+      @adults_licenses = AdultsLicense.all
+      @adults_separates = AdultsSeparate.all
+      @adults_japans = AdultsJapan.all
+      @adults_onlines = AdultsOnline.all     
+      @kojenadult_classes = KojenadultClasse.all
+      @adults_graduateds = AdultsGraduated.all
+      @adults_howyouknowus = AdultsHowyouknowu.all
+      @adults_localexameds = AdultsLocalexamed.all
+      @adults_whatexameds = AdultsWhatexamed.all
+      @adults_whylearns = AdultsWhylearn.all
+      @adults_session_descriptions = AdultsSessionDescription.all   
+    else    
+      flash[:notice] = "無權對他校資料進行修改！"
+      redirect_to :action => :index
+    end
   end
 
   # POST /kojenadults
@@ -266,9 +268,9 @@ class KojenadultsController < ApplicationController
         #render :search_report :layout => "text_layout" # 這邊要明確的指示render
         #render :layout => "test_layout" <= 怪怪用了它會遭到不幸,會無法調出資料
       rescue Exception => e #<= 這個不能取消
-          flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
-         #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
-       redirect_to :action => :search1       
+        flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
+        #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
+        redirect_to :action => :search1       
       end
     end
   end
