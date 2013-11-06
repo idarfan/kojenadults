@@ -22,7 +22,7 @@
             <li><a href="/lessonrecords">成人美語學選課資料輸入系統</a></li>
             <li><a href="/kojenadults/search1">成人美語學生資料進階搜尋系統</a></li>
             <li><a href="/users">員工帳號管理系統</a></li>
-          </ul>             
+          </ul>          
           <% if session[:user_id] %>         
             <%= button_to '登出系統', logout_path, :method => :delete %>
           <% end %>          
@@ -31,7 +31,7 @@
           <%= yield %>
         </div>
       </div>
-      <div class="footer">
+      <div class="footer">        
         <p>科見成人美語</p>
       </div>
     </div>

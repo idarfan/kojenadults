@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
+    return unless users_level1
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
+    return unless users_level1
     @user = User.new
 
     respond_to do |format|
@@ -45,6 +47,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
+    return unless users_level1
     @user = User.new(params[:user])
 
     respond_to do |format|

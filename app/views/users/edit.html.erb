@@ -1,6 +1,38 @@
 <h1>Editing user</h1>
 
-<%= render 'form' %>
+<%= form_for(@user, :html => {:id => "users_form"}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this users from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>  
+  <div class="field2">
+    <%= f.label :name, "1.請輸入名稱" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field1">
+    <%= f.label :password, "2.請輸入密碼" %><br />
+    <%= f.password_field :password %>
+  </div>  
+ <div class="field2">
+    <%= f.label :schoolname, "3.請輸所屬分校" %><br />
+    <%= f.text_field :schoolname %>
+  </div>
+<div class="field1">
+    <%= f.label :level, "4.請輸入權限等級" %><br />
+    <%= f.text_field :level %>
+  </div>  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
