@@ -70,7 +70,7 @@ class Kojenadult < ActiveRecord::Base
     :length => {:minimum => 12, :maximum => 13}				  
   # 輸入學生id ,範圍由 xxxx-xxxxx 不可不填. 不可以有重複 				  
   validates :cname,  :presence => true, :on => :create
-  validates_format_of :cname, :with => / [\u4e00-\u9fa5] /, :message => "死白痴妳,輸入中文啦 "
+  validates_format_of :cname, :with => / [\u4e00-\u9fa5] /, :message => "請輸入中文 "
   #確保必填
   validates_length_of :cname, :presence => true, :in => 2..12, :allow_nil => false, :on => :update
   #:length => {:minimum => 2, :maximum => 12}
