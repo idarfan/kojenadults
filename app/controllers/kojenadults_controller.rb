@@ -1,6 +1,6 @@
 # encoding: utf-8
 class KojenadultsController < ApplicationController
-  before_filter :authorize, :except => [:data]
+  before_filter :authorize, :except => [:data]  
   
   def data
     @kojenadults = Kojenadult.all

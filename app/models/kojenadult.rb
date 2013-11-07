@@ -71,7 +71,7 @@ class Kojenadult < ActiveRecord::Base
   # 輸入學生id ,範圍由 xxxx-xxxxx 不可不填. 不可以有重複 				  
   validates :cname,  :presence => true, :on => :create
   validates_format_of :cname, :with => /[\u4e00-\u9fa5]/, :message => "請輸入中文"
-  #確保必填
+  #確保必填個及必需輸入中文
   validates_length_of :cname, :presence => true, :in => 2..12, :allow_nil => false, :on => :update
   #:length => {:minimum => 2, :maximum => 12}
   # 中文姓名最少2個字,最多12個字	不可以不填

@@ -12,11 +12,11 @@
     <%= stylesheet_link_tag css_load %>
     <%= yield :header %>    
   </head>
-  <body>
+  <body>    
     <div class="container">
       <div class="header"><img src="/images/Direct-KJ.png" width="209" height="96"/></div>
       <div class="wapper">
-        <div class="sidebar1">
+        <div class="sidebar1">          
           <ul class="nav">
             <li><a href="/kojenadults">成人美語學生資料輸入系統</a></li>            
             <li><a href="/lessonrecords">成人美語學選課資料輸入系統</a></li>
@@ -28,7 +28,7 @@
           <% end %>          
         </div>
         <div class="content">    
-          <%= yield %>
+          <%= yield %>          
         </div>
       </div>
       <div class="footer">        

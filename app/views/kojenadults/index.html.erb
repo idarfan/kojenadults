@@ -3,6 +3,7 @@
   <head>    
   </head>
   <body>
+    <p>現在時間是 <%= Time.now %> <%= current_user.name %> 您好</p>
     <h1>列出學生清單</h1>
 
     <%= form_tag search_kojenadults_path, :method => :get do %>
