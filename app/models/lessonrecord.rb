@@ -4,6 +4,6 @@ class Lessonrecord < ActiveRecord::Base
   
   validates :lesson,  :presence =>  {:message => "請您必須填寫課程名稱"}
   searchable do
-    text :cname, :ename, :lesson, :student_id
+    text :cname, :ename, :lesson, :student_id, :schoolname
   end
 end

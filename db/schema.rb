@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104055757) do
+ActiveRecord::Schema.define(:version => 20131108032758) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -231,7 +231,7 @@ ActiveRecord::Schema.define(:version => 20131104055757) do
     t.string   "cname"
     t.string   "ename"
     t.string   "community_id"
-    t.integer  "student_id",              :limit => 8
+    t.string   "student_id"
     t.date     "birthday"
     t.string   "gender"
     t.string   "email"
@@ -301,7 +301,7 @@ ActiveRecord::Schema.define(:version => 20131104055757) do
     t.integer  "kojenadult_id"
     t.string   "cname"
     t.string   "ename"
-    t.integer  "student_id",    :limit => 8
+    t.string   "student_id"
     t.string   "lesson"
     t.date     "start_period"
     t.date     "end_period"
