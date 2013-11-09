@@ -243,7 +243,7 @@ class KojenadultsController < ApplicationController
     else
       begin
         start_at = DateTime.strptime(params[:start_at], "%m/%d/%Y")                        
-        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y")        
+        end_at = DateTime.strptime(params[:end_at], "%m/%d/%Y") + 1.day       
         start_age_at = Time.now - params[:end_age_at].to_i.years - 1.year
         end_age_at = Time.now - params[:start_age_at].to_i.years 
         @whylearn_ids = params['whylearn_ids'].map{|i|i.to_i > 0 ? i.to_i : nil}.compact

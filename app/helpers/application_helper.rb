@@ -1,5 +1,9 @@
 # encoding : utf-8
+#require "area"
+
 module ApplicationHelper
+  #include Area
+
   def js(*js_s)
     @js ||= []
     js_s.each do |js_name|
