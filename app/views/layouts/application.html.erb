@@ -27,7 +27,8 @@
             <%= button_to '登出系統', logout_path, :method => :delete %>
           <% end %>          
         </div>
-        <div class="content">    
+        <div class="content">
+          <p id="notice" ><%= notice %></p>
           <%= yield %>          
         </div>
       </div>

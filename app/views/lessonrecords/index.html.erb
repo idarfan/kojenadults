@@ -9,8 +9,7 @@
       <p>
         <%= text_field_tag :query, params[:query] %> <%= submit_tag "搜尋" %>
       </p>
-    <% end %>
-      <b><p id="notice"><%= flash[:notice] %></p></b> 
+    <% end %>      
     <br />
     <br />
     <table>
@@ -38,6 +37,6 @@
       <% end %>
     </table>
     <br />
-    <%= link_to 'New Lessonrecord', new_lessonrecord_path %>
+    <%= link_to '輸入新的學生選課記錄', new_lessonrecord_path %>
   </body>
 </html>

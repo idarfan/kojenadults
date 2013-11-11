@@ -112,19 +112,19 @@
     </div>
   <% end %>  
   <div class="field2">
-    <%= f.label :student_id, "2.請輸入學籍號碼" %><br />
+    <%= f.label :student_id, "1.請輸入學籍號碼" %><br />
     <%= f.text_field :student_id %>
   </div>
   <div class="field1">
-    <%= f.label :session_description, "3.請輸入選讀課程" %><br />
+    <%= f.label :session_description, "2.請輸入選讀課程" %><br />
     <%= f.select(:lesson, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', '1')) %>    
   </div>  
   <div class="field1">
-    <%= f.label :startperiod, "5.請選擇上課開始日期" %><br />
+    <%= f.label :startperiod, "3.請選擇上課開始日期" %><br />
     <%= f.text_field :start_period, :class => "date_picker" %>     
   </div>
   <div class="field2">
-    <%= f.label :endperiod, "6.請選擇上課結束日期" %><br />
+    <%= f.label :endperiod, "4.請選擇上課結束日期" %><br />
     <%= f.text_field :end_period, :class => "date_picker" %>     
   </div>  
 
