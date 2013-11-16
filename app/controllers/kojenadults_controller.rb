@@ -281,11 +281,11 @@ class KojenadultsController < ApplicationController
     end
   end
 
-  def  search_report2
-    begin
+  def  search_report2     
+   begin
       start_at = Date.strptime(params[:start_at], "%m/%d/%Y")                        
       end_at = Date.strptime(params[:end_at], "%m/%d/%Y")
-      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged])
+      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged], :schoolname => current_user.schoolname)
       #@emails = @kojenadults.map { |k| k.email }.uniq.reject { |k| k.blank? }
       @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #若只調用單一欄位,不用上述的寫法
       @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)     
@@ -294,8 +294,8 @@ class KojenadultsController < ApplicationController
       flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
       #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
       redirect_to :action => :search2       
-    end
-  end 
+    end 
+  end
 
   #底下的是參考性寫法
   def myjobs
