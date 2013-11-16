@@ -19,7 +19,10 @@
   <p>請輸入欲查詢的學生起始年齡:</p>
   <input type="text" name="start_age_at" value="" />  
   <p>請輸入欲查詢的學生結束年齡:</p>
-  <input type="text" name="end_age_at" value="" />        
+  <input type="text" name="end_age_at" value="" />       
+  </div>
+  <div class="field2">
+  <input type ="checkbox" name="reged" /> 勾選它,若要列出已註冊選課學生
   </div>
   <% AdultsWhylearn.all.each do |whylearn| %>
     <%= check_box_tag "whylearn_ids[]", whylearn.id %> <%= whylearn.reason_desc %>  

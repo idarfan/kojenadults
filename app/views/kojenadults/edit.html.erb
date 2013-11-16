@@ -257,7 +257,13 @@
     <%= f.text_field :whatexamed_other %>
   </div>
   <div class="field1">
-    <%= f.label :notice_other, "29.請輸入其他的附註事項" %><br />
+  <%= f.label "29.是否有註冊選課"%>
+    <br />
+    <%= f.check_box :reged %>
+    <br />
+  </div>
+  <div class="field2">
+    <%= f.label :notice_other, "30.請輸入其他的附註事項" %><br />
     <%= f.text_area :notice_other %>
   </div>  
   <div class="actions">

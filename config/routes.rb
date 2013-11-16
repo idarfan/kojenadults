@@ -72,7 +72,9 @@ Kojenadults::Application.routes.draw do
       get :data
       get :search
       get :search1
-      get :search_report      
+      get :search_report
+      get :search2
+      get :search_report2
     end
   end   
   

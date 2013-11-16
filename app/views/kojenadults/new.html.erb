@@ -6,93 +6,97 @@
     /**/
     $.validator.messages.required = "請填寫此欄位";
     $.validator.messages.remote = "請修正此欄位";
-    
-    jQuery(function($){
+
+    jQuery(function($) {
       ///$(function() { alert('Ready to do your bidding!'); });     
       //alert($('#student_form').length + ' elements!');      
       $("#student_form").validate({
         rules: {
           "student[student_id]": {
             required: true,
-            remote:"/students/student_id_check/"
+            remote: "/students/student_id_check/"
           }
         },
         messages: {
           "student[student_id]": {
-            required:function(){alert("請填寫學生ID....")},
-            remote:function(){alert("這學生ID已經被使用....")}
+            required: function() {
+              alert("請填寫學生ID....")
+            },
+            remote: function() {
+              alert("這學生ID已經被使用....")
+            }
           }
         }
       });
       //輸入前台學生驗證式搭配 remote 資料庫student_id 驗證
-      
-      $(".date_picker").datepicker({              
+
+      $(".date_picker").datepicker({
         showMonthAfterYear: true,
-        dateFormat : 'yy-mm-dd',
+        dateFormat: 'yy-mm-dd',
         yearRange: '1928:2016',
         changeMonth: true,
         changeYear: true
-      });      
-      
-      $(".main_area , .sub_area").change(function(){
-        $("input.road_name_setting").each(function(){
+      });
+
+      $(".main_area , .sub_area").change(function() {
+        $("input.road_name_setting").each(function() {
           var temp = $(this).siblings("select.road_name_setting");
-          if(($(this).attr("value") + "").length == 0){
-            $(this).addClass("hidden").attr("value" , "").attr("name" , "");
-            temp.removeClass("hidden").attr("name" , $(this).attr("ref"));
-          }else{
-            temp.addClass("hidden").attr("name" , "");
-            $(this).removeClass("hidden").attr("name" , $(this).attr("ref"));
+          if (($(this).attr("value") + "").length == 0) {
+            $(this).addClass("hidden").attr("value", "").attr("name", "");
+            temp.removeClass("hidden").attr("name", $(this).attr("ref"));
+          } else {
+            temp.addClass("hidden").attr("name", "");
+            $(this).removeClass("hidden").attr("name", $(this).attr("ref"));
           }
           temp.find("option:not(.title)").remove();
         })
-        
-        if($('.main_area').attr("value") != "%" && $('.sub_area').attr("value") != "%"){
+
+        if ($('.main_area').attr("value") != "%" && $('.sub_area').attr("value") != "%") {
           var temp = $('.main_area').attr("value");
           var temp2 = $('.sub_area').attr("value");
-          $.get("/maps/area_road_" + temp + "_" + temp2 + '.txt' , null, function(txt){
-            $(".road_selector .first_title").html("★請下拉選擇").attr("selected" , "true");
+          $.get("/maps/area_road_" + temp + "_" + temp2 + '.txt', null, function(txt) {
+            $(".road_selector .first_title").html("★請下拉選擇").attr("selected", "true");
             $(".road_selector").html($(".road_selector").html() + txt);
           });
-        }else{
-          $(this).siblings("select.road_name_setting").each(function(){
-            $(this).find(".first_title").html("★請先選擇地區").attr("selected" , "true");
+        } else {
+          $(this).siblings("select.road_name_setting").each(function() {
+            $(this).find(".first_title").html("★請先選擇地區").attr("selected", "true");
           })
         }
       })
       //slot吃角子老虎(拉霸)
-      $("input.road_name_setting").keyup(function(e){
-        if($(this).attr("value").length == 0 && (e.keyCode == 8 || e.keyCode == 46)){
-          $(this).addClass("hidden").attr("name" , "");
-          $(this).siblings("select.road_name_setting").removeClass("hidden").attr("name" , $(this).attr("ref")).find(".first_title").attr("selected" , "true");
-        }else{
-          $(this).siblings("select.road_name_setting").addClass("hidden").attr("name" , "");
-          $(this).removeClass("hidden").attr("name" , $(this).attr("ref"));
+      $("input.road_name_setting").keyup(function(e) {
+        if ($(this).attr("value").length == 0 && (e.keyCode == 8 || e.keyCode == 46)) {
+          $(this).addClass("hidden").attr("name", "");
+          $(this).siblings("select.road_name_setting").removeClass("hidden").attr("name", $(this).attr("ref")).find(".first_title").attr("selected", "true");
+        } else {
+          $(this).siblings("select.road_name_setting").addClass("hidden").attr("name", "");
+          $(this).removeClass("hidden").attr("name", $(this).attr("ref"));
         }
-      }).each(function(){
-        if($(this).attr("value").length > 1){
-          $(this).siblings("select.road_name_setting").addClass("hidden").attr("name" , "");
-          $(this).removeClass("hidden").attr("name" , $(this).attr("ref"));
-        }else{
-          $(this).addClass("hidden").attr("name" , "");
-          $(this).siblings("select.road_name_setting").removeClass("hidden").attr("name" , $(this).attr("ref"));
+      }).each(function() {
+        if ($(this).attr("value").length > 1) {
+          $(this).siblings("select.road_name_setting").addClass("hidden").attr("name", "");
+          $(this).removeClass("hidden").attr("name", $(this).attr("ref"));
+        } else {
+          $(this).addClass("hidden").attr("name", "");
+          $(this).siblings("select.road_name_setting").removeClass("hidden").attr("name", $(this).attr("ref"));
         }
       })
-      $("select.road_name_setting").live("change" , function(){
-        if($(this).attr("value") == "%"){
-          $(this).addClass("hidden").attr("name" , "");
-          $(this).siblings("input.road_name_setting").removeClass("hidden").attr("name" , $(this).attr("ref"));
-        }else{
-          $(this).siblings("input.road_name_setting").addClass("hidden").attr("name" , "");
-          $(this).removeClass("hidden").attr("name" , $(this).attr("ref"));
+      $("select.road_name_setting").live("change", function() {
+        if ($(this).attr("value") == "%") {
+          $(this).addClass("hidden").attr("name", "");
+          $(this).siblings("input.road_name_setting").removeClass("hidden").attr("name", $(this).attr("ref"));
+        } else {
+          $(this).siblings("input.road_name_setting").addClass("hidden").attr("name", "");
+          $(this).removeClass("hidden").attr("name", $(this).attr("ref"));
         }
-      }).each(function(){
-        if($(this).attr("value") == "%"){
+      }).each(function() {
+        if ($(this).attr("value") == "%") {
           temp = $(this).find(".first_title");
-          if(temp[0]){
-            temp.attr("selected" , "true");
-          }else{
-            $(this).find("option:first").attr("selected" , "true");
+          if (temp[0]) {
+            temp.attr("selected", "true");
+          } else {
+            $(this).find("option:first").attr("selected", "true");
           }
         }
       })
@@ -105,14 +109,14 @@
       <h2><%= pluralize(@kojenadult.errors.count, "error") %> prohibited this kojenadult from being saved:</h2>
 
       <ul>
-        <% @kojenadult.errors.full_messages.each do |msg| %>
+    <% @kojenadult.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
-        <% end %>
+    <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
- <div class="field1">
+  <div class="field1">
     <%= f.label :adults_classtype, "1.請輸入課程類別" %><br />
     <%= f.select(:adults_classtype, options_from_collection_for_select(@adults_classtypes, 'reason_desc', 'reason_desc', @adults_classtypes.last.reason_desc), {:prompt => '請選擇課程類別'}) %>    
   </div>
@@ -198,8 +202,8 @@
   </div>  
   <div class="field2">
     <%= f.label :graduated, "22.請您勾選您的學歷?" %><br />
-    <% @adults_graduateds.each do |gr| %>      
-      <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
+  <% @adults_graduateds.each do |gr| %>      
+    <%= check_box_tag "kojenadult[adults_graduated_ids][]", gr.id, @kojenadult.adults_graduated.map(&:id).include?(gr.id) %> <%= gr.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_graduated_ids][]','' %>    
   </div>
@@ -217,8 +221,8 @@
   </div> 
   <div class="field2">
     <%= f.label :howyouknowus, "25.請您勾選您是透過什麼媒體知道我們的?" %><br />
-    <% @adults_howyouknowus.each do |how| %>      
-      <%= check_box_tag "kojenadult[adults_howyouknowu_ids][]", how.id, @kojenadult.adults_howyouknowu.map(&:id).include?(how.id) %> <%= how.reason_desc %>
+  <% @adults_howyouknowus.each do |how| %>      
+    <%= check_box_tag "kojenadult[adults_howyouknowu_ids][]", how.id, @kojenadult.adults_howyouknowu.map(&:id).include?(how.id) %> <%= how.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_howyouknowu_ids][]','' %>   
   </div>
@@ -228,8 +232,8 @@
   </div>    
   <div class="field2">
     <%= f.label :whylearn, "26.請問您是在何種動機之下，開始進修美語？" %><br />
-    <% @adults_whylearns.each do |wh| %>      
-      <%= check_box_tag "kojenadult[adults_whylearn_ids][]", wh.id, @kojenadult.adults_whylearn.map(&:id).include?(wh.id) %> <%= wh.reason_desc %>
+  <% @adults_whylearns.each do |wh| %>      
+    <%= check_box_tag "kojenadult[adults_whylearn_ids][]", wh.id, @kojenadult.adults_whylearn.map(&:id).include?(wh.id) %> <%= wh.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_whylearn_ids][]','' %>           
   </div>
@@ -239,28 +243,34 @@
   </div>
   <div class="field2">
     <%= f.label :localexamed, "27.請問您有通過那些本國英語認證考試?" %><br />
-    <% @adults_localexameds.each do |lo| %>      
-      <%= check_box_tag "kojenadult[adults_localexamed_ids][]", lo.id, @kojenadult.adults_localexamed.map(&:id).include?(lo.id) %> <%= lo.reason_desc %>
+  <% @adults_localexameds.each do |lo| %>      
+    <%= check_box_tag "kojenadult[adults_localexamed_ids][]", lo.id, @kojenadult.adults_localexamed.map(&:id).include?(lo.id) %> <%= lo.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_localexamed_ids][]','' %>   
   </div>
   <div class="field1">
     <%= f.label :whatexamed, "28.請問您有通過那些國際英語認證考試?" %><br />
-    <% @adults_whatexameds.each do |we| %>      
-      <%= check_box_tag "kojenadult[adults_whatexamed_ids][]", we.id, @kojenadult.adults_whatexamed.map(&:id).include?(we.id) %> <%= we.reason_desc %>
+  <% @adults_whatexameds.each do |we| %>      
+    <%= check_box_tag "kojenadult[adults_whatexamed_ids][]", we.id, @kojenadult.adults_whatexamed.map(&:id).include?(we.id) %> <%= we.reason_desc %>
     <% end %>   
     <%= hidden_field_tag 'kojenadult[adults_whatexamed_ids][]','' %>   
   </div>
   <div class="field2">
     <%= f.label :whyexamed_other,"其他"%><br />
-    <%= f.text_field :whatexamed_other %>
+  <%= f.text_field :whatexamed_other %>
   </div>
   <div class="field1">
-    <%= f.label :notice_other, "29.請輸入其他的附註事項" %><br />
-    <%= f.text_area :notice_other %>
+  <%= f.label "29.是否有註冊選課"%>
+    <br />
+    <%= f.check_box :reged %>
+    <br />
+  </div>
+  <div class="field2">
+    <%= f.label :notice_other, "30.請輸入其他的附註事項" %><br />
+  <%= f.text_area :notice_other %>
   </div>  
   <div class="actions">
-    <%= f.submit %>
+  <%= f.submit %>
   </div>
 <% end %>
 

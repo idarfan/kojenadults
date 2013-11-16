@@ -2,6 +2,20 @@
 class Kojenadult < ActiveRecord::Base
   #採用過濾器
   #before_save :fix_cname
+
+  before_save :student_id_to_sub_column, :filter_out_xxx_email
+
+  def student_id_to_sub_column
+    self.student_id_schoolname = self.student_id[0..1]
+    self.student_id_date             = Date.strptime(self.student_id[2..9], "%Y%m%d")
+    self.student_id_serial           = self.student_id[10..11]
+  end
+  
+  def filter_out_xxx_email
+    if self.email.to_s.downcase == "xxx@xxx.xxx"
+      self.email = "" 
+    end
+  end
   
   #記算年齡的方法
   def age
@@ -75,9 +89,7 @@ class Kojenadult < ActiveRecord::Base
   validates_length_of :cname, :presence => true, :in => 2..12, :allow_nil => false, :on => :update
   #:length => {:minimum => 2, :maximum => 12}
   # 中文姓名最少2個字,最多12個字	不可以不填
-  validates :email, :presence => true, 
-    :length => {:minimum => 3, :maximum => 254}  
-  # 電子郵件最少3個字最多 254個字,不可以不填,可以有重複
+  
   validates :ename,  :length => {:minimum => 2, :maximum => 254}
   #英文姓名最少淤三個字,最多254字. 可以不填				  
   validates :birthday,  :presence => true                  
@@ -85,8 +97,9 @@ class Kojenadult < ActiveRecord::Base
   validates :gender,  :presence => true
   #性別不能不填			  
   validates :address,  :presence => true, 
-    :length => {:minimum => 2, :maximum => 254}  
-				  
+    :length => {:minimum => 2, :maximum => 254} 
+  validates :email, :format => { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, :message => "電子郵件格式錯誤" }, :allow_blank => true				  
+  #允許空白但不允許格式錯誤
   validates :telephone, :length => {:minimum => 3, :maximum => 254}
   #電話欄位可以空白				  
   validates :mobile_phone,  :presence => true, 
@@ -99,10 +112,7 @@ class Kojenadult < ActiveRecord::Base
   #驗證學號		
   validates :cname,  :presence => { :message => "姓名欄位不能空白" }, 
     :length => {:minimum => 2, :maximum => 12, :message => "姓名欄位長度不正確" }
-  #驗證姓名 		  
-  validates :email,  :presence => { :message => "電子郵件欄位不能空白" }, 
-    :length => {:minimum => 3, :maximum => 254, :message => "電子郵件欄位長度不正確" }
-  #驗證電子郵件
+  #驗證姓名	  
   validates :birthday,  :presence => { :message => "生日欄位不能空白" }     
   #驗證生日
   validates :gender,  :presence => { :message => "姓別欄位不能空白" }

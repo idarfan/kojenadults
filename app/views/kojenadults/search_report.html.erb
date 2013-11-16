@@ -24,3 +24,5 @@
 </table>
 <%= will_paginate @kojenadults %>
 <br />
+
+<%= text_area_tag :emails,  @emails.join(", "), rows: 20, cols:120 %>

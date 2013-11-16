@@ -181,10 +181,7 @@ class KojenadultsController < ApplicationController
     @adults_licenses = AdultsLicense.all
     @adults_separates = AdultsSeparate.all
     @adults_japans = AdultsJapan.all
-    @adults_onlines = AdultsOnline.all
-    #@kojenadult.adults_classtype = [@adults_classtypes]
-    #@adults_classtypes = AdultsClasstype.where("kojenadult_id = #{@kojenadult.kojenadult_id}")
-    #@kojenadult_classes = KojenadultClasse.where("student_id = #{@kojenadult.student_id}")
+    @adults_onlines = AdultsOnline.all   
     @kojenadult_classes = KojenadultClasse.all
     @adults_graduateds = AdultsGraduated.all
     @adults_howyouknowus = AdultsHowyouknowu.all
@@ -192,8 +189,8 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @adults_session_descriptions = AdultsSessionDescription.all
-    x = {"松江二校" => "20", "南京三校" => "30", "南陽五校" => "50"}
-    if @kojenadult.student_id[0..1] == x[current_user.schoolname]    
+    y = {"松江二校" => "20", "南京三校" => "30", "南陽五校" => "50"}
+    if params[:kojenadult][:student_id][0..1] == y[current_user.schoolname]    
 
       respond_to do |format|
         if @kojenadult.update_attributes(params[:kojenadult])
@@ -267,14 +264,15 @@ class KojenadultsController < ApplicationController
         DATE('#{end_at.strftime("%Y/%m/%d")}') AND
         kojenadults.birthday >= DATE('#{start_age_at.strftime("%Y/%m/%d")}') AND kojenadults.birthday < DATE('#{end_age_at.strftime("%Y/%m/%d")}'))
           ").group('kojenadults.id').select('kojenadults.*')
+        @kojenadults = @kojenadults.where(:reged => !!params[:reged]) #Adding this line for check reged vaule
         if @kojenadults.nil? || @kojenadults.length.zero?
           flash[:notice] = "查詢不到符合條件的學生記錄！"                 
         else
           flash[:notice] = "總共查詢到#{@kojenadults.length}筆記錄"
         end   
-        @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
-        #render :search_report :layout => "text_layout" # 這邊要明確的指示render
-        #render :layout => "test_layout" <= 怪怪用了它會遭到不幸,會無法調出資料
+        #@emails = @kojenadults.map { |k| k.email }.uniq.reject { |k| k.blank? }
+        @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #寫在分頁前
+        @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)        
       rescue Exception => e #<= 這個不能取消
         flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
         #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
@@ -282,6 +280,23 @@ class KojenadultsController < ApplicationController
       end
     end
   end
+
+  def  search_report2
+    begin
+      start_at = Date.strptime(params[:start_at], "%m/%d/%Y")                        
+      end_at = Date.strptime(params[:end_at], "%m/%d/%Y")
+      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged])
+      #@emails = @kojenadults.map { |k| k.email }.uniq.reject { |k| k.blank? }
+      @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #若只調用單一欄位,不用上述的寫法
+      @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)     
+      render :action => :search_report
+    rescue Exception => e #<= 這個不能取消
+      flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
+      #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
+      redirect_to :action => :search2       
+    end
+  end 
+
   #底下的是參考性寫法
   def myjobs
     @ohmyjobs = AdultsWhylearn.all.map{|im|[im.reason_desc , im.id]}
