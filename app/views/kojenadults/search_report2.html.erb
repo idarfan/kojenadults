@@ -1,0 +1,28 @@
+<table> 
+  <tr>
+    <th>所屬校別</th>          
+    <th>學生編號</th>
+    <th>中文姓名</th>
+    <th>英文姓名</th>
+    <th>電子郵件</th>        
+    <th>手機號碼</th>
+    <th>年齡</th>
+    <th>建檔日期</th>    
+  </tr>
+  <% @kojenadults.each do |s| %>
+    <tr>
+      <td><%= s.schoolname %></td>
+      <td><%= s.student_id %></td>
+      <td><%= s.cname %></td>
+      <td><%= s.ename %></td>
+      <td><%= s.email %></td>
+      <td><%= s.mobile_phone %></td>
+      <td><%= s.age %></td>
+      <td><%= s.created_at %>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @kojenadults %>
+<br />
+
+<%= text_area_tag :emails,  @emails.join(", "), rows: 20, cols:120 %>

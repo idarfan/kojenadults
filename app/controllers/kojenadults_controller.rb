@@ -150,8 +150,8 @@ class KojenadultsController < ApplicationController
     @adults_whylearns = AdultsWhylearn.all
     @kojenadult.keyin = current_user.name
     @kojenadult.schoolname = current_user.schoolname
-    @adults_session_descriptions = AdultsSessionDescription.all
-    x = {"松江二校" => "20", "南京三校" => "30", "南陽五校" => "50"}
+    @adults_session_descriptions = AdultsSessionDescription.all   
+    x = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "內湖六校" => "06", "士林十校" => "10"}
     if @kojenadult.student_id[0..1] == x[current_user.schoolname]
       #raise Exception.new(params.inspect)  #檢視表單傳送些什麼參數，檢查完後再予以註銷        
       respond_to do |format|
@@ -189,7 +189,7 @@ class KojenadultsController < ApplicationController
     @adults_whatexameds = AdultsWhatexamed.all
     @adults_whylearns = AdultsWhylearn.all
     @adults_session_descriptions = AdultsSessionDescription.all
-    y = {"松江二校" => "20", "南京三校" => "30", "南陽五校" => "50"}
+    y = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "內湖六校" => "06", "士林十校" => "10"}
     if params[:kojenadult][:student_id][0..1] == y[current_user.schoolname]    
 
       respond_to do |format|
@@ -216,25 +216,16 @@ class KojenadultsController < ApplicationController
     @lessonrecords = Lessonrecord.all
     @kojenadult.destroy
 
-    #raise Exception.new @kojenadult.inspect
-    
-    #@adults_session_descriptions = AdultsSessionDescription.all    
-    #@kojenadult_class = KojenadultClasse.find("student_id = #{@kojenadult.student_id}")           
-    #@kojenadult_class.destroy  
-
     respond_to do |format|
       format.html { redirect_to(kojenadults_url) }
       format.xml  { head :ok }
     end
   end
   
-  def search #註解掉會遭到不幸. by idarfan
-    #@level = Incomelevel.all.map{|im|[im.reason_desc , im.id]}    
-    #@howuknowu = Howuknowu.all.map{|sh|[sh.reason_desc , sh.id]}   
-    #@whylearn = Whylearn.all.map{|sw|[sw.reason_desc , sw.id]}    
+  def search #註解掉會遭到不幸. by idarfan    
     render :layout =>"test_layout"
   end
-
+    
   def search_report    
     if params[:whylearn_ids].nil? or params[:whylearn_ids].empty?
       flash[:notice] = "請選取欲查詢的起始日期及結束日期,並勾選為何學習英文的選項!"       
@@ -281,20 +272,38 @@ class KojenadultsController < ApplicationController
     end
   end
 
-  def  search_report2     
-   begin
-      start_at = Date.strptime(params[:start_at], "%m/%d/%Y")                        
-      end_at = Date.strptime(params[:end_at], "%m/%d/%Y")
-      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged], :schoolname => current_user.schoolname)
-      #@emails = @kojenadults.map { |k| k.email }.uniq.reject { |k| k.blank? }
-      @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #若只調用單一欄位,不用上述的寫法
-      @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)     
-      render :action => :search_report
-    rescue Exception => e #<= 這個不能取消
-      flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
-      #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
-      redirect_to :action => :search2       
-    end 
+  def  search_report2
+    begin
+    start_at = Date.strptime(params[:start_at], "%m/%d/%Y")                        
+    end_at = Date.strptime(params[:end_at], "%m/%d/%Y")    
+    if ["idarfan"].include? current_user.name            
+      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged])
+      @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #若只調用單一欄位,不用上述的寫法    
+      if @kojenadults.nil? || @kojenadults.length.zero?
+        flash[:notice] = "查詢不到符合條件的學生記錄！"
+        redirect_to :action => :search2 
+      else
+        flash[:notice] = "總共查詢到#{@kojenadults.length}筆記錄"                
+        @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
+        render :action => :search_report
+      end               
+    else 
+      @kojenadults = Kojenadult.where(:student_id_date => start_at..end_at, :reged => !!params[:reged], :schoolname => current_user.schoolname)     
+      @emails = @kojenadults.pluck(:email).uniq.reject { |k| k.blank? } #若只調用單一欄位,不用上述的寫法    
+      if @kojenadults.nil? || @kojenadults.length.zero?
+        flash[:notice] = "查詢不到符合條件的學生記錄！"
+        redirect_to :action => :search2 
+      else
+        flash[:notice] = "總共查詢到#{@kojenadults.length}筆記錄"                
+        @kojenadults = @kojenadults.paginate(:page => params[:page], :per_page => 10)
+        render :action => :search_report 
+      end           
+    end
+      rescue Exception => e #<= 這個不能取消
+        flash[:notice] = "請選取欲查詢的起始日期及結束日期! "
+        #flash[:notice] = "請選取欲查詢的起始日期及結束日期! #{e.class}"
+        redirect_to :action => :search2       
+    end
   end
 
   #底下的是參考性寫法
