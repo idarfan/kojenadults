@@ -7,6 +7,7 @@ class LessonrecordsController < ApplicationController
     @lessonrecords = Lessonrecord.paginate(:page => params[:page], :per_page => 10) 
     @kojenadults = Kojenadult.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    @childs_session_descriptions = ChildsSessionDescription.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,6 +20,7 @@ class LessonrecordsController < ApplicationController
   def show
     @lessonrecords = Lessonrecord.find(params[:id])
     @adults_session_descriptions = AdultsSessionDescription.all
+    @childs_session_descriptions = ChildsSessionDescription.all
     @kojenadults = Kojenadult.all
 
     respond_to do |format|
@@ -33,6 +35,7 @@ class LessonrecordsController < ApplicationController
     @lessonrecords = Lessonrecord.new
     @kojenadults = Kojenadult.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    @childs_session_descriptions = ChildsSessionDescription.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,6 +50,7 @@ class LessonrecordsController < ApplicationController
     if @lessonrecords.schoolname == current_user.schoolname || ["idarfan"].include?(current_user.name)
     @kojenadults = Kojenadult.all
     @adults_session_descriptions = AdultsSessionDescription.all
+    @childs_session_descriptions = ChildsSessionDescription.all
     else      
       #@lessonrecords = Lessonrecord.where(:schoolname => current_user.schoolname).find(params[:id])
     flash[:notice] = "無權對他校資料進行修改！"

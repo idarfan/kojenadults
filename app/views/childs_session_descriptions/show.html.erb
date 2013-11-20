@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Classname:</b>
+  <%= @childs_session_description.classname %>
+</p>
+
+<p>
+  <b>Class description:</b>
+  <%= @childs_session_description.class_description %>
+</p>
+
+
+<%= link_to 'Edit', edit_childs_session_description_path(@childs_session_description) %> |
+<%= link_to 'Back', childs_session_descriptions_path %>

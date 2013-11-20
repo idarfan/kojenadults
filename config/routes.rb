@@ -1,4 +1,7 @@
 Kojenadults::Application.routes.draw do
+  resources :childs_session_descriptions
+
+
   #resources :lessonrecords
   #get 'lessonrecord' => 'lessonrecord#index'
 
@@ -28,7 +31,7 @@ Kojenadults::Application.routes.draw do
 
   resources :kojenadult_session_descriptionships
 
-  resources :adults_session_descriptions
+  resources :adults_session_descriptions  
 
   #get "admin/index"
   #get "sessions/new"

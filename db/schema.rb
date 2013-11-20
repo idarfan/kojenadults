@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116081835) do
+ActiveRecord::Schema.define(:version => 20131120032408) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(:version => 20131116081835) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "childs_session_descriptions", :force => true do |t|
+    t.string   "classname"
+    t.string   "class_description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "fortest", :force => true do |t|

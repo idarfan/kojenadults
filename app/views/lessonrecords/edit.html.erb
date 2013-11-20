@@ -7,31 +7,31 @@
     $.validator.messages.required = "請填寫此欄位";
     $.validator.messages.remote = "請修正此欄位";
 
-    jQuery(function($){
+    jQuery(function($) {
       ///$(function() { alert('Ready to do your bidding!'); });      
       //alert($('#student_form').length + ' elements!');            
       /* $("#student_form").validate({
-        rules: {
-          "student[student_id]": {
-            required: true,
-            remote:"/students/student_id_check/"
-          }
-        },
-        messages: {
-          "student[student_id]": {
-            required:function(){alert("請填寫.....")},
-            remote:function(){alert("已有重複資料.....")}
-          }
-        }
-      });
-       */      
-      $(".date_picker").datepicker({              
+       rules: {
+       "student[student_id]": {
+       required: true,
+       remote:"/students/student_id_check/"
+       }
+       },
+       messages: {
+       "student[student_id]": {
+       required:function(){alert("請填寫.....")},
+       remote:function(){alert("已有重複資料.....")}
+       }
+       }
+       });
+       */
+      $(".date_picker").datepicker({
         showMonthAfterYear: true,
-        dateFormat : 'yy-mm-dd',
+        dateFormat: 'yy-mm-dd',
         yearRange: '1928:2016',
         changeMonth: true,
         changeYear: true
-      });      
+      });
     })
   </script>
   <style>
@@ -115,12 +115,12 @@
     <%= f.label :student_id, "2.請輸入學籍號碼" %><br />
     <%= f.text_field :student_id %>
   </div>
-  
-  <div class="field1">
-    <%= f.label :session_description, "2.請輸入選讀課程" %><br />
-    <%= f.select(:lesson, options_from_collection_for_select(@adults_session_descriptions, :classname, 'classname', '1')) %>    
-  </div> 
- 
+
+  <div class="field1">    
+    <%= f.label :lesson, "3.請輸入課程名稱" %><br />
+    <%= f.text_field :lesson %>
+  </div>
+
   <div class="field2">
     <%= f.label :start_period, "4.請選擇上課開始日期" %><br />
     <%= f.text_field :start_period, :class => "date_picker" %>     
@@ -129,7 +129,7 @@
     <%= f.label :end_period, "5.請選擇上課結束日期" %><br />
     <%= f.text_field :end_period, :class => "date_picker" %>     
   </div>  
- 
+
   <div class="actions">
     <%= f.submit %>
   </div>
