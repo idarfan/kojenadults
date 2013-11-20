@@ -214,8 +214,10 @@ ActiveRecord::Schema.define(:version => 20131120032408) do
     t.decimal  "test_fee",                   :precision => 10, :scale => 0
     t.date     "end_period"
     t.decimal  "tuition",                    :precision => 10, :scale => 0
+    t.string   "repeat"
     t.decimal  "withdraw",                   :precision => 10, :scale => 0
     t.string   "postpone"
+    t.decimal  "scholarship",                :precision => 10, :scale => 0
     t.string   "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -8,3 +8,4 @@ class CreateChildsSessionDescriptions < ActiveRecord::Migration
     end
   end
 end
+#adding 11/20
