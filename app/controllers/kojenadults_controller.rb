@@ -154,7 +154,7 @@ class KojenadultsController < ApplicationController
     @kojenadult.schoolname = current_user.schoolname
     @adults_session_descriptions = AdultsSessionDescription.all
     @childs_session_descriptions = ChildsSessionDescription.all
-    x = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "內湖六校" => "06", "士林十校" => "10", "板橋十一校" => "11"}
+    x = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "士林六校" => "06", "內湖十校" => "10", "板橋十一校" => "11"}
     if @kojenadult.student_id[0..1] == x[current_user.schoolname]
       #raise Exception.new(params.inspect)  #檢視表單傳送些什麼參數，檢查完後再予以註銷        
       respond_to do |format|
@@ -193,7 +193,7 @@ class KojenadultsController < ApplicationController
     @adults_whylearns = AdultsWhylearn.all
     @adults_session_descriptions = AdultsSessionDescription.all
     @childs_session_descriptions = ChildsSessionDescription.all
-    y = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "內湖六校" => "06", "士林十校" => "10", "板橋十一校" => "11"}
+    y = {"松江二校" => "02", "南京三校" => "03", "台大四校" => "04", "南陽五校" => "05", "士林六校" => "06", "內湖十校" => "10", "板橋十一校" => "11"}
     if params[:kojenadult][:student_id][0..1] == y[current_user.schoolname]    
 
       respond_to do |format|
