@@ -17,6 +17,10 @@ class Kojenadult < ActiveRecord::Base
     end
   end
   
+ # def student_count
+  #  SELECT  COUNT(*) FROM `kojenadults` WHERE `schoolname` = '松江二校'
+   # Kojenadult.select("count(*)").group(:schooldname)
+  #end
   #記算年齡的方法
   def age
     now = Time.now.utc.to_date
@@ -126,6 +130,6 @@ class Kojenadult < ActiveRecord::Base
     :length => {:minimum => 10, :maximum => 20, :message => "行動電話欄位長度不正確" }
   #驗證行動電話  
   searchable do
-    text :cname, :ename, :email, :student_id,:telephone, :mobile_phone, :parents_phone, :company_phone, :jobs, :session_description
+    text :schoolname, :cname, :ename, :email, :student_id,:telephone, :mobile_phone, :parents_phone, :company_phone, :jobs, :session_description
   end
 end

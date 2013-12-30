@@ -343,4 +343,20 @@ class KojenadultsController < ApplicationController
       format.xml  { render :xml => @kojenadults }
     end
   end
+  
+  def inputs_view
+    @inputs = []
+    @inputs += [["schoolname", "學生資料輸入筆數"]]
+    @inputs += Kojenadult.select("schoolname, count(*) as cou").group(:schoolname).map {|x|[x.schoolname, x.cou]}.sort {|x, y| y[1] <=> x[1] }    
+    @inputs = @inputs.to_json
+    #render( layout: false)
+  end
+  
+  def inputs_email_view    
+    @inputs_email_view = []
+    @inputs_email_view += [["schoolname", "電子郵件資料輸入筆數"]]
+    @inputs_email_view += Kojenadult.select("schoolname, count(distinct email) as cou").group(:schoolname).map {|x|[x.schoolname, x.cou]}.sort {|x, y| y[1] <=> x[1] }    
+    @inputs_email_view = @inputs_email_view.to_json
+    #render( layout: false)
+  end
 end  

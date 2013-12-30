@@ -78,6 +78,8 @@ Kojenadults::Application.routes.draw do
       get :search_report
       get :search2
       get :search_report2
+      get :inputs_view
+      get :inputs_email_view
     end
   end   
   
