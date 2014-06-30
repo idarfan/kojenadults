@@ -2,8 +2,8 @@
 class Kojenadult < ActiveRecord::Base
   #採用過濾器
   #before_save :fix_cname
-
-  before_save :student_id_to_sub_column, :filter_out_xxx_email
+before_save :student_id_to_sub_column, :filter_out_xxx_email, :address_to_address_full 
+  #before_save :student_id_to_sub_column, :filter_out_xxx_email, :address_to_address_full
 
   def student_id_to_sub_column
     self.student_id_schoolname = self.student_id[0..1]
@@ -27,12 +27,20 @@ class Kojenadult < ActiveRecord::Base
     dob = self.birthday
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
+
   #使用私有方法 fix_cname
   private
   def fix_cname
     self.cname = self.cname.gsub(/[\w\s\b\$[:punct:]]/ , '')
-  end  
-  #
+  end
+
+  protected
+  def address_to_address_full             
+      self.address_full = "#{Area.area_name(self.main_area,self.sub_area)}#{self.road_name}#{self.address}"
+  end
+# self.address_full = "#{ Area.area_name(self.MAIN_AREA,self.SUB_AREA)}#{'@kojenadult.road_name'}#{'@kojenadult.address'}"  
+#  self.address_full = #{':area_name(@kojenadult)''}#{'@kojenadult.road_name'}#{'@kojenadult.address'}
+#
   has_many :kojenadult_adults_graduatedship, :dependent => :destroy
   has_many :adults_graduated, :through => :kojenadult_adults_graduatedship
   #您從什麼學校畢業的?
@@ -131,5 +139,5 @@ class Kojenadult < ActiveRecord::Base
   #驗證行動電話  
   searchable do
     text :schoolname, :cname, :ename, :email, :student_id,:telephone, :mobile_phone, :parents_phone, :company_phone, :jobs, :session_description
-  end
+  end  
 end

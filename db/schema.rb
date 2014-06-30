@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120032408) do
+ActiveRecord::Schema.define(:version => 20140426120150) do
 
   create_table "adults_classtypes", :force => true do |t|
     t.string   "reason_desc"
@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(:version => 20131120032408) do
     t.date     "student_id_date"
     t.string   "student_id_serial"
     t.boolean  "reged",                                :default => false
+    t.string   "address_full"
   end
 
   create_table "kojenadults_classe_ships", :force => true do |t|

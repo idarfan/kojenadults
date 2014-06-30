@@ -44,7 +44,7 @@ class KojenadultsController < ApplicationController
     @adults_licenses = AdultsLicense.all
     @adults_separates = AdultsSeparate.all
     @adults_japans = AdultsJapan.all
-    @adults_onlines = AdultsOnline.all
+    @adults_onlines = AdultsOnline.all    
     if ! @kojenadult.student_id.nil? #unless @kojenadult.student_id.nil? if ! @kojenadult.student_id.empty? 
       @lessonrecords = Lessonrecord.where("student_id = #{@kojenadult.student_id}")
       @adults_graduateds = AdultsGraduated.all
